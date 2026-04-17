@@ -58,9 +58,8 @@ const BusinessModel = () => {
       <div>
         <h3 style={{ fontSize: '2rem', marginBottom: '1.5rem', color: 'var(--color-tomato)' }}>B1. Descripción Empresarial</h3>
         <ScrollReveal direction="up">
-          <div style={{
+          <div className="card-padding" style={{
             background: 'var(--color-cream-dark)',
-            padding: '2.5rem',
             borderRadius: '12px',
             borderLeft: '5px solid var(--color-tomato)'
           }}>
@@ -78,14 +77,13 @@ const BusinessModel = () => {
         <h3 style={{ fontSize: '2rem', marginBottom: '1.5rem', color: 'var(--color-wheat)' }}>B2. Business Model Canvas</h3>
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
           gap: '1.5rem'
         }}>
           {canvasItems.map((item, index) => (
             <ScrollReveal key={index} direction="up" delay={index * 0.05}>
-              <div style={{
+              <div className="card-padding" style={{
                 background: 'white',
-                padding: '2rem',
                 borderRadius: '8px',
                 boxShadow: '0 5px 15px rgba(0,0,0,0.03)',
                 height: '100%'
