@@ -74,7 +74,6 @@ function App() {
             subtitle="Parte B"
           />
 
-          <ScrollReveal direction="up">
             <div style={{
               display: 'flex',
               flexDirection: 'column',
@@ -91,7 +90,6 @@ function App() {
               <StrategicCrosses />
 
             </div>
-          </ScrollReveal>
         </div>
       </section>
       
