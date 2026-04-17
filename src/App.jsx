@@ -1,8 +1,9 @@
-import React from 'react'
 import ScrollReveal from './components/ScrollReveal'
 import SectionTitle from './components/SectionTitle'
 import TeamAgreement from './components/TeamAgreement'
 import BusinessModel from './components/BusinessModel'
+import DofaAnalysis from './components/DofaAnalysis'
+import Sustainability from './components/Sustainability'
 
 function App() {
   return (
@@ -76,17 +77,10 @@ function App() {
             }}>
               <BusinessModel />
 
-              {/* B4 DOFA */}
-              <div>
-                <h3 style={{ fontSize: '2rem', marginBottom: '1rem' }}>B4. Análisis DOFA</h3>
-                <p style={{ opacity: 0.8 }}>[Fortalezas, Oportunidades, Debilidades, Amenazas...]</p>
-              </div>
+              <DofaAnalysis />
               
               {/* B5 Sostenibilidad */}
-              <div>
-                <h3 style={{ fontSize: '2rem', marginBottom: '1rem', color: 'var(--color-basil)' }}>B5. Sostenibilidad</h3>
-                <p style={{ opacity: 0.8 }}>[Social, Ambiental, Económico...]</p>
-              </div>
+              <Sustainability />
 
             </div>
           </ScrollReveal>
