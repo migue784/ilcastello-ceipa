@@ -37,7 +37,8 @@ function App() {
             fontSize: 'clamp(3rem, 8vw, 5rem)',
             marginTop: '1rem',
             marginBottom: '1.5rem',
-            lineHeight: 1.1
+            lineHeight: 1.1,
+            color: 'var(--color-basil)'
           }}>
             Il Castello
           </h1>

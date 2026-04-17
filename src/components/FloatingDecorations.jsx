@@ -7,8 +7,8 @@ const FloatingDecorations = () => {
     fontSize: 'clamp(5rem, 15vw, 12rem)',
     fontStyle: 'italic',
     whiteSpace: 'nowrap',
-    color: 'var(--color-charcoal)',
-    opacity: 0.03, // Muy sutil para no interferir con la legibilidad
+    color: 'var(--color-basil)',
+    opacity: 0.05, // Lo dejamos en 5% para que el verde se note suavemente
     pointerEvents: 'none',
     userSelect: 'none',
     fontWeight: '700',
