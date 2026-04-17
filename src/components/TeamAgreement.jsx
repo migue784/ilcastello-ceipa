@@ -73,26 +73,63 @@ const TeamAgreement = () => {
         </ScrollReveal>
       ))}
 
-      {/* Tarjeta de Firmas Pendientes */}
-      <ScrollReveal direction="up" delay={0.5}>
-          <div style={{
-            background: 'var(--color-charcoal)',
-            color: 'var(--color-cream)',
-            padding: '2.5rem',
+      {/* Tarjeta de Integrantes y Firmas */}
+      <ScrollReveal direction="up" delay={0.5} style={{ gridColumn: '1 / -1' }}>
+          <div className="card-padding" style={{
+            background: 'white',
             borderRadius: '12px',
-            boxShadow: '0 15px 35px rgba(0,0,0,0.1)',
-            height: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '1rem',
-            justifyContent: 'center',
-            alignItems: 'center',
-            textAlign: 'center'
+            boxShadow: '0 15px 35px rgba(0,0,0,0.04)',
+            width: '100%'
           }}>
-            <h3 style={{ margin: 0, color: 'var(--color-wheat)' }}>Equipo y Firmas</h3>
-            <p style={{ opacity: 0.6, fontSize: '0.9rem' }}>
-              [Espacio reservado para las fotos, el análisis del test de entrada y rúbricas manuales de los integrantes]
-            </p>
+            <h3 style={{ margin: '0 0 2.5rem 0', color: 'var(--color-basil)', fontSize: '1.8rem', textAlign: 'center' }}>Nuestros Integrantes y Análisis del Test</h3>
+            
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '3rem' }}>
+              
+              {/* Miguel Angel Lopera */}
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '1rem' }}>
+                <h4 style={{ fontSize: '1.2rem', color: 'var(--color-tomato)' }}>Miguel Angel Lopera</h4>
+                <p style={{ fontSize: '0.85rem', opacity: 0.8, lineHeight: '1.5' }}>
+                  <strong>Test de entrada:</strong> [A la espera del resumen del test para Miguel...]
+                </p>
+                <div style={{ marginTop: 'auto', borderBottom: '1px solid rgba(0,0,0,0.1)', paddingBottom: '0.5rem', width: '100%', display: 'flex', justifyContent: 'center' }}>
+                  <img src="/firmas/firma1.jpeg" alt="Firma Miguel" style={{ maxHeight: '80px', objectFit: 'contain' }} />
+                </div>
+              </div>
+
+              {/* Samuel Ossa */}
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '1rem' }}>
+                <h4 style={{ fontSize: '1.2rem', color: 'var(--color-tomato)' }}>Samuel Ossa</h4>
+                <p style={{ fontSize: '0.85rem', opacity: 0.8, lineHeight: '1.5' }}>
+                  <strong>Test de entrada:</strong> [A la espera del resumen del test para Samuel...]
+                </p>
+                <div style={{ marginTop: 'auto', borderBottom: '1px solid rgba(0,0,0,0.1)', paddingBottom: '0.5rem', width: '100%', display: 'flex', justifyContent: 'center' }}>
+                  <img src="/firmas/firma2.jpeg" alt="Firma Samuel" style={{ maxHeight: '80px', objectFit: 'contain' }} />
+                </div>
+              </div>
+
+              {/* Pablo Rodrigo */}
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '1rem' }}>
+                <h4 style={{ fontSize: '1.2rem', color: 'var(--color-tomato)' }}>Pablo Rodrigo</h4>
+                <p style={{ fontSize: '0.85rem', opacity: 0.8, lineHeight: '1.5' }}>
+                  <strong>Test de entrada:</strong> [A la espera del resumen del test para Pablo...]
+                </p>
+                <div style={{ marginTop: 'auto', borderBottom: '1px solid rgba(0,0,0,0.1)', paddingBottom: '0.5rem', width: '100%', display: 'flex', justifyContent: 'center' }}>
+                  <img src="/firmas/firma3.jpeg" alt="Firma Pablo" style={{ maxHeight: '80px', objectFit: 'contain' }} />
+                </div>
+              </div>
+
+              {/* Emmanuel Ramirez */}
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '1rem' }}>
+                <h4 style={{ fontSize: '1.2rem', color: 'var(--color-tomato)' }}>Emmanuel Ramirez</h4>
+                <p style={{ fontSize: '0.85rem', opacity: 0.8, lineHeight: '1.5' }}>
+                  <strong>Test de entrada:</strong> [A la espera del resumen del test para Emmanuel...]
+                </p>
+                <div style={{ marginTop: 'auto', borderBottom: '1px solid rgba(0,0,0,0.1)', paddingBottom: '0.5rem', width: '100%', display: 'flex', justifyContent: 'center', minHeight: '80px', alignItems: 'center' }}>
+                  <span style={{ fontSize: '0.8rem', opacity: 0.4, fontStyle: 'italic' }}>Firma pendiente...</span>
+                </div>
+              </div>
+
+            </div>
           </div>
       </ScrollReveal>
     </div>
