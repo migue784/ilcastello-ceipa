@@ -63,10 +63,8 @@ const BusinessModel = () => {
             borderRadius: '12px',
             borderLeft: '5px solid var(--color-tomato)'
           }}>
-            <p style={{ fontSize: '1.1rem', lineHeight: '1.8', opacity: 0.9 }}>
-              <strong>Il Castello (Pasta Artesanale G.L.G. SAS)</strong> es una fábrica de pastas artesanales italianas con sede en Sabaneta y restaurante propio en El Poblado, operando desde 1983. Fundada por Gianluigi G., se destaca por elaboraciones con sémola de durum y huevo.
-              <br/><br/>
-              Sus productos incluyen: <strong>Pasta Seca</strong> (Fettuccine, Spaghetti), <strong>Pasta Congelada Rellena</strong> (Raviolis 4 quesos, pollo, gnocchis), <strong>Bases de Pizza</strong>, línea <strong>Horeca (Institucional)</strong> y cobertura nacional a través de su e-commerce.
+            <p style={{ fontSize: '1.1rem', lineHeight: '1.8', opacity: 0.9, textAlign: 'justify' }}>
+              <strong>Pasta Artesanal LG S.A.S.</strong> (comercialmente vinculada a <strong>Il Castello</strong>), fundada en 1983 por Gianluigi G. y con sede operativa en Sabaneta, es una fábrica líder en pastas premium que fusiona la tradición italiana con tecnología avanzada de inocuidad. Con un restaurante insignia en El Poblado y bajo la gerencia de Saúl, la compañía se diferencia por el uso exclusivo de sémola de trigo durum y huevo, sin aditivos ni conservantes. Su portafolio abarca pastas secas con un proceso de secado de 14 horas, así como pastas rellenas ultracongeladas (raviolis de carne, pollo y quesos), gnocchis, canelones y bases de pizza. Gracias a sus rigurosos estándares de pasteurización, la empresa abastece al canal HORECA, a grandes superficies como Éxito, Carulla y Euro, y fabrica la marca Monticello para Nutresa, manteniendo una expansión nacional que integra canales digitales.
             </p>
           </div>
         </ScrollReveal>
