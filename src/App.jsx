@@ -4,6 +4,7 @@ import TeamAgreement from './components/TeamAgreement'
 import BusinessModel from './components/BusinessModel'
 import DofaAnalysis from './components/DofaAnalysis'
 import Sustainability from './components/Sustainability'
+import StrategicCrosses from './components/StrategicCrosses'
 
 function App() {
   return (
@@ -82,11 +83,45 @@ function App() {
               {/* B5 Sostenibilidad */}
               <Sustainability />
 
+              {/* B6 y B7 Cruces Estratégicos y Objetivo SMART */}
+              <StrategicCrosses />
+
             </div>
           </ScrollReveal>
         </div>
       </section>
       
+      {/* Referencias APA */}
+      <section className="section bg-cream-dark" id="referencias">
+        <div className="container" style={{ maxWidth: '800px' }}>
+          <SectionTitle title="Referencias Bibliográficas" />
+          <ScrollReveal direction="up">
+            <div style={{
+              background: 'white',
+              padding: '2.5rem',
+              borderRadius: '8px',
+              fontFamily: 'var(--font-serif)',
+              fontSize: '0.95rem',
+              lineHeight: '1.8',
+              boxShadow: '0 5px 20px rgba(0,0,0,0.03)'
+            }}>
+              <p style={{ paddingLeft: '2rem', textIndent: '-2rem', marginBottom: '1rem' }}>
+                CEIPA Business School. (2026). <span style={{ fontStyle: 'italic' }}>Aldea Global 2 | Actividades Grupales – Método Científico</span>.
+              </p>
+              <p style={{ paddingLeft: '2rem', textIndent: '-2rem', marginBottom: '1rem' }}>
+                Gavenzi, L., & Saúl, H. (2026). <span style={{ fontStyle: 'italic' }}>Entrevista sobre la Realidad Empresarial de Il Castello</span> [Entrevista grabada]. Sabaneta, Antioquia.
+              </p>
+              <p style={{ paddingLeft: '2rem', textIndent: '-2rem', marginBottom: '1rem' }}>
+                Porter, M. E. (2008). The Five Competitive Forces That Shape Strategy. <span style={{ fontStyle: 'italic' }}>Harvard Business Review, 86</span>(1), 78-93.
+              </p>
+              <p style={{ paddingLeft: '2rem', textIndent: '-2rem', marginBottom: '1rem' }}>
+                Osterwalder, A., & Pigneur, Y. (2010). <span style={{ fontStyle: 'italic' }}>Business Model Generation: A Handbook for Visionaries, Game Changers, and Challengers</span>. Wiley.
+              </p>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
       <footer style={{
         background: 'var(--color-charcoal)',
         color: 'var(--color-cream)',
