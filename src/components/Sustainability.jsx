@@ -12,7 +12,7 @@ const Sustainability = () => {
         gap: '1.5rem'
       }}>
         <ScrollReveal direction="up" delay={0.1}>
-          <div style={{ display: 'flex', gap: '1.5rem', background: 'white', padding: '2rem', borderRadius: '8px', boxShadow: '0 5px 15px rgba(0,0,0,0.03)' }}>
+          <div className="flex-stack card-padding" style={{ background: 'white', borderRadius: '8px', boxShadow: '0 5px 15px rgba(0,0,0,0.03)' }}>
             <div style={{ color: 'var(--color-tomato)', paddingTop: '0.2rem' }}><HeartHandshake size={32} /></div>
             <div>
               <h4 style={{ fontSize: '1.2rem', margin: '0 0 0.5rem 0', color: 'var(--color-charcoal)' }}>Sostenibilidad Social</h4>
@@ -24,7 +24,7 @@ const Sustainability = () => {
         </ScrollReveal>
 
         <ScrollReveal direction="up" delay={0.2}>
-          <div style={{ display: 'flex', gap: '1.5rem', background: 'white', padding: '2rem', borderRadius: '8px', boxShadow: '0 5px 15px rgba(0,0,0,0.03)' }}>
+          <div className="flex-stack card-padding" style={{ background: 'white', borderRadius: '8px', boxShadow: '0 5px 15px rgba(0,0,0,0.03)' }}>
             <div style={{ color: 'var(--color-wheat)', paddingTop: '0.2rem' }}><TrendingUp size={32} /></div>
             <div>
               <h4 style={{ fontSize: '1.2rem', margin: '0 0 0.5rem 0', color: 'var(--color-charcoal)' }}>Sostenibilidad Económica</h4>
@@ -36,7 +36,7 @@ const Sustainability = () => {
         </ScrollReveal>
 
         <ScrollReveal direction="up" delay={0.3}>
-          <div style={{ display: 'flex', gap: '1.5rem', background: 'var(--color-cream-dark)', padding: '2rem', borderRadius: '8px', borderStyle: 'dashed', borderWidth: '2px', borderColor: 'var(--color-basil)' }}>
+          <div className="flex-stack card-padding" style={{ background: 'var(--color-cream-dark)', borderRadius: '8px', borderStyle: 'dashed', borderWidth: '2px', borderColor: 'var(--color-basil)' }}>
             <div style={{ color: 'var(--color-basil)', paddingTop: '0.2rem' }}><Leaf size={32} /></div>
             <div>
               <h4 style={{ fontSize: '1.2rem', margin: '0 0 0.5rem 0', color: 'var(--color-charcoal)' }}>Sostenibilidad Ambiental</h4>

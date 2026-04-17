@@ -66,3 +66,43 @@ img {
 .bg-cream-dark {
   background-color: var(--color-cream-dark);
 }
+
+/* Responsive Utilities */
+.flex-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.card-padding {
+  padding: 1.8rem;
+}
+
+.sm-margin-top {
+  margin-top: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .flex-stack {
+    flex-direction: row;
+    gap: 1.5rem;
+  }
+  .card-padding {
+    padding: 2.5rem;
+  }
+  .sm-margin-top {
+    margin-top: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 3.5rem 0;
+  }
+  .container {
+    padding: 0 1.2rem;
+  }
+  h3 {
+    fontSize: '1.7rem';
+  }
+}

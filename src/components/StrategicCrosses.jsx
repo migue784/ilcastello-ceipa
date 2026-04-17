@@ -58,15 +58,14 @@ const StrategicCrosses = () => {
       <div style={{ marginTop: '5rem' }}>
         <h3 style={{ fontSize: '2rem', marginBottom: '1.5rem', color: 'var(--color-tomato)' }}>B7. Objetivo de Internacionalización (Metodología SMART)</h3>
         <ScrollReveal direction="up">
-          <div style={{
+          <div className="card-padding" style={{
             background: 'var(--color-charcoal)',
             color: 'var(--color-cream)',
-            padding: '3rem',
             borderRadius: '12px',
             position: 'relative',
             overflow: 'hidden'
           }}>
-            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1.5rem' }}>
+            <div className="flex-stack" style={{ alignItems: 'flex-start' }}>
               <Target size={48} color="var(--color-tomato)" />
               <div>
                 <p style={{ fontSize: '1.25rem', lineHeight: '1.6', margin: '0 0 2rem 0', fontStyle: 'italic', color: 'var(--color-wheat)' }}>
