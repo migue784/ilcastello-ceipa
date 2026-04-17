@@ -5,6 +5,7 @@ import BusinessModel from './components/BusinessModel'
 import DofaAnalysis from './components/DofaAnalysis'
 import Sustainability from './components/Sustainability'
 import StrategicCrosses from './components/StrategicCrosses'
+import FloatingDecorations from './components/FloatingDecorations'
 
 function App() {
   return (
@@ -18,8 +19,10 @@ function App() {
         alignItems: 'center',
         padding: '0 2rem',
         backgroundImage: 'linear-gradient(to bottom, rgba(253, 251, 247, 0.3), var(--color-cream))',
+        position: 'relative'
       }}>
-        <ScrollReveal direction="up" delay={0.2} style={{ textAlign: 'center' }}>
+        <FloatingDecorations />
+        <ScrollReveal direction="up" delay={0.2} style={{ textAlign: 'center', position: 'relative', zIndex: 10 }}>
           <span style={{
             color: 'var(--color-tomato)',
             fontFamily: 'var(--font-sans)',
