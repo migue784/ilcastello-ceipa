@@ -1,6 +1,8 @@
 import React from 'react'
 import ScrollReveal from './components/ScrollReveal'
 import SectionTitle from './components/SectionTitle'
+import TeamAgreement from './components/TeamAgreement'
+import BusinessModel from './components/BusinessModel'
 
 function App() {
   return (
@@ -54,39 +56,7 @@ function App() {
             subtitle="Parte A"
           />
           
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-            gap: '2rem',
-            marginTop: '3rem'
-          }}>
-            {/* Aquí irán las tarjetas de los integrantes y los compromisos */}
-            <ScrollReveal direction="up" delay={0.1}>
-              <div style={{
-                background: 'var(--color-cream)',
-                padding: '2rem',
-                borderRadius: '8px',
-                borderTop: '4px solid var(--color-tomato)',
-                boxShadow: '0 10px 30px rgba(0,0,0,0.03)'
-              }}>
-                <h3 style={{ marginBottom: '1rem' }}>Compromisos y Convivencia</h3>
-                <p style={{ opacity: 0.8 }}>[Esperando contenido del equipo...]</p>
-              </div>
-            </ScrollReveal>
-            
-            <ScrollReveal direction="up" delay={0.2}>
-              <div style={{
-                background: 'var(--color-cream)',
-                padding: '2rem',
-                borderRadius: '8px',
-                borderTop: '4px solid var(--color-basil)',
-                boxShadow: '0 10px 30px rgba(0,0,0,0.03)'
-              }}>
-                <h3 style={{ marginBottom: '1rem' }}>Nuestro Equipo</h3>
-                <p style={{ opacity: 0.8 }}>[Esperando nombres e info del equipo...]</p>
-              </div>
-            </ScrollReveal>
-          </div>
+          <TeamAgreement />
         </div>
       </section>
 
@@ -104,29 +74,7 @@ function App() {
               flexDirection: 'column',
               gap: '4rem'
             }}>
-              {/* B1 */}
-              <div>
-                <h3 style={{ fontSize: '2rem', marginBottom: '1rem', color: 'var(--color-tomato)' }}>B1. Descripción</h3>
-                <p style={{ fontSize: '1.1rem', maxWidth: '800px', opacity: 0.8 }}>
-                  [Aquí pondremos la información de Il Castello, su propuesta de valor...]
-                </p>
-              </div>
-
-              {/* B2 */}
-              <div>
-                <h3 style={{ fontSize: '2rem', marginBottom: '1rem', color: 'var(--color-wheat)' }}>B2. Business Model Canvas</h3>
-                <div style={{
-                  height: '300px',
-                  background: 'var(--color-cream-dark)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  border: '1px dashed rgba(0,0,0,0.2)',
-                  borderRadius: '8px'
-                }}>
-                  <p style={{ opacity: 0.6, fontStyle: 'italic' }}>Espacio reservado para el Canvas interactivo</p>
-                </div>
-              </div>
+              <BusinessModel />
 
               {/* B4 DOFA */}
               <div>
