@@ -158,20 +158,160 @@ export default function ExportSimulator({ isOpen, onClose }) {
   const margenNeto = (EBITDA / ingresosTotales) * 100;
   const isRentable = EBITDA > 0;
 
-  // Lógica de descarga de informe falso súper profesional
+  // Lógica de generación del PDF Dinámico
   const handleDownloadReport = () => {
-    const reportText = `IL CASTELLO - AUDITORÍA LOGÍSTICA DE CARGA HORECA\n\n------------------------------\nDestino de Exportación: Puertos CRC & HORECA Interior\nIncoterm Usado: ${incoterm} B2B\nVolumen Despachado: ${volumen.toLocaleString()} KG\nTiempo de Tránsito Marítimo: 13 Días Constantes\n\nESTADO DE CARGA:\nCadena de Ultracongelación: Ininterrumpida (-20°C a contenedor CERRADO)\nMermas Físicas Sensoriales: 0.0%\n\nFINANZAS:\nCapital Base Obtenido: $${(ingresosTotales/1000000).toFixed(1)} Millones COP\nRentabilidad Operativa Neta (EBITDA Líquido): $${(EBITDA/1000000).toFixed(1)} Millones COP\nMargen: ${margenNeto.toFixed(1)}%\n\nVerificado por Motor Aduanero Simulado V9.4\n------------------------------`;
-    
-    // Generar archivo virtual y triggear descarga en el navegador del usuario directamente
-    const dataStr = "data:text/plain;charset=utf-8," + encodeURIComponent(reportText);
-    const tempAnchorNode = document.createElement('a');
-    tempAnchorNode.setAttribute("href", dataStr);
-    tempAnchorNode.setAttribute("download", `Manifiesto_Aduanas_IlCastello_${incoterm}.txt`);
-    document.body.appendChild(tempAnchorNode); 
-    tempAnchorNode.click();
-    tempAnchorNode.remove();
+    // Si jsPDF no ha cargado, usamos el fallback
+    if (!window.jspdf || !window.jspdf.jsPDF) {
+      alert("La librería de PDFs está cargando, por favor reintenta en un segundo.");
+      return;
+    }
 
-    // Finalizar luego de disparar la descarga
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+
+    // Colores corporativos
+    const primaryColor = [56, 74, 53];    // #384a35
+    const darkCharcoal = [17, 24, 39];    // #111827
+    const redColor = [239, 68, 68];       // tomato / red-500
+    
+    // --- PORTADA Y HEADER ---
+    doc.setFillColor(...primaryColor);
+    doc.rect(0, 0, 210, 30, 'F');
+    
+    doc.setTextColor(255, 255, 255);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(22);
+    doc.text("IL CASTELLO", 14, 20);
+    
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(12);
+    doc.text("Master Plan Logístico y Financiero - HORECA Centroamérica", 65, 20);
+
+    // Metadata técnica
+    doc.setTextColor(...darkCharcoal);
+    doc.setFontSize(10);
+    const today = new Date();
+    doc.text(`Fecha de Simulación: ${today.toLocaleDateString()}`, 14, 40);
+    doc.text(`ID de Auditoría: EXP-${Math.floor(Math.random() * 90000) + 10000}-CRC`, 14, 46);
+    
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(14);
+    doc.text("1. PARÁMETROS DE EXPORTACIÓN TÉRMICA", 14, 60);
+
+    // Draw Line
+    doc.setDrawColor(...primaryColor);
+    doc.setLineWidth(0.5);
+    doc.line(14, 62, 196, 62);
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(10);
+    const params = [
+       `Mercado Destino: Puertos CRC y Zonas de Hotelería Interior (San José, Tamarindo).`,
+       `Volumen Bruto Despachado: ${volumen.toLocaleString()} KG.`,
+       `Incoterm pactado: ${incoterm} (Asignación de responsabilidad B2B).`,
+       `Tiempo de Tránsito Marítimo Estimado: 13 Días.`,
+       `Cadena de Ultracongelación Mantenida: -20°C mediante contenedores Reefer.`,
+       `Porcentaje de Mermas Termodinámicas: 0.0% (Viabilidad Táctica de Calidad).`
+    ];
+    params.forEach((line, i) => doc.text(`• ${line}`, 14, 70 + (i * 6)));
+
+    // --- SECCIÓN FINANCIERA (TABLAS) ---
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(14);
+    doc.text("2. AUDITORÍA FINANCIERA: COSTOS VS RENDIMIENTOS", 14, 115);
+    doc.line(14, 117, 196, 117);
+
+    // AutoTable Datos
+    const tableData = [
+       ["Ingreso Total Proyectado (Ventas B2B)", 
+        "", 
+        `$ ${(ingresosTotales/1000000).toFixed(1)} M COP`],
+
+       ["Costos Operativos de Producción (IL Castello Locales)", 
+        `-$ ${(costoProduccionLocal/1000000).toFixed(1)} M`, 
+        ""],
+       
+       ["Gastos Aduaneros Nacionales (DIAN / Soc. Portuaria)", 
+        `-$ ${(costoAduaneroCO/1000000).toFixed(1)} M`, 
+        ""],
+
+       [`Flete Reefer Internacional Oceánico (-20°C)`, 
+        `-$ ${(costoFleteRefrigerado/1000000).toFixed(1)} M`, 
+        ""],
+
+       [`Seguro Internacional de Mercancía (${incoterm})`, 
+        `-$ ${(seguroIncoterm/1000000).toFixed(1)} M`, 
+        ""],
+
+       [`Aranceles de Nacionalización CRC (${incoterm})`, 
+        `-$ ${(arancelCostaRica/1000000).toFixed(1)} M`, 
+        ""]
+    ];
+
+    if (window.jspdf && window.jspdf.jsPDF && doc.autoTable) {
+        doc.autoTable({
+          startY: 125,
+          head: [['Concepto Contable', 'Egresos (Gastos)', 'Ingresos (Retorno)']],
+          body: tableData,
+          theme: 'striped',
+          headStyles: { fillColor: primaryColor, textColor: 255 },
+          columnStyles: {
+            0: { cellWidth: 100 },
+            1: { cellWidth: 40, textColor: redColor, halign: 'right' },
+            2: { cellWidth: 40, halign: 'right', fontStyle: 'bold' }
+          }
+        });
+    }
+
+    // --- RESULTADOS Y GRÁFICO EBITDA ---
+    let finalY = doc.lastAutoTable ? doc.lastAutoTable.finalY + 15 : 200;
+    
+    // Si la tabla no funcionó, seteamos manual
+    if(!doc.lastAutoTable) finalY = 190;
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(16);
+    doc.setTextColor(isRentable ? primaryColor[0] : redColor[0], isRentable ? primaryColor[1] : redColor[1], isRentable ? primaryColor[2] : redColor[2]);
+    doc.text(`RESULTADO EBITDA: $ ${(EBITDA/1000000).toFixed(1)} M COP`, 14, finalY);
+    
+    doc.setFontSize(12);
+    doc.text(`MARGEN OPERATIVO: ${margenNeto.toFixed(1)}%`, 14, finalY + 8);
+
+    doc.setFont("helvetica", "normal");
+    doc.setTextColor(...darkCharcoal);
+    doc.setFontSize(10);
+    const conclMessage = isRentable 
+      ? `CONCLUSIÓN TÁCTICA: Bajo las condiciones actuales de negociación mediante el Incoterm ${incoterm},\nla exportación de ${volumen.toLocaleString()} KG logra romper exitosamente la barrera de costos fijos internacionales.\nSe consolida como modelo altamente rentable para el proyecto corporativo (TOWS).`
+      : `ALERTA CRÍTICA TÁCTICA: Bajo el Incoterm ${incoterm}, la exportación de tan solo ${volumen.toLocaleString()} KG\nes arruinada por los costos inamovibles del flete naviero (-20°C). Se exige ampliar sustancialmente el aforo.`;
+    
+    const splitMsg = doc.splitTextToSize(conclMessage, 180);
+    doc.text(splitMsg, 14, finalY + 20);
+
+    // Simulación de barra tipo GANTT/Progreso al fondo del documento
+    doc.setDrawColor(200, 200, 200);
+    doc.rect(14, finalY + 35, 180, 8); // Barra vacía Gris
+    
+    // Si hay rentabilidad llenar parte de la barra verde
+    if (isRentable) {
+       doc.setFillColor(...primaryColor);
+       // Margen como porcentaje del ancho de barra (hasta un 100%)
+       let fillWidth = Math.min((margenNeto / 100) * 180, 180);
+       // Asegurar min bar
+       if(fillWidth < 5) fillWidth = 5;
+       doc.rect(14, finalY + 35, fillWidth, 8, 'F');
+    } else {
+       // Perdiendo plata, se llena de rojo un poquito para denotar alerta
+       doc.setFillColor(...redColor);
+       doc.rect(14, finalY + 35, 20, 8, 'F');
+    }
+    
+    doc.setFontSize(8);
+    doc.text("REPRESENTACIÓN DE RIESGO DE INVERSIÓN (VERDE: VIABLE | GRIS: RIESGO | ROJO: PÉRDIDA)", 14, finalY + 47);
+
+    // Firmas
+    doc.text("Firmado Computacionalmente por Sistema HORECA - La Última Milla", 14, 280);
+
+    doc.save(`IlCastello_Export_Analysis_${incoterm}.pdf`);
     handleClose();
   };
 
