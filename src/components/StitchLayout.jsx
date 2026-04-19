@@ -138,13 +138,13 @@ export default function StitchLayout({ scrollYProgress }) {
          <HorizontalGallery>
             
             {/* ITEM 1: DOFA (Tailwind Glass Style basado en Stitch) */}
-            <div style={{ width: '85vw', maxWidth: '900px', flexShrink: 0, marginTop: '2vh', paddingRight: '2rem', position: 'relative', zIndex: 20 }}>
+            <div style={{ width: '90vw', maxWidth: '1600px', flexShrink: 0, marginTop: '2vh', paddingRight: '2rem', position: 'relative', zIndex: 20 }}>
                <h3 className="font-headline text-3xl font-bold text-on-primary uppercase mb-8 ml-4">Matriz DOFA</h3>
                <DofaAnalysis />
             </div>
 
             {/* ITEM 2: TOWS (Cruces) */}
-            <div style={{ width: '85vw', maxWidth: '950px', flexShrink: 0, marginTop: '8vh', paddingRight: '2rem', position: 'relative', zIndex: 20 }}>
+            <div style={{ width: '90vw', maxWidth: '1500px', flexShrink: 0, marginTop: '8vh', paddingRight: '2rem', position: 'relative', zIndex: 20 }}>
                <StrategicCrosses />
             </div>
 

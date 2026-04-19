@@ -24,9 +24,9 @@ const FloatingProduct = ({ scrollYProgress }) => {
   // --- 3. RAVIOLI (Estrategia Total - Sección Verde) ---
   // Arranca sin overlap en 0.30 y perdura hasta el footer.
   const opacityRavioli = useTransform(scrollYProgress, [0.30, 0.32, 0.90, 0.92], [0, 1, 1, 0]);
-  const scaleRavioli = useTransform(scrollYProgress, [0.32, 0.90], [1.2, 1]);
-  const xRavioli = useTransform(scrollYProgress, [0.30, 0.40, 0.88, 0.92], ["-150%", "-20%", "40%", "150%"]);
-  const yRavioli = useTransform(scrollYProgress, [0.63, 0.92], ["0%", "0%"]);
+  const scaleRavioli = useTransform(scrollYProgress, [0.32, 0.90], [1.1, 0.9]);
+  const xRavioli = useTransform(scrollYProgress, [0.30, 0.40, 0.88, 0.92], ["-150%", "-10%", "50%", "150%"]);
+  const yRavioli = useTransform(scrollYProgress, [0.30, 0.92], ["35%", "50%"]);
 
   return (
     <div className="sticky-product-wrapper">
