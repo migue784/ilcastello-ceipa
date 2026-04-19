@@ -1,3 +1,5 @@
+import React, { useRef } from 'react'
+import { motion, useScroll } from 'framer-motion'
 import SectionTitle from './components/SectionTitle'
 import TeamAgreement from './components/TeamAgreement'
 import BusinessModel from './components/BusinessModel'
