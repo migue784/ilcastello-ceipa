@@ -51,19 +51,16 @@ const DofaAnalysis = () => {
     <div>
       <h3 style={{ fontSize: '2rem', marginBottom: '1.5rem', color: 'var(--color-wheat)' }}>B4. Análisis DOFA</h3>
       <div style={{
-        display: 'flex',
-        flexWrap: 'nowrap',
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
         gap: '2rem',
-        paddingBottom: '4rem',
-        marginTop: '2rem'
+        paddingBottom: '2rem'
       }}>
         {dofaData.map((item, index) => (
           <ScrollReveal key={index} direction={index % 2 === 0 ? "left" : "right"} delay={index * 0.1}>
             <div className="card-glass-dark" style={{
               padding: '2rem',
-              width: '320px',
-              height: 'max-content',
-              minHeight: '380px',
+              height: '100%',
               borderBottom: `4px solid ${item.color}`
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>

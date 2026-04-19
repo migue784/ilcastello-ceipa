@@ -124,35 +124,37 @@ export default function StitchLayout({ scrollYProgress }) {
         </div>
       </section>
 
-      {/* Strategic Strategy (DOFA & Sustainability) via Horizontal Gallery */}
-      <section id="estrategia" className="bg-primary relative overflow-hidden">
-         <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-tertiary/20 to-transparent pointer-events-none"></div>
-         
-         {/* Título Estático Superior */}
-         <div className="pt-32 px-8 max-w-7xl mx-auto relative z-10 w-full">
-            <h2 className="font-headline text-4xl md:text-6xl font-bold text-on-primary uppercase mb-4">Estrategia <span className="text-secondary-fixed-dim">Total</span></h2>
-            <p className="font-body text-on-primary/70 max-w-2xl text-lg mb-10">Análisis estructural y proyección sostenible hacia mercados internacionales.</p>
-         </div>
+      {/* Strategic Strategy (DOFA & Sustainability) */}
+      <section id="estrategia" className="py-24 bg-primary text-on-primary relative overflow-hidden" style={{ zIndex: 20 }}>
+        {/* Decoración de fondo */}
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/10 to-transparent rounded-full opacity-50 pointer-events-none transform translate-x-1/3 -translate-y-1/3 blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[var(--color-wheat)]/10 to-transparent rounded-full opacity-30 pointer-events-none transform -translate-x-1/3 translate-y-1/3 blur-3xl"></div>
 
-         {/* Contenedor del Carrusel Custom en vez del Grid aburrido de Stitch */}
-         <HorizontalGallery>
+        <div className="max-w-7xl mx-auto px-8 md:px-16 space-y-32">
+          
+          <div className="relative z-10 pt-16">
+            <h2 className="font-headline text-5xl md:text-7xl font-bold uppercase mb-4 text-on-primary">
+              Estrategia <span className="text-[var(--color-wheat)]">Total</span>
+            </h2>
+            <p className="font-body text-xl text-on-primary/80 max-w-2xl mb-16 font-light">Análisis estructural y proyección sostenible hacia mercados internacionales.</p>
             
-            {/* ITEM 1: DOFA (Tailwind Glass Style basado en Stitch) */}
-            <div style={{ width: '90vw', maxWidth: '1600px', flexShrink: 0, marginTop: '2vh', paddingRight: '2rem', position: 'relative', zIndex: 20 }}>
-               <h3 className="font-headline text-3xl font-bold text-on-primary uppercase mb-8 ml-4">Matriz DOFA</h3>
+            {/* ITEM 1: DOFA (Tailwind Glass Style) */}
+            <div className="w-full">
                <DofaAnalysis />
             </div>
+          </div>
 
-            {/* ITEM 2: TOWS (Cruces) */}
-            <div style={{ width: '90vw', maxWidth: '1500px', flexShrink: 0, marginTop: '8vh', paddingRight: '2rem', position: 'relative', zIndex: 20 }}>
-               <StrategicCrosses />
-            </div>
+          {/* ITEM 2: TOWS (Cruces) */}
+          <div className="w-full relative z-10 pb-16">
+             <StrategicCrosses />
+          </div>
 
-            {/* ITEM 3: SOSTENIBILIDAD */}
-            <div style={{ width: '85vw', maxWidth: '800px', flexShrink: 0, marginTop: '5vh', paddingRight: '2rem', position: 'relative', zIndex: 20 }}>
-              <Sustainability />
-            </div>
-         </HorizontalGallery>
+          {/* ITEM 3: SOSTENIBILIDAD */}
+          <div className="w-full relative z-10 pb-16">
+            <Sustainability />
+          </div>
+
+        </div>
       </section>
 
       {/* References */}

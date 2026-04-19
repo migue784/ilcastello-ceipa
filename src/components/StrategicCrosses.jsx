@@ -34,20 +34,16 @@ const StrategicCrosses = () => {
       </p>
       
       <div style={{
-        display: 'flex',
-        flexWrap: 'nowrap',
-        gap: '2rem',
-        paddingBottom: '4rem',
-        marginTop: '2rem'
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+        gap: '1.5rem'
       }}>
         {tows.map((item, index) => (
           <ScrollReveal key={index} direction="up" delay={index * 0.1}>
             <div className="card-glass-dark" style={{
               padding: '2rem',
-              width: '320px',
-              height: 'max-content',
-              minHeight: '350px',
-              borderLeft: `5px solid ${item.color}`
+              borderLeft: `5px solid ${item.color}`,
+              height: '100%'
             }}>
               <h4 style={{ margin: '0 0 1rem 0', color: 'var(--color-wheat)', fontSize: '1.1rem' }}>{item.title}</h4>
               <p style={{ opacity: 0.9, fontSize: '0.95rem', lineHeight: '1.5', margin: 0, color: 'var(--color-cream)' }}>{item.desc}</p>

@@ -25,19 +25,17 @@ const FloatingProduct = ({ scrollYProgress }) => {
   const displayPappardelle = useTransform(scrollYProgress, [0.10, 0.12, 0.28, 0.281], ["none", "block", "block", "none"]);
 
   // --- 3. RAVIOLI (Estrategia Total - Sección Verde) ---
-  // Arranca sin overlap en 0.30.
-  // El usuario quiere que "la imagen desaparezca/se mueva a medida que la información pasa hacia la izquierda con el scroll".
-  // Por lo tanto, el empaque debe moverse hacia la izquierda y SALIRSE de la pantalla (x: -150%) 
-  // mucho antes de terminar el scroll (ej: en 0.60).
-  const opacityRavioli = useTransform(scrollYProgress, [0.30, 0.32, 0.58, 0.60], [0, 1, 1, 0]);
-  const scaleRavioli = useTransform(scrollYProgress, [0.32, 0.58], [1.1, 0.8]);
-  // Ingresa desde la derecha y se desliza hacia la izquierda acompañando a las tarjetas.
-  const xRavioli = useTransform(scrollYProgress, [0.30, 0.35, 0.50, 0.60], ["150%", "20%", "-20%", "-150%"]);
-  const yRavioli = useTransform(scrollYProgress, [0.30, 0.60], ["40%", "40%"]);
-  const displayRavioli = useTransform(scrollYProgress, [0.30, 0.31, 0.59, 0.60], ["none", "block", "block", "none"]);
+  // Al volver al formato Vertical de Layout, la página regresa a su Height natural.
+  // El Ravioli nace de la zona derecha central (x: 40%) en y:25%, descendiendo tranquilamente.
+  const opacityRavioli = useTransform(scrollYProgress, [0.55, 0.60, 0.95, 1], [0, 1, 1, 0]);
+  const scaleRavioli = useTransform(scrollYProgress, [0.60, 0.95], [1.1, 0.9]);
+  const xRavioli = useTransform(scrollYProgress, [0.55, 0.60], ["150%", "30%"]);
+  const yRavioli = useTransform(scrollYProgress, [0.55, 0.85, 0.95], ["0%", "45%", "80%"]);
+  // Lo mandamos al fondo absoluto usando zIndex implícito y display inline
+  const displayRavioli = useTransform(scrollYProgress, [0.55, 0.58, 0.97, 1], ["none", "block", "block", "none"]);
 
   return (
-    <div className="sticky-product-wrapper">
+    <div className="sticky-product-wrapper" style={{ zIndex: 0 }}>
       
       {/* 1. FETTUCCINE */}
       <motion.div
