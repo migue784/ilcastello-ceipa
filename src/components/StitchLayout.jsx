@@ -23,13 +23,19 @@ export default function StitchLayout({ scrollYProgress }) {
           IL CASTELLO
         </div>
         <div className="hidden md:flex gap-8 items-center font-label text-sm uppercase tracking-wider">
-          <a className="text-on-surface-variant/60 dark:text-on-surface-variant/40 hover:text-primary transition-colors duration-400" href="#team">Governance</a>
-          <a className="text-primary dark:text-primary-container border-b-2 border-primary pb-1" href="#realidad">Enterprise</a>
-          <a className="text-on-surface-variant/60 dark:text-on-surface-variant/40 hover:text-primary transition-colors duration-400" href="#estrategia">Vision</a>
+          <a className="text-on-surface-variant/60 dark:text-on-surface-variant/40 hover:text-primary transition-colors duration-400" href="#team">Acuerdos</a>
+          <a className="text-primary dark:text-primary-container border-b-2 border-primary pb-1" href="#realidad">Empresa</a>
+          <a className="text-on-surface-variant/60 dark:text-on-surface-variant/40 hover:text-primary transition-colors duration-400" href="#estrategia">Estrategia Total</a>
         </div>
         <div>
-          <button className="bg-primary text-on-primary px-8 py-3 text-sm font-bold uppercase tracking-widest hover:bg-primary-container transition-colors duration-400 rounded-none">
-            Connect
+          <button 
+            className="bg-primary text-on-primary px-8 py-3 text-sm font-bold uppercase tracking-widest hover:bg-primary-container transition-colors duration-400 rounded-none transform hover:scale-105"
+            onClick={() => {
+              alert("¡Bienvenido al mundo de la pasta artesanal Premium! Nuestro equipo gerencial te espera.");
+              window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            }}
+          >
+            Descubre Más
           </button>
         </div>
       </nav>
@@ -94,25 +100,25 @@ export default function StitchLayout({ scrollYProgress }) {
             <div className="bg-surface-container-highest p-10 flex flex-col justify-between aspect-square group hover:bg-primary transition-colors duration-400">
               <div className="font-label text-sm uppercase tracking-widest text-on-surface-variant group-hover:text-on-primary/70 mb-4">Entidad</div>
               <h3 className="font-headline text-3xl font-bold text-on-surface group-hover:text-on-primary">Pasta Artesanal LG S.A.S</h3>
-              <p className="font-body text-on-surface-variant group-hover:text-on-primary/90 mt-auto">Establecida en 1983. Tradición y vanguardia.</p>
+              <p className="font-body text-on-surface-variant group-hover:text-on-primary/90 mt-2 flex-grow">Establecida en 1983, es un referente de la tradición italiana en Colombia. Evitan la dependencia corporativa inyectando sus utilidades directamente en tecnología europea, apostando por ser una empresa ágil y sostenible.</p>
             </div>
             
             <div className="bg-surface-container-highest p-10 flex flex-col justify-between aspect-square group hover:bg-surface-dim transition-colors duration-400">
               <div className="font-label text-sm uppercase tracking-widest text-on-surface-variant mb-4">Producto Core</div>
               <h3 className="font-headline text-3xl font-bold text-on-surface">Ravioli Ultracongelado</h3>
-              <p className="font-body text-on-surface-variant mt-auto">Preservación absoluta de la frescura artesanal a -20°C.</p>
+              <p className="font-body text-on-surface-variant mt-2 flex-grow">Preservación absoluta de la frescura artesanal. Congelado por choque a -20°C tras amasado manual, elimina patógenos sin el uso del controversial químico 'Potasio' común en supermercados.</p>
             </div>
             
             <div className="bg-surface-container-highest p-10 flex flex-col justify-between aspect-square group hover:bg-surface-dim transition-colors duration-400">
-              <div className="font-label text-sm uppercase tracking-widest text-on-surface-variant mb-4">Proceso</div>
-              <h3 className="font-headline text-3xl font-bold text-on-surface">14 Horas</h3>
-              <p className="font-body text-on-surface-variant mt-auto">Secado lento. 100% natural, sin aditivos ni colorantes.</p>
+              <div className="font-label text-sm uppercase tracking-widest text-on-surface-variant mb-4">Proceso Lento</div>
+              <h3 className="font-headline text-3xl font-bold text-on-surface">Secado 14 Horas</h3>
+              <p className="font-body text-on-surface-variant mt-2 flex-grow">En contraste a la industria global dominada por Barilla (secado veloz por calor rotundo), Il Castello emplea secaderos estáticos europeos, deshidratando su pasta 100% durum pausadamente para mantener texturas excepcionales.</p>
             </div>
             
             <div className="bg-surface-container-highest p-10 flex flex-col justify-between aspect-square group hover:bg-surface-dim transition-colors duration-400">
-              <div className="font-label text-sm uppercase tracking-widest text-on-surface-variant mb-4">Partnerships</div>
-              <h3 className="font-headline text-3xl font-bold text-on-surface">Canal HORECA</h3>
-              <p className="font-body text-on-surface-variant mt-auto">Alianzas con Grupo Nutresa, Éxito y Carulla.</p>
+              <div className="font-label text-sm uppercase tracking-widest text-on-surface-variant mb-4">Targeting</div>
+              <h3 className="font-headline text-3xl font-bold text-on-surface">Canal HORECA Premium</h3>
+              <p className="font-body text-on-surface-variant mt-2 flex-grow">Principal fuente del 90% de sus ingresos. Suplen a los más gigantes, desde Grupo Nutresa hasta restaurantes Élite, quitándoles la carga operativa intensiva de la cocina artesanal.</p>
             </div>
           </div>
         </div>
@@ -132,18 +138,18 @@ export default function StitchLayout({ scrollYProgress }) {
          <HorizontalGallery>
             
             {/* ITEM 1: DOFA (Tailwind Glass Style basado en Stitch) */}
-            <div style={{ width: '85vw', maxWidth: '900px', flexShrink: 0, marginTop: '5vh', paddingRight: '2rem' }}>
-               <h3 className="font-headline text-3xl font-bold text-on-primary uppercase mb-8">Matriz DOFA</h3>
+            <div style={{ width: '85vw', maxWidth: '900px', flexShrink: 0, marginTop: '2vh', paddingRight: '2rem', position: 'relative', zIndex: 20 }}>
+               <h3 className="font-headline text-3xl font-bold text-on-primary uppercase mb-8 ml-4">Matriz DOFA</h3>
                <DofaAnalysis />
             </div>
 
             {/* ITEM 2: TOWS (Cruces) */}
-            <div style={{ width: '85vw', maxWidth: '850px', flexShrink: 0, marginTop: '20vh', paddingRight: '2rem' }}>
+            <div style={{ width: '85vw', maxWidth: '950px', flexShrink: 0, marginTop: '8vh', paddingRight: '2rem', position: 'relative', zIndex: 20 }}>
                <StrategicCrosses />
             </div>
 
             {/* ITEM 3: SOSTENIBILIDAD */}
-            <div style={{ width: '85vw', maxWidth: '800px', flexShrink: 0, marginTop: '10vh', paddingRight: '2rem' }}>
+            <div style={{ width: '85vw', maxWidth: '800px', flexShrink: 0, marginTop: '5vh', paddingRight: '2rem', position: 'relative', zIndex: 20 }}>
               <Sustainability />
             </div>
          </HorizontalGallery>
