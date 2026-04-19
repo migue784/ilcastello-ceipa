@@ -54,7 +54,8 @@ const DofaAnalysis = () => {
         display: 'flex',
         flexWrap: 'nowrap',
         gap: '2rem',
-        paddingBottom: '10rem' // Para compensar la diagonal y que no se corte por abajo
+        paddingBottom: '4rem',
+        marginTop: '2rem'
       }}>
         {dofaData.map((item, index) => (
           <ScrollReveal key={index} direction={index % 2 === 0 ? "left" : "right"} delay={index * 0.1}>
@@ -63,7 +64,6 @@ const DofaAnalysis = () => {
               width: '320px',
               height: 'max-content',
               minHeight: '380px',
-              marginTop: `${index * 4}rem`, // DIAGONAL EN CASCADA
               borderBottom: `4px solid ${item.color}`
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
