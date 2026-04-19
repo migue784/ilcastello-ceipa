@@ -59,12 +59,65 @@ img {
 }
 
 /* Base sections with padding */
+/* Base sections with padding */
 .section {
   padding: 6rem 0;
+  position: relative;
+  min-height: 100vh; /* Scrollytelling necesita mucho height */
+  display: flex;
+  align-items: center;
+  z-index: 10; 
 }
 
 .bg-cream-dark {
   background-color: var(--color-cream-dark);
+}
+
+/* --- Scrollytelling Specific Styles --- */
+.scrolly-container {
+  /* Contenedor que ocupará gran altura para permitir el scroll natural */
+  position: relative;
+  width: 100%;
+}
+
+.sticky-product-wrapper {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5;
+  pointer-events: none; /* Dejar pasar los clicks a las tarjetas debajo */
+}
+
+/* Tipografía gigante a lo "Spyt" */
+h1.hero-gigante {
+  font-family: var(--font-serif);
+  font-size: clamp(4rem, 20vw, 15rem);
+  line-height: 0.8;
+  text-transform: uppercase;
+  color: var(--color-basil);
+  text-align: center;
+  white-space: nowrap;
+  letter-spacing: -5px;
+}
+
+h2.section-gigante {
+  font-family: var(--font-sans);
+  font-size: clamp(3rem, 10vw, 8rem);
+  font-weight: 800;
+  color: var(--color-cream-dark);
+  text-transform: uppercase;
+  position: absolute;
+  top: 10%;
+  left: 2rem;
+  z-index: 0; /* Por detrás de las tarjetas flotantes */
+  letter-spacing: -2px;
+  line-height: 0.9;
+  max-width: 80%;
 }
 
 /* Responsive Utilities */
@@ -103,6 +156,9 @@ img {
     padding: 0 1.2rem;
   }
   h3 {
-    fontSize: '1.7rem';
+    font-size: 1.7rem;
+  }
+  h2.section-gigante {
+    font-size: clamp(3rem, 15vw, 5rem);
   }
 }

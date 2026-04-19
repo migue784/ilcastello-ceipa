@@ -1,3 +1,5 @@
+import React, { useRef } from 'react'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import ScrollReveal from './components/ScrollReveal'
 import SectionTitle from './components/SectionTitle'
 import TeamAgreement from './components/TeamAgreement'
@@ -6,135 +8,150 @@ import DofaAnalysis from './components/DofaAnalysis'
 import Sustainability from './components/Sustainability'
 import StrategicCrosses from './components/StrategicCrosses'
 import FloatingDecorations from './components/FloatingDecorations'
+import FloatingProduct from './components/FloatingProduct'
 
 function App() {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({ target: containerRef });
+
   return (
-    <>
-      {/* Hero Section */}
-      <section style={{
-        minHeight: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: '0 2rem',
-        backgroundImage: 'linear-gradient(to bottom, rgba(253, 251, 247, 0.3), var(--color-cream))',
-        position: 'relative'
-      }}>
-        <FloatingDecorations />
-        <ScrollReveal direction="up" delay={0.2} style={{ textAlign: 'center', position: 'relative', zIndex: 10 }}>
-          <span style={{
-            color: 'var(--color-tomato)',
-            fontFamily: 'var(--font-sans)',
-            textTransform: 'uppercase',
-            letterSpacing: '4px',
-            fontWeight: '600',
-            fontSize: '0.9rem'
-          }}>
-            Aldea Global 2 • Fase 1
-          </span>
-          <h1 style={{
-            fontSize: 'clamp(3rem, 8vw, 5rem)',
-            marginTop: '1rem',
-            marginBottom: '1.5rem',
-            lineHeight: 1.1,
-            color: 'var(--color-basil)'
-          }}>
-            Il Castello
-          </h1>
-          <p style={{
-            fontFamily: 'var(--font-serif)',
-            fontSize: '1.25rem',
-            maxWidth: '600px',
-            color: 'var(--color-charcoal)',
-            opacity: 0.8
-          }}>
-            Estudio de la realidad empresarial y potencial de internacionalización de pasta artesanal premium.
-          </p>
-        </ScrollReveal>
-      </section>
-
-      {/* Acuerdo de Equipo */}
-      <section className="section bg-cream-dark" id="acuerdo-equipo">
-        <div className="container">
-          <SectionTitle 
-            title="Acuerdo de Equipo" 
-            subtitle="Parte A"
-          />
-          
-          <TeamAgreement />
-        </div>
-      </section>
-
-      {/* Realidad Empresarial */}
-      <section className="section" id="realidad-empresarial">
-        <div className="container">
-          <SectionTitle 
-            title="Realidad Empresarial" 
-            subtitle="Parte B"
-          />
-
-            <div style={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '4rem'
-            }}>
-              <BusinessModel />
-
-              <DofaAnalysis />
-              
-              {/* B5 Sostenibilidad */}
-              <Sustainability />
-
-              {/* B6 y B7 Cruces Estratégicos y Objetivo SMART */}
-              <StrategicCrosses />
-
-            </div>
-        </div>
-      </section>
+    <div ref={containerRef} className="scrolly-container">
       
-      {/* Referencias APA */}
-      <section className="section bg-cream-dark" id="referencias">
-        <div className="container" style={{ maxWidth: '800px' }}>
-          <SectionTitle title="Referencias Bibliográficas" />
-          <ScrollReveal direction="up">
-            <div style={{
-              background: 'white',
-              padding: '2.5rem',
-              borderRadius: '8px',
-              fontFamily: 'var(--font-serif)',
-              fontSize: '0.95rem',
-              lineHeight: '1.8',
-              boxShadow: '0 5px 20px rgba(0,0,0,0.03)'
-            }}>
-              <p style={{ paddingLeft: '2rem', textIndent: '-2rem', marginBottom: '1rem' }}>
-                CEIPA Business School. (2026). <span style={{ fontStyle: 'italic' }}>Aldea Global 2 | Actividades Grupales – Método Científico</span>.
-              </p>
-              <p style={{ paddingLeft: '2rem', textIndent: '-2rem', marginBottom: '1rem' }}>
-                Gavenzi, L., & Saúl, H. (2026). <span style={{ fontStyle: 'italic' }}>Entrevista sobre la Realidad Empresarial de Il Castello</span> [Entrevista grabada]. Sabaneta, Antioquia.
-              </p>
-              <p style={{ paddingLeft: '2rem', textIndent: '-2rem', marginBottom: '1rem' }}>
-                Porter, M. E. (2008). The Five Competitive Forces That Shape Strategy. <span style={{ fontStyle: 'italic' }}>Harvard Business Review, 86</span>(1), 78-93.
-              </p>
-              <p style={{ paddingLeft: '2rem', textIndent: '-2rem', marginBottom: '1rem' }}>
-                Osterwalder, A., & Pigneur, Y. (2010). <span style={{ fontStyle: 'italic' }}>Business Model Generation: A Handbook for Visionaries, Game Changers, and Challengers</span>. Wiley.
-              </p>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
+      {/* 1. CAPA DE FONDO: EL PRODUCTO FLOTANTE FIJO */}
+      <FloatingProduct scrollYProgress={scrollYProgress} />
 
-      <footer style={{
-        background: 'var(--color-charcoal)',
-        color: 'var(--color-cream)',
-        padding: '3rem 2rem',
-        textAlign: 'center'
-      }}>
-        <p style={{ opacity: 0.6, fontSize: '0.9rem' }}>
-          CEIPA Aldea Global 2 • Proyecto Grupal 2026
-        </p>
-      </footer>
-    </>
+      {/* 2. CAPA DE CONTENIDO: LAS SECCIONES QUE HACEN SCROLL POR ENCIMA */}
+      <div style={{ position: 'relative', zIndex: 10 }}>
+
+        {/* Hero Section */}
+        <section style={{
+          minHeight: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: '0 2rem',
+          position: 'relative',
+          overflow: 'hidden'
+        }}>
+          <FloatingDecorations />
+          
+          <h2 className="section-gigante" style={{ top: '10%' }}>IL CASTELLO</h2>
+          <h2 className="section-gigante" style={{ bottom: '10%', right: '2rem', left: 'auto', textAlign: 'right', color: 'rgba(0,0,0,0.03)' }}>PREMIUM</h2>
+
+          <motion.div 
+            style={{ 
+              textAlign: 'center', 
+              position: 'relative', 
+              zIndex: 10,
+              background: 'rgba(255,251,242,0.85)',
+              padding: '2rem',
+              borderRadius: '20px',
+              backdropFilter: 'blur(10px)',
+              marginTop: '40vh', /* Empujamos el cuadro para dejar ver el fettuccine flotante */
+              maxWidth: '600px',
+              border: '1px solid rgba(0,0,0,0.05)'
+            }}
+          >
+            <span style={{
+              color: 'var(--color-tomato)',
+              fontFamily: 'var(--font-sans)',
+              textTransform: 'uppercase',
+              letterSpacing: '4px',
+              fontWeight: '600',
+              fontSize: '0.9rem'
+            }}>
+              Aldea Global 2 • Fase 1
+            </span>
+            <p style={{
+              fontFamily: 'var(--font-serif)',
+              fontSize: '1.25rem',
+              marginTop: '1.5rem',
+              color: 'var(--color-charcoal)',
+              opacity: 0.9
+            }}>
+              Estudio de la realidad empresarial y potencial de internacionalización de pasta artesanal premium.
+            </p>
+          </motion.div>
+        </section>
+
+        {/* Acuerdo de Equipo */}
+        {/* Cambiamos márgenes y anchos en lugar del layout flat, para que conviva con la caja flotante */}
+        <section className="section" id="acuerdo-equipo" style={{ minHeight: '150vh', justifyContent: 'flex-start' }}>
+          <div className="container" style={{ maxWidth: '800px', marginLeft: '0', paddingLeft: '4rem' }}>
+            <h2 className="section-gigante" style={{ position: 'absolute', top: 0, left: 0, opacity: 0.1, zIndex: -1 }}>CONVIVENCIA</h2>
+            <SectionTitle title="Acuerdo de Equipo" subtitle="Parte A" />
+            <TeamAgreement />
+          </div>
+        </section>
+
+        {/* Realidad Empresarial - Canvas */}
+        <section className="section" id="realidad-empresarial" style={{ minHeight: '150vh', justifyContent: 'flex-end' }}>
+          <div className="container" style={{ maxWidth: '900px', marginRight: '0', paddingRight: '4rem' }}>
+            <h2 className="section-gigante" style={{ position: 'absolute', top: 0, right: 0, textAlign: 'right', opacity: 0.1, zIndex: -1 }}>MODELO DE NEGOCIO</h2>
+            <SectionTitle title="Realidad Empresarial" subtitle="Parte B" />
+            <BusinessModel />
+          </div>
+        </section>
+
+        {/* DOFA y Estrategias */}
+        <section className="section bg-cream-dark" id="analisis-estrategico" style={{ minHeight: '200vh', flexDirection: 'column', alignItems: 'flex-start', padding: '10rem 4rem' }}>
+          <h2 className="section-gigante" style={{ top: '5%', left: '5%', opacity: 0.1, color: 'var(--color-basil)', zIndex: 0 }}>ESTRATEGIA TOTAL</h2>
+          <div style={{ maxWidth: '850px', zIndex: 10, position: 'relative' }}>
+            <DofaAnalysis />
+            <div style={{ margin: '8rem 0' }}></div>
+            <Sustainability />
+            <div style={{ margin: '8rem 0' }}></div>
+            <StrategicCrosses />
+          </div>
+        </section>
+        
+        {/* Referencias APA */}
+        <section className="section" id="referencias" style={{ minHeight: '50vh', display: 'flex', alignItems: 'center' }}>
+          <div className="container" style={{ maxWidth: '800px', margin: '0 auto' }}>
+            <SectionTitle title="Referencias Bibliográficas" />
+            <ScrollReveal direction="up">
+              <div style={{
+                background: 'white',
+                padding: '2.5rem',
+                borderRadius: '8px',
+                fontFamily: 'var(--font-serif)',
+                fontSize: '0.95rem',
+                lineHeight: '1.8',
+                boxShadow: '0 5px 20px rgba(0,0,0,0.03)'
+              }}>
+                <p style={{ paddingLeft: '2rem', textIndent: '-2rem', marginBottom: '1rem' }}>
+                  CEIPA Business School. (2026). <span style={{ fontStyle: 'italic' }}>Aldea Global 2 | Actividades Grupales – Método Científico</span>.
+                </p>
+                <p style={{ paddingLeft: '2rem', textIndent: '-2rem', marginBottom: '1rem' }}>
+                  Gavenzi, L., & Saúl, H. (2026). <span style={{ fontStyle: 'italic' }}>Entrevista sobre la Realidad Empresarial de Il Castello</span> [Entrevista grabada]. Sabaneta, Antioquia.
+                </p>
+                <p style={{ paddingLeft: '2rem', textIndent: '-2rem', marginBottom: '1rem' }}>
+                  Porter, M. E. (2008). The Five Competitive Forces That Shape Strategy. <span style={{ fontStyle: 'italic' }}>Harvard Business Review, 86</span>(1), 78-93.
+                </p>
+                <p style={{ paddingLeft: '2rem', textIndent: '-2rem', marginBottom: '1rem' }}>
+                  Osterwalder, A., & Pigneur, Y. (2010). <span style={{ fontStyle: 'italic' }}>Business Model Generation: A Handbook for Visionaries, Game Changers, and Challengers</span>. Wiley.
+                </p>
+              </div>
+            </ScrollReveal>
+          </div>
+        </section>
+
+        <footer style={{
+          background: 'var(--color-charcoal)',
+          color: 'var(--color-cream)',
+          padding: '3rem 2rem',
+          textAlign: 'center',
+          position: 'relative',
+          zIndex: 20
+        }}>
+          <p style={{ opacity: 0.6, fontSize: '0.9rem' }}>
+            CEIPA Aldea Global 2 • Proyecto Grupal 2026
+          </p>
+        </footer>
+
+      </div>
+    </div>
   )
 }
 
