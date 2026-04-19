@@ -178,6 +178,9 @@ export default function StitchLayout({ scrollYProgress }) {
           © 2026 PROYECTO UNIVERSITARIO ESTUDIANTES CEIPA.
         </div>
       </footer>
+      {/* Simulador Exportación */}
+      <ExportSimulator isOpen={simulatorOpen} onClose={() => setSimulatorOpen(false)} />
+
     </div>
   );
 }
