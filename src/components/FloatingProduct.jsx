@@ -13,6 +13,8 @@ const FloatingProduct = ({ scrollYProgress }) => {
   const scaleFettuccine = useTransform(scrollYProgress, [0, 0.08], [1.2, 0.8]);
   const xFettuccine = useTransform(scrollYProgress, [0, 0.08], ["50%", "100%"]);
   const yFettuccine = useTransform(scrollYProgress, [0, 0.08], ["0%", "50%"]);
+  // Truco extra: Sacarlo del flujo (display) para que no sea pintado fantasmalmente en Safari/Chrome.
+  const displayFettuccine = useTransform(scrollYProgress, [0, 0.08, 0.081], ["block", "block", "none"]);
   
   // --- 2. PAPPARDELLE (Acompaña Video Rojo y Realidad Empresarial) ---
   // Entra en 0.10 y muere bruscamente en 0.28 (justo al borde de la sección verde "Estrategia Total").
@@ -20,6 +22,7 @@ const FloatingProduct = ({ scrollYProgress }) => {
   const scalePappardelle = useTransform(scrollYProgress, [0.10, 0.28], [0.8, 1.2]);
   const xPappardelle = useTransform(scrollYProgress, [0.10, 0.15, 0.23, 0.28], ["150%", "30%", "-30%", "-150%"]);
   const yPappardelle = useTransform(scrollYProgress, [0.10, 0.28], ["0%", "0%"]);
+  const displayPappardelle = useTransform(scrollYProgress, [0.10, 0.12, 0.28, 0.281], ["none", "block", "block", "none"]);
 
   // --- 3. RAVIOLI (Estrategia Total - Sección Verde) ---
   // Arranca sin overlap en 0.30 y perdura hasta el footer.
@@ -27,6 +30,7 @@ const FloatingProduct = ({ scrollYProgress }) => {
   const scaleRavioli = useTransform(scrollYProgress, [0.32, 0.90], [1.1, 0.9]);
   const xRavioli = useTransform(scrollYProgress, [0.30, 0.40, 0.88, 0.92], ["-150%", "-10%", "50%", "150%"]);
   const yRavioli = useTransform(scrollYProgress, [0.30, 0.92], ["35%", "50%"]);
+  const displayRavioli = useTransform(scrollYProgress, [0.30, 0.32, 0.90, 0.92], ["none", "block", "block", "none"]);
 
   return (
     <div className="sticky-product-wrapper">
@@ -40,6 +44,7 @@ const FloatingProduct = ({ scrollYProgress }) => {
           x: xFettuccine,
           y: yFettuccine,
           opacity: opacityFettuccine,
+          display: displayFettuccine,
           filter: 'drop-shadow(0 25px 35px rgba(0,0,0,0.3))'
         }}
       >
@@ -55,6 +60,7 @@ const FloatingProduct = ({ scrollYProgress }) => {
           x: xPappardelle,
           y: yPappardelle,
           opacity: opacityPappardelle,
+          display: displayPappardelle,
           filter: 'drop-shadow(0 25px 35px rgba(0,0,0,0.3))'
         }}
       >
@@ -70,6 +76,7 @@ const FloatingProduct = ({ scrollYProgress }) => {
           x: xRavioli,
           y: yRavioli,
           opacity: opacityRavioli,
+          display: displayRavioli,
           filter: 'drop-shadow(0 25px 35px rgba(0,0,0,0.3))'
         }}
       >
