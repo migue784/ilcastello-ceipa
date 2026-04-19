@@ -8,25 +8,24 @@ const FloatingProduct = ({ scrollYProgress }) => {
   const rotate = useTransform(scrollYProgress, [0, 1], [0, 360]);
 
   // --- 1. FETTUCCINE (Hero a Acuerdo) ---
-  // Debe iniciar un poco a la derecha ("50%") y no "0%" para que no interrumpa el Título a la izquierda.
-  const opacityFettuccine = useTransform(scrollYProgress, [0, 0.15, 0.16], [1, 1, 0]);
-  const scaleFettuccine = useTransform(scrollYProgress, [0, 0.15], [1.2, 0.8]);
-  // Ingresa centro-derecha, sale hacia abajo/desvanecido rápido
-  const xFettuccine = useTransform(scrollYProgress, [0, 0.15], ["50%", "100%"]);
-  const yFettuccine = useTransform(scrollYProgress, [0, 0.15], ["0%", "50%"]);
+  // Debe iniciar a la derecha ("50%") y desaparecer RAPIDÍSIMO (0.10) para no verse en el Video Rojo.
+  const opacityFettuccine = useTransform(scrollYProgress, [0, 0.10, 0.12], [1, 1, 0]);
+  const scaleFettuccine = useTransform(scrollYProgress, [0, 0.10], [1.2, 0.8]);
+  const xFettuccine = useTransform(scrollYProgress, [0, 0.10], ["50%", "100%"]);
+  const yFettuccine = useTransform(scrollYProgress, [0, 0.10], ["0%", "50%"]);
   
-  // --- 2. PAPPARDELLE (Acompaña Realidad Empresarial y Video) ---
-  // Entra desde x: 150% (fuera de la pantalla a la derecha)
-  // Desaparece bruscamente en 0.55 ANTES que aparezca el verde.
-  const opacityPappardelle = useTransform(scrollYProgress, [0.28, 0.30, 0.54, 0.56], [0, 1, 1, 0]);
-  const scalePappardelle = useTransform(scrollYProgress, [0.30, 0.54], [0.8, 1.2]);
-  const xPappardelle = useTransform(scrollYProgress, [0.28, 0.35, 0.45, 0.56], ["150%", "30%", "-30%", "-150%"]);
-  const yPappardelle = useTransform(scrollYProgress, [0.28, 0.56], ["0%", "0%"]);
+  // --- 2. PAPPARDELLE (Acompaña Video Rojo y Realidad Empresarial) ---
+  // Entra en 0.18 (luego de morir el de arriba) y muere en 0.45 (ANTES de que inicie la zona verde DOFA)
+  const opacityPappardelle = useTransform(scrollYProgress, [0.18, 0.20, 0.42, 0.45], [0, 1, 1, 0]);
+  const scalePappardelle = useTransform(scrollYProgress, [0.20, 0.42], [0.8, 1.2]);
+  const xPappardelle = useTransform(scrollYProgress, [0.18, 0.25, 0.38, 0.45], ["150%", "30%", "-30%", "-150%"]);
+  const yPappardelle = useTransform(scrollYProgress, [0.18, 0.45], ["0%", "0%"]);
 
   // --- 3. RAVIOLI (Estrategia Total - Sección Verde) ---
-  const opacityRavioli = useTransform(scrollYProgress, [0.57, 0.58, 0.90, 0.92], [0, 1, 1, 0]);
-  const scaleRavioli = useTransform(scrollYProgress, [0.58, 0.90], [1.2, 1]);
-  const xRavioli = useTransform(scrollYProgress, [0.57, 0.62, 0.88, 0.92], ["-150%", "-20%", "40%", "150%"]);
+  // Nace en la sección verde limpia.
+  const opacityRavioli = useTransform(scrollYProgress, [0.48, 0.50, 0.90, 0.92], [0, 1, 1, 0]);
+  const scaleRavioli = useTransform(scrollYProgress, [0.50, 0.90], [1.2, 1]);
+  const xRavioli = useTransform(scrollYProgress, [0.48, 0.55, 0.88, 0.92], ["-150%", "-20%", "40%", "150%"]);
   const yRavioli = useTransform(scrollYProgress, [0.63, 0.92], ["0%", "0%"]);
 
   return (
