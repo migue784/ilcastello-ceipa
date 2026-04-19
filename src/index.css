@@ -84,7 +84,6 @@ img {
 }
 
 /* --- cinematic placeholders --- */
-/* --- cinematic placeholders --- */
 .cinematic-placeholder {
   width: 100%;
   aspect-ratio: 16/9;
@@ -107,41 +106,37 @@ img {
   font-size: 1.2rem;
 }
 
-/* Scroll interno de tarjetas horizontales (Laptops) */
-.dofa-slider-card::-webkit-scrollbar {
-  width: 6px;
-}
-.dofa-slider-card::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 4px;
-}
-.dofa-slider-card::-webkit-scrollbar-thumb {
-  background: rgba(227, 184, 90, 0.4); /* Wheat/Dorado */
-  border-radius: 4px;
-}
-.dofa-slider-card::-webkit-scrollbar-thumb:hover {
-  background: rgba(227, 184, 90, 0.8);
-}
-
-  width: 100%;
-  aspect-ratio: 16/9;
-  background-color: rgba(0, 0, 0, 0.2);
-  border: 1px dashed rgba(255, 255, 255, 0.4);
+/* --- Glassmorphism --- */
+.card-glass-dark {
+  background: rgba(30, 30, 25, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  position: relative;
+  color: var(--color-cream);
+}
+.card-glass-dark h3, .card-glass-dark h4 {
+  color: var(--color-wheat) !important;
 }
 
-.cinematic-placeholder span {
+/* Base button reset for Accordion */
+.btn-accordion {
+  background: rgba(227, 184, 90, 0.1);
+  border: 1px solid rgba(227, 184, 90, 0.3);
+  color: var(--color-wheat);
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
   font-family: var(--font-sans);
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+.btn-accordion:hover {
+  background: rgba(227, 184, 90, 0.2);
 }
 
 /* --- Scrollytelling Specific Styles --- */
