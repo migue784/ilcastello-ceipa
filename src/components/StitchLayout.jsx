@@ -89,36 +89,36 @@ export default function StitchLayout({ scrollYProgress }) {
       {/* Company Reality */}
       <section id="realidad" className="py-32 px-8 md:px-16 bg-surface" style={{ position: 'relative', zIndex: 20 }}>
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-20">
-          <div className="md:w-1/4">
+          <div className="md:w-1/3">
             <h2 className="font-headline text-4xl md:text-5xl font-bold text-on-surface uppercase leading-tight sticky top-32">
               Realidad <br />
               <span className="text-primary text-6xl">Empresarial</span>
             </h2>
           </div>
-          <div className="md:w-3/4 flex flex-wrap lg:flex-nowrap gap-6">
+          <div className="md:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-6">
             
-            <div className="bg-surface-container-highest p-8 flex flex-col justify-between w-full lg:w-1/4 min-h-[300px] border-t-4 border-primary group hover:bg-surface-dim transition-all duration-400">
+            <div className="bg-surface-container-highest p-10 flex flex-col justify-between aspect-square group hover:bg-surface-dim transition-all duration-400">
               <div className="font-label text-xs uppercase tracking-widest text-primary mb-4">Entidad</div>
-              <h3 className="font-headline text-2xl font-bold text-on-surface mb-2">Pasta Artesanal LG S.A.S</h3>
-              <p className="font-body text-sm text-on-surface-variant flex-grow">Establecida en 1983, es un referente de la tradición italiana en Colombia. Evitan la dependencia corporativa inyectando sus utilidades en tecnología europea, apostando por ser 100% ágiles y sostenibles.</p>
+              <h3 className="font-headline text-3xl font-bold text-on-surface mb-2">Pasta Artesanal LG S.A.S</h3>
+              <p className="font-body text-sm lg:text-base text-on-surface-variant flex-grow pt-2">Establecida en 1983, es un referente de la tradición italiana en Colombia. Evitan la dependencia corporativa inyectando sus utilidades en tecnología europea, apostando por ser ágiles y sostenibles.</p>
             </div>
             
-            <div className="bg-surface-container-highest p-8 flex flex-col justify-between w-full lg:w-1/4 min-h-[300px] border-t-4 border-primary group hover:bg-surface-dim transition-all duration-400">
+            <div className="bg-surface-container-highest p-10 flex flex-col justify-between aspect-square group hover:bg-surface-dim transition-all duration-400">
               <div className="font-label text-xs uppercase tracking-widest text-primary mb-4">Producto Core</div>
-              <h3 className="font-headline text-2xl font-bold text-on-surface mb-2">Ravioli Ultracongelado</h3>
-              <p className="font-body text-sm text-on-surface-variant flex-grow">Preservación absoluta de la frescura. Congelado por choque a -20°C tras amasado manual, elimina patógenos sin el uso del controversial químico 'Potasio' común en supermercados.</p>
+              <h3 className="font-headline text-3xl font-bold text-on-surface mb-2">Ravioli Ultracongelado</h3>
+              <p className="font-body text-sm lg:text-base text-on-surface-variant flex-grow pt-2">Preservación absoluta de la frescura. Congelado por choque a -20°C tras amasado manual, elimina patógenos sin el uso del controversial químico 'Potasio' usado en los supermercados.</p>
             </div>
             
-            <div className="bg-surface-container-highest p-8 flex flex-col justify-between w-full lg:w-1/4 min-h-[300px] border-t-4 border-primary group hover:bg-surface-dim transition-all duration-400">
+            <div className="bg-surface-container-highest p-10 flex flex-col justify-between aspect-square group hover:bg-surface-dim transition-all duration-400">
               <div className="font-label text-xs uppercase tracking-widest text-primary mb-4">Proceso Lento</div>
-              <h3 className="font-headline text-2xl font-bold text-on-surface mb-2">Secado 14 Horas</h3>
-              <p className="font-body text-sm text-on-surface-variant flex-grow">En contraste a la industria global, Il Castello emplea secaderos estáticos europeos, deshidratando su pasta 100% durum pausadamente para mantener texturas excepcionales.</p>
+              <h3 className="font-headline text-3xl font-bold text-on-surface mb-2">Secado 14 Horas</h3>
+              <p className="font-body text-sm lg:text-base text-on-surface-variant flex-grow pt-2">En contraste a la industria global, Il Castello emplea secaderos estáticos europeos, deshidratando su pasta 100% durum pausadamente para mantener todas las texturas excepcionales del huevo.</p>
             </div>
             
-            <div className="bg-surface-container-highest p-8 flex flex-col justify-between w-full lg:w-1/4 min-h-[300px] border-t-4 border-primary group hover:bg-surface-dim transition-all duration-400">
+            <div className="bg-surface-container-highest p-10 flex flex-col justify-between aspect-square group hover:bg-surface-dim transition-all duration-400">
               <div className="font-label text-xs uppercase tracking-widest text-primary mb-4">Targeting</div>
-              <h3 className="font-headline text-2xl font-bold text-on-surface mb-2">Canal HORECA Premium</h3>
-              <p className="font-body text-sm text-on-surface-variant flex-grow">Principal fuente del 90% de sus ingresos. Suplen a restaurantes élite, quitándoles la carga operativa de la cocina artesanal.</p>
+              <h3 className="font-headline text-3xl font-bold text-on-surface mb-2">Canal HORECA Premium</h3>
+              <p className="font-body text-sm lg:text-base text-on-surface-variant flex-grow pt-2">Principal fuente del 90% de sus ingresos fijos. Suplen a los restaurantes élite y cadenas de Hoteles de cinco estrellas, quitándoles la carga pesada y operativa de la cocina artesanal.</p>
             </div>
           </div>
         </div>
