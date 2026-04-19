@@ -7,21 +7,26 @@ const FloatingProduct = ({ scrollYProgress }) => {
   // Rotación constante a lo largo de toda la página
   const rotate = useTransform(scrollYProgress, [0, 1], [0, 360]);
 
-  // Animamos el producto sólamente de 0 a 0.25 (Hero y Acuerdos)
-  // Luego desaparece para el Descanso 1
-  const opacityFettuccine = useTransform(scrollYProgress, [0, 0.20, 0.25], [1, 1, 0]);
+  // --- 1. FETTUCCINE (Hero a Acuerdo) ---
+  // Desaparece súbitamente de la pantalla cruzando x o subiendo y
+  const opacityFettuccine = useTransform(scrollYProgress, [0, 0.20, 0.21], [1, 1, 0]);
   const scaleFettuccine = useTransform(scrollYProgress, [0, 0.20], [1.4, 0.8]);
+  // Ingresa centro, sale hacia arriba violentamente
   const xFettuccine = useTransform(scrollYProgress, [0, 0.20], ["0%", "50%"]);
+  const yFettuccine = useTransform(scrollYProgress, [0, 0.20], ["0%", "-100%"]);
   
-  // Pappardelle aparece en Canvas y luego se va (0.35 a 0.55)
-  const opacityPappardelle = useTransform(scrollYProgress, [0.35, 0.40, 0.50, 0.55], [0, 1, 1, 0]);
+  // --- 2. PAPPARDELLE (Acompaña Modelo Canvas) ---
+  // Entra desde x: 150% (fuera de la pantalla a la derecha) hacia el centro
+  const opacityPappardelle = useTransform(scrollYProgress, [0.33, 0.35, 0.50, 0.52], [0, 1, 1, 0]);
   const scalePappardelle = useTransform(scrollYProgress, [0.35, 0.50], [0.8, 1.2]);
-  const xPappardelle = useTransform(scrollYProgress, [0.35, 0.50], ["50%", "-50%"]);
+  const xPappardelle = useTransform(scrollYProgress, [0.33, 0.38, 0.47, 0.52], ["150%", "50%", "-50%", "-150%"]);
+  const yPappardelle = useTransform(scrollYProgress, [0.33, 0.52], ["0%", "0%"]);
 
-  // Ravioli aparece en DOFA y luego "Fin" (0.7 a 1.0)
-  const opacityRavioli = useTransform(scrollYProgress, [0.65, 0.70, 0.90, 0.95], [0, 1, 1, 0]);
+  // --- 3. RAVIOLI (Cierre o similar si hace falta) ---
+  const opacityRavioli = useTransform(scrollYProgress, [0.63, 0.65, 0.90, 0.92], [0, 1, 1, 0]);
   const scaleRavioli = useTransform(scrollYProgress, [0.65, 0.90], [1.2, 1]);
-  const xRavioli = useTransform(scrollYProgress, [0.65, 0.90], ["-50%", "40%"]);
+  const xRavioli = useTransform(scrollYProgress, [0.63, 0.68, 0.88, 0.92], ["-150%", "-50%", "40%", "150%"]);
+  const yRavioli = useTransform(scrollYProgress, [0.63, 0.92], ["0%", "0%"]);
 
   return (
     <div className="sticky-product-wrapper">
@@ -33,6 +38,7 @@ const FloatingProduct = ({ scrollYProgress }) => {
           rotate,
           scale: scaleFettuccine,
           x: xFettuccine,
+          y: yFettuccine,
           opacity: opacityFettuccine,
           filter: 'drop-shadow(0 25px 35px rgba(0,0,0,0.3))'
         }}
@@ -47,6 +53,7 @@ const FloatingProduct = ({ scrollYProgress }) => {
           rotate,
           scale: scalePappardelle,
           x: xPappardelle,
+          y: yPappardelle,
           opacity: opacityPappardelle,
           filter: 'drop-shadow(0 25px 35px rgba(0,0,0,0.3))'
         }}
@@ -61,6 +68,7 @@ const FloatingProduct = ({ scrollYProgress }) => {
           rotate,
           scale: scaleRavioli,
           x: xRavioli,
+          y: yRavioli,
           opacity: opacityRavioli,
           filter: 'drop-shadow(0 25px 35px rgba(0,0,0,0.3))'
         }}

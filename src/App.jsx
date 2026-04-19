@@ -80,18 +80,18 @@ function App() {
           <HorizontalGallery>
             
             {/* ELEMENTO 1 DEL SLIDER: DOFA OVERVIEW */}
-            <div style={{ width: '850px', flexShrink: 0, marginTop: '20vh' }}>
+            <div style={{ width: '85vw', maxWidth: '850px', flexShrink: 0, marginTop: '10vh', maxHeight: '80vh', overflowY: 'auto', paddingRight: '1rem' }} className="dofa-slider-card">
               <SectionTitle title="Análisis Estratégico" subtitle="DOFA" style={{ color: 'var(--color-cream)' }} />
               <DofaAnalysis />
             </div>
 
             {/* ELEMENTO 2 DEL SLIDER: SOSTENIBILIDAD */}
-            <div style={{ width: '800px', flexShrink: 0, marginTop: '30vh' }}>
+            <div style={{ width: '85vw', maxWidth: '800px', flexShrink: 0, marginTop: '20vh', maxHeight: '80vh', overflowY: 'auto', paddingRight: '1rem' }} className="dofa-slider-card">
                <Sustainability />
             </div>
 
             {/* ELEMENTO 3 DEL SLIDER: CRUCES ESTRATÉGICOS */}
-            <div style={{ width: '850px', flexShrink: 0, marginTop: '15vh' }}>
+            <div style={{ width: '85vw', maxWidth: '850px', flexShrink: 0, marginTop: '10vh', maxHeight: '80vh', overflowY: 'auto', paddingRight: '1rem' }} className="dofa-slider-card">
                <StrategicCrosses />
             </div>
 

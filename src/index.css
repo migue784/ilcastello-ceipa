@@ -84,7 +84,45 @@ img {
 }
 
 /* --- cinematic placeholders --- */
+/* --- cinematic placeholders --- */
 .cinematic-placeholder {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 1px dashed rgba(255, 255, 255, 0.4);
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.cinematic-placeholder span {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.2rem;
+}
+
+/* Scroll interno de tarjetas horizontales (Laptops) */
+.dofa-slider-card::-webkit-scrollbar {
+  width: 6px;
+}
+.dofa-slider-card::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+.dofa-slider-card::-webkit-scrollbar-thumb {
+  background: rgba(227, 184, 90, 0.4); /* Wheat/Dorado */
+  border-radius: 4px;
+}
+.dofa-slider-card::-webkit-scrollbar-thumb:hover {
+  background: rgba(227, 184, 90, 0.8);
+}
+
   width: 100%;
   aspect-ratio: 16/9;
   background-color: rgba(0, 0, 0, 0.2);
