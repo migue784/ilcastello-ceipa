@@ -50,7 +50,8 @@ export default function ExportSimulator({ isOpen, onClose }) {
       }).addTo(map);
 
       // Iconos Personalizados en SVG puro
-      const truckSVG = `<div class="bg-charcoal text-white rounded-full p-2 border-2 border-white shadow-xl flex justify-center items-center"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14v10h1"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg></div>`;
+      // Cambiamos el bg a negro absoluto (bg-black) y borde oscuro para que contraste en cualquier mapa claro u oscuro
+      const truckSVG = `<div class="bg-black text-white rounded-full p-2 border-[3px] border-white shadow-2xl flex justify-center items-center"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14v10h1"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg></div>`;
       const shipSVG = `<div class="bg-primary text-white rounded-full p-3 border-[3px] border-white shadow-2xl flex justify-center items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 21c.6.5 1.2 1 2.5 1 2.5 0 3.2-1.2 5.5-1.2 2.3 0 3 1.2 5.5 1.2 2.3 0 3-1.2 5.5-1.2 1.3 0 1.9.5 2.5 1"/><path d="M19.38 20A11.6 11.6 0 0 0 21 14l-9-4-9 4c0 2.9.94 5.34 2.81 7.76"/><path d="M19 13V7a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v6"/><path d="M12 10v4"/><path d="M12 2v3"/></svg></div>`;
       const endPinSVG = `<div class="bg-tomato text-white rounded-full w-4 h-4 border-2 border-white shadow-lg mx-auto"></div>`;
 
@@ -157,6 +158,23 @@ export default function ExportSimulator({ isOpen, onClose }) {
   const margenNeto = (EBITDA / ingresosTotales) * 100;
   const isRentable = EBITDA > 0;
 
+  // Lógica de descarga de informe falso súper profesional
+  const handleDownloadReport = () => {
+    const reportText = `IL CASTELLO - AUDITORÍA LOGÍSTICA DE CARGA HORECA\n\n------------------------------\nDestino de Exportación: Puertos CRC & HORECA Interior\nIncoterm Usado: ${incoterm} B2B\nVolumen Despachado: ${volumen.toLocaleString()} KG\nTiempo de Tránsito Marítimo: 13 Días Constantes\n\nESTADO DE CARGA:\nCadena de Ultracongelación: Ininterrumpida (-20°C a contenedor CERRADO)\nMermas Físicas Sensoriales: 0.0%\n\nFINANZAS:\nCapital Base Obtenido: $${(ingresosTotales/1000000).toFixed(1)} Millones COP\nRentabilidad Operativa Neta (EBITDA Líquido): $${(EBITDA/1000000).toFixed(1)} Millones COP\nMargen: ${margenNeto.toFixed(1)}%\n\nVerificado por Motor Aduanero Simulado V9.4\n------------------------------`;
+    
+    // Generar archivo virtual y triggear descarga en el navegador del usuario directamente
+    const dataStr = "data:text/plain;charset=utf-8," + encodeURIComponent(reportText);
+    const tempAnchorNode = document.createElement('a');
+    tempAnchorNode.setAttribute("href", dataStr);
+    tempAnchorNode.setAttribute("download", `Manifiesto_Aduanas_IlCastello_${incoterm}.txt`);
+    document.body.appendChild(tempAnchorNode); 
+    tempAnchorNode.click();
+    tempAnchorNode.remove();
+
+    // Finalizar luego de disparar la descarga
+    handleClose();
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -203,8 +221,18 @@ export default function ExportSimulator({ isOpen, onClose }) {
                       <span className="font-label text-xs uppercase tracking-widest text-primary mb-2 block font-bold">Incoterms</span>
                    </div>
                    <div className="grid grid-cols-2 gap-4">
-                      <button onClick={() => setIncoterm('FOB')} className={`py-4 shadow-sm font-label text-sm uppercase font-bold transition-all ${incoterm === 'FOB' ? 'bg-charcoal text-white rounded-sm' : 'bg-surface border border-outline/30 text-on-surface-variant hover:border-charcoal'}`}>FOB</button>
-                      <button onClick={() => setIncoterm('CIF')} className={`py-4 shadow-sm font-label text-sm uppercase font-bold transition-all ${incoterm === 'CIF' ? 'bg-primary text-white rounded-sm' : 'bg-surface border border-outline/30 text-on-surface-variant hover:border-primary'}`}>CIF</button>
+                      <button 
+                        onClick={() => setIncoterm('FOB')} 
+                        className={`py-4 shadow-sm font-label text-sm uppercase font-bold transition-all ${incoterm === 'FOB' ? 'bg-primary text-white rounded-sm border-2 border-primary' : 'bg-surface border border-outline/30 text-on-surface-variant hover:border-primary'}`}
+                      >
+                         FOB
+                      </button>
+                      <button 
+                        onClick={() => setIncoterm('CIF')} 
+                        className={`py-4 shadow-sm font-label text-sm uppercase font-bold transition-all ${incoterm === 'CIF' ? 'bg-primary text-white rounded-sm border-2 border-primary' : 'bg-surface border border-outline/30 text-on-surface-variant hover:border-primary'}`}
+                      >
+                         CIF
+                      </button>
                    </div>
                    <div className="mt-6 p-4 bg-white/50 border border-outline/10 text-xs text-on-surface-variant leading-relaxed">
                      {incoterm === 'FOB' ? 'FOB (Free On Board): Minimiza la carga de gastos porque Il Castello solo asume la logística desde Medellín hasta que el contenedor sube al barco en Cartagena. Reduce costo de flete.' : 'CIF (Cost, Insurance & Freight): La jugada maestra B2B. Proveemos el contenedor refrigerado hasta el puerto de Moín en Limón, Costa Rica, absorbiendo altos costos fijos pero controlando la cadena física de temperatura a -20°C.'}
@@ -307,8 +335,8 @@ export default function ExportSimulator({ isOpen, onClose }) {
                            </li>
                         </ul>
 
-                        <button onClick={handleClose} className="w-full px-8 py-5 bg-charcoal text-white font-label font-bold text-sm uppercase tracking-widest hover:bg-black transition-colors rounded-sm shadow-md flex items-center justify-center gap-2">
-                           <Terminal size={18}/> Descargar Informe Financiero (Salir)
+                        <button onClick={handleDownloadReport} className="w-full px-8 py-5 bg-primary text-white font-label font-bold text-sm uppercase tracking-widest hover:bg-[#384a35] transition-colors rounded-sm shadow-md flex items-center justify-center gap-2">
+                           <Terminal size={18}/> Descargar Manifiesto y Salir
                         </button>
                      </div>
                   </motion.div>
