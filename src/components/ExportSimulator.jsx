@@ -7,12 +7,15 @@ export default function ExportSimulator({ isOpen, onClose }) {
   const [volumen, setVolumen] = useState(2000); 
   const [incoterm, setIncoterm] = useState('CIF');
   const [trackingPhaseStatus, setTrackingPhaseStatus] = useState('INACTIVO');
+  const [diasTranscurridos, setDiasTranscurridos] = useState(0);
   
-  // Referencia al mapa para no re-inicializar
   const mapRef = useRef(null);
 
   useEffect(() => {
-    if (isOpen && fase === 'offline') setFase('booting');
+    if (isOpen && fase === 'offline') {
+      setFase('booting');
+      setDiasTranscurridos(0);
+    }
   }, [isOpen, fase]);
 
   useEffect(() => {
@@ -24,33 +27,39 @@ export default function ExportSimulator({ isOpen, onClose }) {
   // LOGICA LEAFLET NATIVA
   useEffect(() => {
     if (fase === 'tracking') {
-      setTrackingPhaseStatus('FASE 1: TRASLADO MEDELLÍN -> CARTAGENA');
-      // Asegurarse de que el CDN se cargó en window
+      setTrackingPhaseStatus('FASE 1: TRASLADO MEDELLÍN -> PUERTO CARTAGENA');
+      
+      let dias = 0;
+      const daysInterval = setInterval(() => {
+        dias += 0.05;
+        if (dias <= 15) setDiasTranscurridos(dias);
+      }, 50);
+
       if (!window.L) {
          console.error("Leaflet NO cargó desde el CDN"); return;
       }
       
       const L = window.L;
-      // Iniciar mapa
       if (mapRef.current) { mapRef.current.remove(); }
       
-      const map = L.map('real-map-container', { zoomControl: false, scrollWheelZoom: false, dragging: false }).setView([6.2442, -75.5812], 7);
+      const map = L.map('real-map-container', { zoomControl: false, scrollWheelZoom: false, dragging: false });
       mapRef.current = map;
 
-      // Base CartoDB Clara corporativa
       L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-          attribution: '&copy; <a href="https://carto.com/attributions">CARTO</a>'
+          attribution: '&copy; CARTO'
       }).addTo(map);
 
-      // Iconos Personalizados CSS
-      const createIcon = (color, sizeStr, extraClass) => L.divIcon({
-         className: 'bg-transparent',
-         html: `<div class="w-${sizeStr} h-${sizeStr} rounded-full border-[3px] border-white shadow-lg flex items-center justify-center ${extraClass}" style="background-color: ${color}"></div>`,
-         iconSize: [(parseInt(sizeStr)*4), (parseInt(sizeStr)*4)], iconAnchor: [(parseInt(sizeStr)*2), (parseInt(sizeStr)*2)]
-      });
+      // Iconos Personalizados en SVG puro
+      const truckSVG = `<div class="bg-charcoal text-white rounded-full p-2 border-2 border-white shadow-xl flex justify-center items-center"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14v10h1"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg></div>`;
+      const shipSVG = `<div class="bg-primary text-white rounded-full p-3 border-[3px] border-white shadow-2xl flex justify-center items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 21c.6.5 1.2 1 2.5 1 2.5 0 3.2-1.2 5.5-1.2 2.3 0 3 1.2 5.5 1.2 2.3 0 3-1.2 5.5-1.2 1.3 0 1.9.5 2.5 1"/><path d="M19.38 20A11.6 11.6 0 0 0 21 14l-9-4-9 4c0 2.9.94 5.34 2.81 7.76"/><path d="M19 13V7a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v6"/><path d="M12 10v4"/><path d="M12 2v3"/></svg></div>`;
+      const endPinSVG = `<div class="bg-tomato text-white rounded-full w-4 h-4 border-2 border-white shadow-lg mx-auto"></div>`;
 
-      const TIERRA_COLOR = '#111827'; // charcoal
-      const MAR_COLOR = '#384a35'; // primary
+      const iconCamion = L.divIcon({ className: 'bg-transparent', html: truckSVG, iconSize: [40, 40], iconAnchor: [20, 20] });
+      const iconBarco = L.divIcon({ className: 'bg-transparent', html: shipSVG, iconSize: [50, 50], iconAnchor: [25, 25] });
+      const iconPunto = L.divIcon({ className: 'bg-transparent', html: endPinSVG, iconSize: [16, 16], iconAnchor: [8, 8] });
+
+      const TIERRA_COLOR = '#111827';
+      const MAR_COLOR = '#384a35';
 
       // Utils de animación coords
       const animMarker = (marker, startPos, endPos, durationMs, onFinish) => {
@@ -58,12 +67,8 @@ export default function ExportSimulator({ isOpen, onClose }) {
          const animate = (currTime) => {
             const elapsed = currTime - startTime;
             const progress = Math.min(elapsed / durationMs, 1);
-            // Ease in out
             const ease = progress < .5 ? 2 * progress * progress : -1 + (4 - 2 * progress) * progress;
-            const currentLat = startPos[0] + (endPos[0] - startPos[0]) * ease;
-            const currentLng = startPos[1] + (endPos[1] - startPos[1]) * ease;
-            
-            marker.setLatLng([currentLat, currentLng]);
+            marker.setLatLng([startPos[0] + (endPos[0] - startPos[0]) * ease, startPos[1] + (endPos[1] - startPos[1]) * ease]);
             
             if (progress < 1) requestAnimationFrame(animate);
             else if (onFinish) onFinish();
@@ -79,69 +84,77 @@ export default function ExportSimulator({ isOpen, onClose }) {
       const guanacaste = [10.6346, -85.4407];
       const limonSur = [9.7, -82.8];
 
-      // FASE 1: (0s) Camión Medellin -> Cartagena
-      const truck = L.marker(medellin, {icon: createIcon(TIERRA_COLOR, '4', 'scale-75')}).addTo(map);
-      
-      // Dibujar linea tenue carretera
-      L.polyline([medellin, cartagena], {color: TIERRA_COLOR, weight: 1, dashArray: '4,4', opacity: 0.5}).addTo(map);
+      // FASE 1 INIT: Ajustar encuadre para que se vean Medellín y Cartagena simultáneamente.
+      map.fitBounds([medellin, cartagena], { padding: [100, 100] });
 
-      setTimeout(() => {
-         // Zoom a zona caribe para ver el mar
-         map.flyToBounds([cartagena, ptoLimon], { duration: 2, padding: [50,50] });
-      }, 2500);
+      L.marker(medellin, {icon: iconPunto}).addTo(map);
+      const truck = L.marker(medellin, {icon: iconCamion}).addTo(map);
+      L.polyline([medellin, cartagena], {color: TIERRA_COLOR, weight: 2, dashArray: '4,4', opacity: 0.5}).addTo(map);
 
-      animMarker(truck, medellin, cartagena, 2500, () => {
-         // FIN FASE 1 -> START FASE 2: BARCO
+      // FASE 1: LENTA (5 Segundos)
+      animMarker(truck, medellin, cartagena, 6000, () => {
+         
+         // FASE 2: BARCO (Zoom Out)
          setTrackingPhaseStatus('FASE 2: TRÁNSITO INTERNACIONAL AL CARIBE');
-         truck.remove(); // Desaparece camión, sale barco
+         truck.remove();
+         L.marker(cartagena, {icon: iconPunto}).addTo(map);
          
-         const ship = L.marker(cartagena, {icon: createIcon(MAR_COLOR, '5', 'shadow-primary')}).addTo(map);
+         // Ajusta vista para ver Cartagena y Costa Rica
+         map.flyToBounds([cartagena, ptoLimon], { duration: 2.5, padding: [60,60] });
          
-         // Dibujar linea alta mar
-         L.polyline([cartagena, ptoLimon], {color: MAR_COLOR, weight: 2, dashArray: '6,6', opacity: 0.7}).addTo(map);
+         const ship = L.marker(cartagena, {icon: iconBarco}).addTo(map);
+         L.polyline([cartagena, ptoLimon], {color: MAR_COLOR, weight: 3, dashArray: '6,6', opacity: 0.7}).addTo(map);
 
-         // Animar barco cruzando todo el mar (4 segundos calmos)
-         animMarker(ship, cartagena, ptoLimon, 4000, () => {
-            
-            // FIN FASE 2 -> START FASE 3: DISTRIBUCIÓN NACIONAL
-            setTrackingPhaseStatus('FASE 3: DISTRIBUCIÓN FINAL (HOTELERÍA B2B)');
-            map.flyTo([10.2, -84.0], 7, { animate: true, duration: 1.5 }); // Enfocar solo Costa rica
-            
-            setTimeout(() => {
-               ship.remove();
-               // Salen multiples camiones The Last Mile
-               const truck1 = L.marker(ptoLimon, {icon: createIcon(TIERRA_COLOR, '3', 'scale-50')}).addTo(map);
-               const truck2 = L.marker(ptoLimon, {icon: createIcon(TIERRA_COLOR, '3', 'scale-50')}).addTo(map);
-               const truck3 = L.marker(ptoLimon, {icon: createIcon(TIERRA_COLOR, '3', 'scale-50')}).addTo(map);
-               
-               L.polyline([ptoLimon, sanJose], {color: TIERRA_COLOR, weight: 1, dashArray: '2,4', opacity: 0.3}).addTo(map);
-               L.polyline([ptoLimon, guanacaste], {color: TIERRA_COLOR, weight: 1, dashArray: '2,4', opacity: 0.3}).addTo(map);
-               
-               animMarker(truck1, ptoLimon, sanJose, 2000);
-               animMarker(truck2, ptoLimon, guanacaste, 2500);
-               animMarker(truck3, ptoLimon, limonSur, 1500, () => {
-                  setTimeout(() => setTrackingPhaseStatus('COMPLETADO'), 1000);
-               });
-            }, 1600);
-         });
+         setTimeout(() => {
+             // Animar barco super lento cruzando el mar (9 segundos)
+             animMarker(ship, cartagena, ptoLimon, 9000, () => {
+                
+                // FASE 3: DISTRIBUCIÓN NACIONAL
+                setTrackingPhaseStatus('FASE 3: DISTRIBUCIÓN FINAL HORECA');
+                map.flyToBounds([ptoLimon, guanacaste], { animate: true, duration: 2, padding: [40,40] });
+                
+                setTimeout(() => {
+                   ship.remove();
+                   L.marker(ptoLimon, {icon: iconPunto}).addTo(map);
+
+                   const truck1 = L.marker(ptoLimon, {icon: iconCamion}).addTo(map);
+                   const truck2 = L.marker(ptoLimon, {icon: iconCamion}).addTo(map);
+                   const truck3 = L.marker(ptoLimon, {icon: iconCamion}).addTo(map);
+                   
+                   L.polyline([ptoLimon, sanJose], {color: TIERRA_COLOR, weight: 2, dashArray: '2,4', opacity: 0.3}).addTo(map);
+                   L.polyline([ptoLimon, guanacaste], {color: TIERRA_COLOR, weight: 2, dashArray: '2,4', opacity: 0.3}).addTo(map);
+                   
+                   animMarker(truck1, ptoLimon, sanJose, 3500);
+                   animMarker(truck2, ptoLimon, guanacaste, 4000);
+                   animMarker(truck3, ptoLimon, limonSur, 2500, () => {
+                      setTimeout(() => {
+                        setTrackingPhaseStatus('COMPLETADO');
+                        clearInterval(daysInterval);
+                        setDiasTranscurridos(15);
+                      }, 1000);
+                   });
+                }, 2000);
+             });
+         }, 1000);
       });
 
+      return () => { clearInterval(daysInterval); }
     }
     return () => { if (mapRef.current && fase !== 'tracking') { mapRef.current.remove(); mapRef.current = null; } }
   }, [fase]);
 
-  // Limpieza
   const handleClose = () => { setFase('offline'); onClose(); };
 
-  // Físicas Financieras
+  // Físicas Financieras Reales basadas en DOFA Il Castello
   const ingresosTotales = volumen * 35000;
   const costoProduccionLocal = volumen * 11000;
   const costoAduaneroCO = 4500000; 
-  const costoFleteRefrigerado = incoterm === 'CIF' ? 12000000 + (volumen * 5500) : (volumen * 2000);
+  const costoFleteRefrigerado = incoterm === 'CIF' ? 12000000 + (volumen * 5500) : (volumen * 2000); // Refrigeracion Ransa y Marina
   const seguroIncoterm = incoterm === 'CIF' ? ingresosTotales * 0.02 : 0; 
   const arancelCostaRica = incoterm === 'CIF' ? ingresosTotales * 0.14 : 0; 
   const egresosTotales = costoProduccionLocal + costoAduaneroCO + costoFleteRefrigerado + arancelCostaRica + seguroIncoterm;
   const EBITDA = ingresosTotales - egresosTotales;
+  const margenNeto = (EBITDA / ingresosTotales) * 100;
   const isRentable = EBITDA > 0;
 
   if (!isOpen) return null;
@@ -152,7 +165,7 @@ export default function ExportSimulator({ isOpen, onClose }) {
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, transition: {duration: 0.5} }}
         className="fixed inset-0 z-[100] bg-surface text-on-surface font-body overflow-y-auto overflow-x-hidden flex flex-col"
       >
-        <div className="w-full h-20 flex items-center justify-between border-b border-outline/20 px-6 py-4 bg-surface/90 backdrop-blur-md sticky top-0 z-50">
+        <div className="w-full h-20 flex items-center justify-between border-b border-outline/20 px-6 py-4 bg-surface/90 backdrop-blur-md sticky top-0 z-50 shadow-sm">
            <div className="flex items-center gap-3">
               <span className="font-headline font-bold text-2xl tracking-tight text-on-surface uppercase whitespace-nowrap">Estudio Logístico</span>
               <span className="hidden md:ml-4 md:flex text-xs uppercase tracking-widest text-on-surface-variant font-bold border-l border-outline/30 pl-4 py-1">
@@ -160,90 +173,143 @@ export default function ExportSimulator({ isOpen, onClose }) {
               </span>
            </div>
            
-           <button onClick={handleClose} className="p-2 hover:bg-black/5 text-on-surface-variant hover:text-charcoal rounded-full font-label font-bold text-sm uppercase">Cerrar</button>
+           <button onClick={handleClose} className="p-2 hover:bg-black/5 text-charcoal rounded-full font-label font-bold text-sm uppercase">X Cerrar Simulación</button>
         </div>
-
-        {fase === 'booting' && (
-          <div className="flex-1 flex flex-col items-center justify-center bg-surface-container">
-               <Cpu size={48} className="text-primary mb-6 animate-pulse" />
-               <h2 className="font-headline text-3xl font-bold uppercase tracking-widest text-on-surface mb-2">Preparando Motor Comercial</h2>
-               <p className="text-on-surface-variant font-label uppercase tracking-widest">Calculando tarifas y cadenas de frío aéreas / marítimas...</p>
-          </div>
-        )}
 
         {fase === 'dashboard' && (
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="flex-1 p-6 md:p-12 w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
              <div className="space-y-10 border-r border-outline/20 pr-0 md:pr-12">
                 <div>
-                   <h1 className="text-4xl md:text-5xl font-headline font-bold uppercase tracking-tight text-on-surface mb-4">Exportación a<br/><span className="text-primary text-6xl">Costa Rica</span></h1>
-                   <p className="font-body text-base text-on-surface-variant leading-relaxed">Dimensionamiento táctico HORECA. Mueve el control de arrastre para simular el impacto en los fijos logísticos.</p>
+                   <h1 className="text-4xl md:text-5xl font-headline font-bold uppercase tracking-tight text-on-surface mb-2">Exportación a<br/><span className="text-primary text-6xl">Costa Rica</span></h1>
+                   <p className="font-body text-base text-on-surface-variant leading-relaxed mb-4">
+                     Dimensionamiento táctico HORECA. Mueve el control de arrastre para simular el impacto en los fijos logísticos de la ultracongelación. 
+                   </p>
+                   <div className="bg-surface-dim p-4 border-l-4 border-primary text-sm text-on-surface">
+                     Según el análisis <strong>TOWS</strong> de la pasta Il Castello, requerimos alcanzar un umbral mínimo de exportación internacional para diluir el alto consto dependiente del transporte refrigerado.
+                   </div>
                 </div>
-                {/* Inputs de Slider e Incoterm (Conservados) */}
-                <div className="bg-surface-container-highest p-8 rounded-sm">
-                   <div className="flex justify-between items-end pb-4 mb-6">
+
+                {/* Input de Kilos */}
+                <div className="bg-surface-container-highest p-8 rounded-xl shadow-sm border border-outline/10">
+                   <div className="flex justify-between items-end pb-4 mb-6 border-b border-outline/10">
                       <span className="font-label text-xs uppercase tracking-widest text-on-surface-variant font-bold">Volumen Capacidad (KG)</span>
                       <span className="text-4xl font-headline font-bold text-on-surface">{volumen.toLocaleString()} <span className="text-base text-primary">kg/mes</span></span>
                    </div>
                    <input type="range" min="500" max="8000" step="100" value={volumen} onChange={(e) => setVolumen(Number(e.target.value))} className="w-full h-2 rounded-full outline-none accent-primary appearance-none bg-surface-dim cursor-ew-resize"/>
                 </div>
 
-                <div className="bg-surface-container-highest p-8 rounded-sm">
-                   <div className="mb-6">
+                <div className="bg-surface-container-highest p-8 rounded-xl shadow-sm border border-outline/10">
+                   <div className="mb-6 border-b border-outline/10 pb-4">
                       <span className="font-label text-xs uppercase tracking-widest text-primary mb-2 block font-bold">Incoterms</span>
                    </div>
                    <div className="grid grid-cols-2 gap-4">
-                      <button onClick={() => setIncoterm('FOB')} className={`py-4 border shadow-sm font-label text-sm uppercase font-bold transition-all ${incoterm === 'FOB' ? 'bg-charcoal border-charcoal text-white' : 'bg-surface border-outline/30 text-on-surface-variant hover:border-charcoal'}`}>FOB</button>
-                      <button onClick={() => setIncoterm('CIF')} className={`py-4 border shadow-sm font-label text-sm uppercase font-bold transition-all ${incoterm === 'CIF' ? 'bg-primary border-primary text-white' : 'bg-surface border-outline/30 text-on-surface-variant hover:border-primary'}`}>CIF</button>
+                      <button onClick={() => setIncoterm('FOB')} className={`py-4 shadow-sm font-label text-sm uppercase font-bold transition-all ${incoterm === 'FOB' ? 'bg-charcoal text-white rounded-sm' : 'bg-surface border border-outline/30 text-on-surface-variant hover:border-charcoal'}`}>FOB</button>
+                      <button onClick={() => setIncoterm('CIF')} className={`py-4 shadow-sm font-label text-sm uppercase font-bold transition-all ${incoterm === 'CIF' ? 'bg-primary text-white rounded-sm' : 'bg-surface border border-outline/30 text-on-surface-variant hover:border-primary'}`}>CIF</button>
                    </div>
-                   <div className="mt-6 p-4 bg-white/50 border border-outline/10 text-xs text-on-surface-variant">{incoterm === 'FOB' ? 'FOB: Responsabilidad hasta Puerto de Cartagena.' : 'CIF: Cubre flete y seguros hasta Puerto Limón, Costa Rica.'}</div>
+                   <div className="mt-6 p-4 bg-white/50 border border-outline/10 text-xs text-on-surface-variant leading-relaxed">
+                     {incoterm === 'FOB' ? 'FOB (Free On Board): Minimiza la carga de gastos porque Il Castello solo asume la logística desde Medellín hasta que el contenedor sube al barco en Cartagena. Reduce costo de flete.' : 'CIF (Cost, Insurance & Freight): La jugada maestra B2B. Proveemos el contenedor refrigerado hasta el puerto de Moín en Limón, Costa Rica, absorbiendo altos costos fijos pero controlando la cadena física de temperatura a -20°C.'}
+                   </div>
                 </div>
              </div>
 
              <div className="flex flex-col justify-center">
-                <div className="p-10">
-                   <h2 className="font-label font-bold text-xs uppercase tracking-widest text-on-surface-variant border-b border-outline/20 pb-4 mb-8">Auditoría Financiera Comercial</h2>
+                <div className="p-10 bg-surface-container/30 rounded-xl">
+                   <h2 className="font-label font-bold text-xs uppercase tracking-widest text-charcoal border-b border-charcoal/20 pb-4 mb-8">Auditoría Financiera Comercial Acumulada</h2>
+                   
                    <ul className="space-y-6">
                       <li className="flex justify-between items-end border-b border-outline/10 pb-2">
-                        <span className="font-body text-sm text-on-surface">Ingreso Total HORECA Esperado</span>
+                        <span className="font-body text-sm text-on-surface">Proyección de Ingreso B2B (Mdo. Caribe)</span>
                         <span className="font-headline font-bold text-xl">${(ingresosTotales/1000000).toFixed(1)} M</span>
                       </li>
                       <li className="flex justify-between items-end border-b border-outline/10 pb-2">
-                        <span className="font-body text-sm text-on-surface-variant">Costos de Flete y Seguro (Incoterm {incoterm})</span>
-                        <span className="font-headline font-bold text-lg text-tomato">-${((costoFleteRefrigerado + seguroIncoterm)/1000000).toFixed(1)} M</span>
+                        <span className="font-body text-sm text-on-surface-variant font-light">Costos de Producción Local (Trigo y Huevo)</span>
+                        <span className="font-headline font-bold text-lg text-on-surface-variant">-${(costoProduccionLocal/1000000).toFixed(1)} M</span>
                       </li>
+                      <li className="flex justify-between items-end border-b border-outline/10 pb-2 mt-4 pt-4 relative">
+                        <div className="absolute inset-0 bg-tomato/5 -mx-4 -my-2 pointer-events-none rounded-md"></div>
+                        <span className="font-body text-sm text-tomato font-bold relative z-10">Flete Marítimo Reef (-20°C) + Seguros</span>
+                        <span className="font-headline font-bold text-lg text-tomato relative z-10">-${((costoFleteRefrigerado + seguroIncoterm)/1000000).toFixed(1)} M</span>
+                      </li>
+                      
+                      {incoterm === 'CIF' && (
+                        <li className="flex justify-between items-end border-b border-outline/10 pb-2">
+                          <span className="font-body text-sm text-tomato font-bold">Aranceles Aduana Costa Rica</span>
+                          <span className="font-headline text-lg text-tomato font-bold">-${(arancelCostaRica/1000000).toFixed(1)} M</span>
+                        </li>
+                      )}
                    </ul>
-                   <div className="pt-10 flex justify-between items-end mb-8">
-                     <span className="font-label text-sm font-bold uppercase tracking-widest text-charcoal">EBITDA (Rentabilidad)</span>
-                     <span className={`font-headline text-5xl font-bold tracking-tighter ${isRentable ? 'text-primary' : 'text-tomato'}`}>${(EBITDA/1000000).toFixed(1)} M</span>
+                   
+                   <div className="pt-12 flex justify-between items-end mb-8 relative">
+                     <span className="font-label text-sm font-bold uppercase tracking-widest text-charcoal">EBITDA <br/><span className="text-[10px] text-on-surface-variant font-normal">Ganancia Operativa Neta</span></span>
+                     <div className="text-right">
+                       <span className={`block font-headline text-5xl font-bold tracking-tighter ${isRentable ? 'text-primary' : 'text-tomato'}`}>${(EBITDA/1000000).toFixed(1)} M</span>
+                       <span className={`text-sm font-bold ${isRentable ? 'text-primary' : 'text-tomato'}`}>{margenNeto.toFixed(1)}% Margen Operativo</span>
+                     </div>
                    </div>
-                   <button disabled={!isRentable} onClick={() => setFase('tracking')} className={`w-full py-5 text-sm font-label uppercase tracking-widest font-bold transition-transform transform focus:scale-95 flex justify-center items-center gap-3 ${isRentable ? 'bg-primary text-white hover:bg-[#4a6347]' : 'bg-surface-dim text-on-surface-variant'}`}>{isRentable ? 'Simular Rutas Centroamericanas' : 'Bajo Nivel - No Rentable'}</button>
+                   <button disabled={!isRentable} onClick={() => setFase('tracking')} className={`w-full py-5 text-sm font-label uppercase tracking-widest font-bold transition-transform shadow-lg transform focus:scale-95 flex justify-center items-center gap-3 ${isRentable ? 'bg-primary text-white hover:bg-[#4a6347]' : 'bg-surface-dim text-on-surface-variant'}`}>{isRentable ? 'Confirmar Expansión y Rastrear' : 'Proyección No Rentable - Corrija Volumen'}</button>
                 </div>
              </div>
           </motion.div>
         )}
 
-        {/* --- PANTALLA 3: MAPA LEAFLET NATIVO REAL --- */}
+        {/* --- PANTALLA 3: MAPA CINEMÁTICO LEAFLET --- */}
         {fase === 'tracking' && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex-1 w-full relative flex flex-col bg-charcoal">
              
-             {/* Info Bar */}
-             <div className="p-6 bg-surface shadow-md z-40 relative flex gap-8">
-                <div><span className="block font-label text-[10px] uppercase font-bold text-on-surface-variant">Operación</span><span className="font-headline font-bold text-primary">{trackingPhaseStatus}</span></div>
-                <div><span className="block font-label text-[10px] uppercase font-bold text-on-surface-variant">Transit Time</span><span className="font-headline font-bold text-charcoal">13 Días / Vía Marítima</span></div>
+             {/* Info Bar Táctica (Modificada con Contador Días) */}
+             <div className="p-6 bg-surface shadow-lg z-40 relative flex gap-8 items-center border-b-[4px] border-primary justify-between">
+                <div className="flex gap-8">
+                  <div><span className="block font-label text-[10px] uppercase font-bold text-on-surface-variant">Estado Operativo de Carga</span><span className="font-headline font-bold text-primary">{trackingPhaseStatus}</span></div>
+                  <div><span className="block font-label text-[10px] uppercase font-bold text-on-surface-variant">Modalidad Exportación</span><span className="font-headline font-bold text-charcoal">{incoterm} B2B</span></div>
+                </div>
+                
+                {/* HUD Reloj Viaje */}
+                <div className="bg-surface-container px-6 py-2 rounded-sm border border-outline/20">
+                   <span className="block font-label text-[10px] uppercase font-bold text-on-surface-variant text-center">Tiempo Logístico</span>
+                   <span className="font-headline font-bold text-2xl text-charcoal">Día {Math.floor(diasTranscurridos)} <span className="text-sm font-light text-on-surface-variant tracking-wider">/ 15</span></span>
+                </div>
              </div>
 
              {/* Contenedor del Mapa Físico Inyectado */}
              <div id="real-map-container" className="flex-1 w-full bg-[#EAE5D9] relative z-0"></div>
              
-             {/* Overlay de Completado superpuesto sutil */}
+             {/* Overlay de Completado - Resumen Ejecutivo Mejorado */}
              <AnimatePresence>
                 {trackingPhaseStatus === 'COMPLETADO' && (
-                  <motion.div initial={{ opacity: 0, opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-white/70 backdrop-blur-sm z-50 flex items-center justify-center p-6">
-                     <div className="bg-surface p-12 shadow-2xl rounded-sm max-w-xl text-center border-t-8 border-primary">
-                        <CheckCircle2 size={48} className="text-primary mx-auto mb-4" />
-                        <h2 className="text-3xl font-headline font-bold uppercase tracking-tight text-charcoal mb-4">Exportación Finalizada</h2>
-                        <p className="text-on-surface-variant mb-8 text-sm">Los {volumen.toLocaleString()} kg de pasta desembarcaron intactos en suelo Centroamericano, y The Last Mile Logistics distribuyó en San José, Tamarindo y Guanacaste (Incoterm: {incoterm}).</p>
-                        <button onClick={handleClose} className="px-8 py-3 bg-charcoal text-white font-label font-bold text-sm uppercase tracking-widest hover:bg-black">Finalizar Vista Completa</button>
+                  <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-charcoal/40 backdrop-blur-sm z-50 flex items-center justify-center p-6">
+                     <div className="bg-surface p-12 shadow-2xl rounded-xl max-w-3xl w-full flex flex-col relative overflow-hidden">
+                        <div className="absolute top-0 left-0 w-full h-3 bg-primary"></div>
+                        
+                        <div className="flex items-center gap-4 mb-8 border-b border-outline/10 pb-6 w-full mt-4">
+                          <CheckCircle2 size={40} className="text-primary flex-shrink-0" />
+                          <div>
+                            <h2 className="text-4xl font-headline font-bold uppercase tracking-tight text-charcoal mb-0">Ruta Internacional Exitosa</h2>
+                            <p className="text-xs text-on-surface-variant font-label uppercase tracking-widest font-bold">Llegada Confirmada: Centrales Hoteleras B2B Costa Rica</p>
+                          </div>
+                        </div>
+
+                        <ul className="text-sm text-charcoal space-y-4 mb-8 font-body leading-relaxed divide-y divide-outline/10">
+                           <li className="py-2 flex justify-between">
+                             <span className="text-on-surface-variant">Volumen Entregado Intacto:</span>
+                             <span className="font-bold text-xl">{volumen.toLocaleString()} KG Raviolis</span>
+                           </li>
+                           <li className="py-2 flex justify-between">
+                             <span className="text-on-surface-variant">Eficacia Cadena Frío (-20°C):</span>
+                             <span className="font-bold text-primary font-headline text-lg">100% SIN MERMAS TÉRMICAS</span>
+                           </li>
+                           <li className="py-2 flex justify-between">
+                             <span className="text-on-surface-variant">Capital Adquirido Bruto:</span>
+                             <span className="font-bold text-on-surface">${(ingresosTotales/1000000).toFixed(1)} Millones COP</span>
+                           </li>
+                           <li className="py-2 flex justify-between bg-surface-dim -mx-6 px-6 relative mt-4">
+                             <span className="text-charcoal font-bold mt-2 uppercase text-xs tracking-widest">EBITDA Total (Líquida):</span>
+                             <span className="font-bold text-primary text-3xl font-headline mt-1">${(EBITDA/1000000).toFixed(1)} Millones COP</span>
+                           </li>
+                        </ul>
+
+                        <button onClick={handleClose} className="w-full px-8 py-5 bg-charcoal text-white font-label font-bold text-sm uppercase tracking-widest hover:bg-black transition-colors rounded-sm shadow-md flex items-center justify-center gap-2">
+                           <Terminal size={18}/> Descargar Informe Financiero (Salir)
+                        </button>
                      </div>
                   </motion.div>
                 )}
