@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import FloatingProduct from './FloatingProduct';
 import TeamAgreement from './TeamAgreement';
 import HorizontalGallery from './HorizontalGallery';
@@ -7,8 +7,11 @@ import Sustainability from './Sustainability';
 import StrategicCrosses from './StrategicCrosses';
 import ScrollReveal from './ScrollReveal';
 import AnimatedTitle from './AnimatedTitle';
+import ExportSimulator from './ExportSimulator';
 
 export default function StitchLayout({ scrollYProgress }) {
+  const [simulatorOpen, setSimulatorOpen] = useState(false);
+
   return (
     <div className="bg-surface text-on-surface font-body antialiased selection:bg-primary selection:text-on-primary">
       
@@ -30,12 +33,9 @@ export default function StitchLayout({ scrollYProgress }) {
         <div>
           <button 
             className="bg-primary text-on-primary px-8 py-3 text-sm font-bold uppercase tracking-widest hover:bg-primary-container transition-colors duration-400 rounded-none transform hover:scale-105"
-            onClick={() => {
-              alert("¡Bienvenido al mundo de la pasta artesanal Premium! Nuestro equipo gerencial te espera.");
-              window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-            }}
+            onClick={() => setSimulatorOpen(true)}
           >
-            Descubre Más
+            Simular Exportación
           </button>
         </div>
       </nav>
