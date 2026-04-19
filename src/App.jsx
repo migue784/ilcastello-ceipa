@@ -1,6 +1,3 @@
-import React, { useRef } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
-import ScrollReveal from './components/ScrollReveal'
 import SectionTitle from './components/SectionTitle'
 import TeamAgreement from './components/TeamAgreement'
 import BusinessModel from './components/BusinessModel'
@@ -9,6 +6,7 @@ import Sustainability from './components/Sustainability'
 import StrategicCrosses from './components/StrategicCrosses'
 import FloatingDecorations from './components/FloatingDecorations'
 import FloatingProduct from './components/FloatingProduct'
+import AnimatedTitle from './components/AnimatedTitle'
 
 function App() {
   const containerRef = useRef(null);
@@ -36,8 +34,8 @@ function App() {
         }}>
           <FloatingDecorations />
           
-          <h2 className="section-gigante" style={{ top: '10%' }}>IL CASTELLO</h2>
-          <h2 className="section-gigante" style={{ bottom: '10%', right: '2rem', left: 'auto', textAlign: 'right', color: 'rgba(0,0,0,0.03)' }}>PREMIUM</h2>
+          <AnimatedTitle text="IL CASTELLO" style={{ position: 'absolute', top: '10%' }} />
+          <AnimatedTitle text="PREMIUM" className="section-gigante" style={{ bottom: '10%', right: '2rem', left: 'auto', textAlign: 'right', color: 'rgba(0,0,0,0.03)' }} />
 
           <motion.div 
             style={{ 
@@ -48,45 +46,44 @@ function App() {
               padding: '2rem',
               borderRadius: '20px',
               backdropFilter: 'blur(10px)',
-              marginTop: '40vh', /* Empujamos el cuadro para dejar ver el fettuccine flotante */
+              marginTop: '40vh',
               maxWidth: '600px',
               border: '1px solid rgba(0,0,0,0.05)'
             }}
           >
-            <span style={{
-              color: 'var(--color-tomato)',
-              fontFamily: 'var(--font-sans)',
-              textTransform: 'uppercase',
-              letterSpacing: '4px',
-              fontWeight: '600',
-              fontSize: '0.9rem'
-            }}>
+            <span style={{ color: 'var(--color-tomato)', fontFamily: 'var(--font-sans)', textTransform: 'uppercase', letterSpacing: '4px', fontWeight: '600', fontSize: '0.9rem' }}>
               Aldea Global 2 • Fase 1
             </span>
-            <p style={{
-              fontFamily: 'var(--font-serif)',
-              fontSize: '1.25rem',
-              marginTop: '1.5rem',
-              color: 'var(--color-charcoal)',
-              opacity: 0.9
-            }}>
+            <p style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', marginTop: '1.5rem', color: 'var(--color-charcoal)', opacity: 0.9 }}>
               Estudio de la realidad empresarial y potencial de internacionalización de pasta artesanal premium.
             </p>
           </motion.div>
         </section>
 
         {/* Acuerdo de Equipo */}
-        {/* Cambiamos márgenes y anchos en lugar del layout flat, para que conviva con la caja flotante */}
         <section className="section" id="acuerdo-equipo" style={{ minHeight: '150vh', justifyContent: 'flex-start' }}>
           <div className="container" style={{ maxWidth: '800px', marginLeft: '0', paddingLeft: '4rem' }}>
-            <h2 className="section-gigante" style={{ position: 'absolute', top: 0, left: 0, opacity: 0.1, zIndex: -1 }}>CONVIVENCIA</h2>
+            <h2 className="section-gigante" style={{ position: 'absolute', top: '10%', left: 0, opacity: 0.1, zIndex: -1 }}>CONVIVENCIA</h2>
             <SectionTitle title="Acuerdo de Equipo" subtitle="Parte A" />
             <TeamAgreement />
           </div>
         </section>
 
+        {/* --- DESCANSO VISUAL 1 --- */}
+        <section className="section bg-basil" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+          <AnimatedTitle text="DESCUBRE NUESTRA" className="section-gigante" style={{ top: '5%', color: 'rgba(255,255,255,0.05)' }} />
+          <AnimatedTitle text="PASTA AL HUEVO" className="section-gigante" style={{ bottom: '5%', color: 'rgba(255,255,255,0.05)' }} />
+          <div className="container" style={{ maxWidth: '900px' }}>
+            <ScrollReveal direction="up">
+              <div className="cinematic-placeholder">
+                <span>[ ESPACIO PARA FOTO O VIDEO LIFESTYLE ]</span>
+              </div>
+            </ScrollReveal>
+          </div>
+        </section>
+
         {/* Realidad Empresarial - Canvas */}
-        <section className="section" id="realidad-empresarial" style={{ minHeight: '150vh', justifyContent: 'flex-end' }}>
+        <section className="section" id="realidad-empresarial" style={{ minHeight: '150vh', justifyContent: 'flex-end', background: 'var(--color-cream-dark)' }}>
           <div className="container" style={{ maxWidth: '900px', marginRight: '0', paddingRight: '4rem' }}>
             <h2 className="section-gigante" style={{ position: 'absolute', top: 0, right: 0, textAlign: 'right', opacity: 0.1, zIndex: -1 }}>MODELO DE NEGOCIO</h2>
             <SectionTitle title="Realidad Empresarial" subtitle="Parte B" />
@@ -94,8 +91,20 @@ function App() {
           </div>
         </section>
 
+        {/* --- DESCANSO VISUAL 2 --- */}
+        <section className="section bg-tomato" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+          <AnimatedTitle text="100% CERO QUÍMICOS" className="section-gigante" style={{ top: '35%', color: 'rgba(255,255,255,0.05)', textAlign: 'center', width: '100%' }} />
+          <div className="container" style={{ maxWidth: '700px' }}>
+            <ScrollReveal direction="up">
+              <div className="cinematic-placeholder" style={{ aspectRatio: '16/10' }}>
+                <span>[ ESPACIO PARA PROCESO DE PRODUCCIÓN ]</span>
+              </div>
+            </ScrollReveal>
+          </div>
+        </section>
+
         {/* DOFA y Estrategias */}
-        <section className="section bg-cream-dark" id="analisis-estrategico" style={{ minHeight: '200vh', flexDirection: 'column', alignItems: 'flex-start', padding: '10rem 4rem' }}>
+        <section className="section bg-cream" id="analisis-estrategico" style={{ minHeight: '200vh', flexDirection: 'column', alignItems: 'flex-start', padding: '10rem 4rem' }}>
           <h2 className="section-gigante" style={{ top: '5%', left: '5%', opacity: 0.1, color: 'var(--color-basil)', zIndex: 0 }}>ESTRATEGIA TOTAL</h2>
           <div style={{ maxWidth: '850px', zIndex: 10, position: 'relative' }}>
             <DofaAnalysis />

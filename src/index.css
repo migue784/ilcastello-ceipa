@@ -73,6 +73,39 @@ img {
   background-color: var(--color-cream-dark);
 }
 
+.bg-basil {
+  background-color: var(--color-basil);
+  color: var(--color-cream);
+}
+
+.bg-tomato {
+  background-color: var(--color-tomato);
+  color: var(--color-cream);
+}
+
+/* --- cinematic placeholders --- */
+.cinematic-placeholder {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 1px dashed rgba(255, 255, 255, 0.4);
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.cinematic-placeholder span {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.2rem;
+}
+
 /* --- Scrollytelling Specific Styles --- */
 .scrolly-container {
   /* Contenedor que ocupará gran altura para permitir el scroll natural */
