@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ScrollReveal from './ScrollReveal';
-import { Users, FileWarning, MessageCircle, Calendar, Handshake } from 'lucide-react';
+import { Users, FileWarning, MessageCircle, Calendar, Handshake, ChevronDown, ChevronUp } from 'lucide-react';
 
 const agreements = [
   {
@@ -83,52 +83,66 @@ const TeamAgreement = () => {
           }}>
             <h3 style={{ margin: '0 0 2.5rem 0', color: 'var(--color-basil)', fontSize: '1.8rem', textAlign: 'center' }}>Nuestros Integrantes y Análisis del Test</h3>
             
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '3rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', width: '100%' }}>
               
-              {/* Miguel Angel Lopera */}
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '1rem' }}>
-                <h4 style={{ fontSize: '1.2rem', color: 'var(--color-tomato)' }}>Miguel Angel Lopera</h4>
-                <p style={{ fontSize: '0.85rem', opacity: 0.8, lineHeight: '1.5' }}>
-                  <strong>Test de entrada:</strong> [A la espera del resumen del test para Miguel...]
-                </p>
-                <div style={{ marginTop: 'auto', borderBottom: '1px solid rgba(0,0,0,0.1)', paddingBottom: '0.5rem', width: '100%', display: 'flex', justifyContent: 'center' }}>
-                  <img src="/firmas/firma1.jpeg" alt="Firma Miguel" style={{ maxHeight: '80px', objectFit: 'contain' }} />
-                </div>
-              </div>
+              {/* Integrante Dinámico */}
+              {[
+                { name: "Miguel Angel Lopera", img: "/firmas/firma1.jpeg" },
+                { name: "Samuel Ossa", img: "/firmas/firma2.jpeg" },
+                { name: "Pablo Rodrigo", img: "/firmas/firma3.jpeg" },
+                { name: "Emmanuel Ramirez", img: null, pending: true }
+              ].map((member, i) => {
+                const [isOpen, setIsOpen] = useState(false);
+                return (
+                  <div key={i} style={{ 
+                    border: '1px solid rgba(0,0,0,0.05)', 
+                    borderRadius: '12px', 
+                    padding: '1.5rem', 
+                    display: 'flex', 
+                    flexDirection: 'column',
+                    background: 'var(--color-cream)'
+                  }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+                      <div style={{ flex: '1 1 200px' }}>
+                        <h4 style={{ fontSize: '1.3rem', color: 'var(--color-tomato)', margin: 0, fontFamily: 'var(--font-serif)' }}>{member.name}</h4>
+                        <p style={{ margin: 0, fontSize: '0.9rem', opacity: 0.6 }}>Análisis Metodológico</p>
+                      </div>
+                      
+                      <div style={{ flex: '1 1 200px', display: 'flex', justifyContent: 'center' }}>
+                        {member.pending ? (
+                          <span style={{ fontSize: '0.8rem', opacity: 0.4, fontStyle: 'italic' }}>Firma pendiente...</span>
+                        ) : (
+                          <img src={member.img} alt={`Firma ${member.name}`} style={{ maxHeight: '60px', objectFit: 'contain' }} />
+                        )}
+                      </div>
 
-              {/* Samuel Ossa */}
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '1rem' }}>
-                <h4 style={{ fontSize: '1.2rem', color: 'var(--color-tomato)' }}>Samuel Ossa</h4>
-                <p style={{ fontSize: '0.85rem', opacity: 0.8, lineHeight: '1.5' }}>
-                  <strong>Test de entrada:</strong> [A la espera del resumen del test para Samuel...]
-                </p>
-                <div style={{ marginTop: 'auto', borderBottom: '1px solid rgba(0,0,0,0.1)', paddingBottom: '0.5rem', width: '100%', display: 'flex', justifyContent: 'center' }}>
-                  <img src="/firmas/firma2.jpeg" alt="Firma Samuel" style={{ maxHeight: '80px', objectFit: 'contain' }} />
-                </div>
-              </div>
+                      <div style={{ flex: '1 1 150px', display: 'flex', justifyContent: 'flex-end' }}>
+                        <button 
+                          className="btn-accordion" 
+                          style={{ color: 'var(--color-tomato)', background: 'transparent', border: '1px solid var(--color-tomato)', maxWidth: '180px' }}
+                          onClick={() => setIsOpen(!isOpen)}
+                        >
+                          {isOpen ? 'Ocultar Test' : 'Ver Test'}
+                          {isOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+                        </button>
+                      </div>
+                    </div>
 
-              {/* Pablo Rodrigo */}
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '1rem' }}>
-                <h4 style={{ fontSize: '1.2rem', color: 'var(--color-tomato)' }}>Pablo Rodrigo</h4>
-                <p style={{ fontSize: '0.85rem', opacity: 0.8, lineHeight: '1.5' }}>
-                  <strong>Test de entrada:</strong> [A la espera del resumen del test para Pablo...]
-                </p>
-                <div style={{ marginTop: 'auto', borderBottom: '1px solid rgba(0,0,0,0.1)', paddingBottom: '0.5rem', width: '100%', display: 'flex', justifyContent: 'center' }}>
-                  <img src="/firmas/firma3.jpeg" alt="Firma Pablo" style={{ maxHeight: '80px', objectFit: 'contain' }} />
-                </div>
-              </div>
-
-              {/* Emmanuel Ramirez */}
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '1rem' }}>
-                <h4 style={{ fontSize: '1.2rem', color: 'var(--color-tomato)' }}>Emmanuel Ramirez</h4>
-                <p style={{ fontSize: '0.85rem', opacity: 0.8, lineHeight: '1.5' }}>
-                  <strong>Test de entrada:</strong> [A la espera del resumen del test para Emmanuel...]
-                </p>
-                <div style={{ marginTop: 'auto', borderBottom: '1px solid rgba(0,0,0,0.1)', paddingBottom: '0.5rem', width: '100%', display: 'flex', justifyContent: 'center', minHeight: '80px', alignItems: 'center' }}>
-                  <span style={{ fontSize: '0.8rem', opacity: 0.4, fontStyle: 'italic' }}>Firma pendiente...</span>
-                </div>
-              </div>
-
+                    <div style={{ 
+                      maxHeight: isOpen ? '500px' : '0', 
+                      overflow: 'hidden', 
+                      transition: 'all 0.4s ease-in-out',
+                      marginTop: isOpen ? '1.5rem' : '0'
+                    }}>
+                      <div style={{ padding: '1rem', background: 'white', borderRadius: '8px', borderLeft: '3px solid var(--color-wheat)' }}>
+                        <p style={{ fontSize: '0.95rem', opacity: 0.8, lineHeight: '1.6', margin: 0 }}>
+                          <strong>Resumen:</strong> Estamos a la espera de recolectar el texto del test para {member.name}. Este espacio está diseñado para albergar varios párrafos de texto de manera limpia y sin dañar la organización de la página web.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
       </ScrollReveal>

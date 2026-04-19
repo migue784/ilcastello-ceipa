@@ -28,8 +28,8 @@ const StrategicCrosses = () => {
 
   return (
     <div style={{ marginTop: '4rem' }}>
-      <h3 style={{ fontSize: '2rem', marginBottom: '1.5rem', color: 'var(--color-charcoal)' }}>B6. Cruces Estratégicos (Matriz TOWS)</h3>
-      <p style={{ opacity: 0.8, marginBottom: '2rem', maxWidth: '800px', lineHeight: '1.6' }}>
+      <h3 style={{ fontSize: '2rem', marginBottom: '1.5rem', color: 'var(--color-wheat)' }}>B6. Cruces Estratégicos (Matriz TOWS)</h3>
+      <p style={{ opacity: 0.9, marginBottom: '2rem', maxWidth: '800px', lineHeight: '1.6', color: 'var(--color-cream)' }}>
         Con base en las 5 Fuerzas y el DOFA estructurado, se generaron las siguientes estrategias de acción directa para guiar el proceso de internacionalización:
       </p>
       
@@ -40,16 +40,13 @@ const StrategicCrosses = () => {
       }}>
         {tows.map((item, index) => (
           <ScrollReveal key={index} direction="up" delay={index * 0.1}>
-            <div style={{
-              background: 'white',
+            <div className="card-glass-dark" style={{
               padding: '2rem',
-              borderRadius: '8px',
               borderLeft: `5px solid ${item.color}`,
-              boxShadow: '0 5px 15px rgba(0,0,0,0.03)',
               height: '100%'
             }}>
-              <h4 style={{ margin: '0 0 1rem 0', color: 'var(--color-charcoal)', fontSize: '1.1rem' }}>{item.title}</h4>
-              <p style={{ opacity: 0.75, fontSize: '0.95rem', lineHeight: '1.5', margin: 0 }}>{item.desc}</p>
+              <h4 style={{ margin: '0 0 1rem 0', color: 'var(--color-wheat)', fontSize: '1.1rem' }}>{item.title}</h4>
+              <p style={{ opacity: 0.9, fontSize: '0.95rem', lineHeight: '1.5', margin: 0, color: 'var(--color-cream)' }}>{item.desc}</p>
             </div>
           </ScrollReveal>
         ))}

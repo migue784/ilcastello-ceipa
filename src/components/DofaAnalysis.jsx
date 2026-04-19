@@ -49,7 +49,7 @@ const DofaAnalysis = () => {
 
   return (
     <div>
-      <h3 style={{ fontSize: '2rem', marginBottom: '1.5rem' }}>B4. Análisis DOFA</h3>
+      <h3 style={{ fontSize: '2rem', marginBottom: '1.5rem', color: 'var(--color-wheat)' }}>B4. Análisis DOFA</h3>
       <div style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
@@ -57,19 +57,16 @@ const DofaAnalysis = () => {
       }}>
         {dofaData.map((item, index) => (
           <ScrollReveal key={index} direction={index % 2 === 0 ? "left" : "right"} delay={index * 0.1}>
-            <div style={{
-              background: 'white',
-              borderRadius: '12px',
+            <div className="card-glass-dark" style={{
               padding: '2rem',
               height: '100%',
-              boxShadow: '0 5px 20px rgba(0,0,0,0.04)',
               borderBottom: `4px solid ${item.color}`
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
-                <div style={{ background: 'var(--color-cream)', padding: '0.8rem', borderRadius: '50%' }}>
+                <div style={{ background: 'rgba(255,255,255,0.1)', padding: '0.8rem', borderRadius: '50%' }}>
                   {item.icon}
                 </div>
-                <h4 style={{ margin: 0, fontSize: '1.3rem', color: 'var(--color-charcoal)' }}>{item.type}</h4>
+                <h4 style={{ margin: 0, fontSize: '1.3rem', color: 'var(--color-wheat)' }}>{item.type}</h4>
               </div>
               <ul style={{ paddingLeft: '1.2rem', margin: 0, display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
                 {item.items.map((line, i) => (
