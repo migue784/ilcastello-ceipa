@@ -90,22 +90,26 @@ const TeamAgreement = () => {
                 { 
                   name: "Miguel Angel Lopera", 
                   img: "/firmas/firma1.jpeg",
+                  testImg: "/tests/miguel_test.png",
                   testText: "Viendo los resultados de este pretest de Aldea Global, arranco con toda. Sacar casi un 90% en general me da mucha confianza, y ver ese 100% en estrategia y plan de mercadeo me confirma que las bases de mi carrera en negocios internacionales están súper sólidas. Pero esta foto es sobre todo un recordatorio para no relajarme: tengo que meterle mucha más ficha a la hora de decidir a qué países entrar, porque en \"selección de mercados internacionales\" tuve mi nota más baja (77%). De nada sirve tener el mejor plan si no elijo bien el mercado, así que ahí es donde tengo que enfocarme para sacarle todo el provecho al curso."
                 },
                 { 
                   name: "Samuel Ossa", 
-                  img: "/firmas/firma2.jpeg",
+                  img: "/firmas/firma3.jpeg",
+                  testImg: "/tests/samuel_test.png",
                   testText: "Al ver mis resultados, siento que voy bien, pero no lo suficiente como para destacar todavía. Tengo una base sólida (79%), pero estoy por debajo del promedio de selección, lo que me deja claro que puedo dar más. Hay temas donde me va muy bien, como en plan de mercadeo y selección de mercados, pero también tengo bajones fuertes en otros, especialmente en análisis y argumentación. Eso me hace ver que mi problema no es falta de capacidad, sino falta de constancia y profundidad. Si logro ser más parejo en mi rendimiento y mejorar mi pensamiento crítico, sé que puedo subir ese nivel y acercarme a el promedio más alto."
                 },
                 { 
                   name: "Pablo Restrepo", 
-                  img: "/firmas/firma3.jpeg",
+                  img: "/firmas/firma2.jpeg",
+                  testImg: "/tests/pablo_test.png",
                   testText: "Según el test voy por un buen camino y tengo unas bases sólidas, entiendo lo que hago y cuando me enfoco cumplo bien con lo que me toca hacer, sobre todo en el plan de mercadeo, donde más me siento seguro. También analizo bien el entorno y no actúo por impulso, pero todavía puedo mejorar en la parte estratégica, especialmente al elegir mercados y definir el rumbo. No es que esté mal, pero puedo mejorar y ser más seguro en ese tema. Lo siguiente sería confiar más en mi criterio y elegir mejor."
                 },
                 { 
                   name: "Emmanuel Ramirez", 
                   img: null, 
                   pending: true,
+                  testImg: "/tests/emmanuel_test.png",
                   testText: "Antes de empezar este núcleo, considero que tengo una base buena sobre varios temas, especialmente en lo relacionado con el análisis de mercados, la entrada a otros países, las estrategias de mercadeo y la importancia de estudiar el entorno antes de tomar decisiones. El resultado que obtuve me demuestra que sí tengo conocimientos previos importantes y que entiendo gran parte de los conceptos. Mi fortaleza es poder relacionar la teoría con situaciones prácticas.\n\nTambién me sirvió para darme cuenta de que hay cosas que debo reforzar: en algunas preguntas fallé por no analizar con suficiente detalle o por demorarme demasiado. Entiendo que todavía necesito mejorar en precisión, agilidad y en conceptos más específicos. Empiezo este proceso con la conciencia de organizar mejor mi tiempo para obtener un mejor desempeño."
                 }
               ].map((member, i) => {
@@ -129,7 +133,7 @@ const TeamAgreement = () => {
                         {member.pending ? (
                           <span style={{ fontSize: '0.8rem', opacity: 0.4, fontStyle: 'italic' }}>Firma pendiente...</span>
                         ) : (
-                          <img src={member.img} alt={`Firma ${member.name}`} style={{ maxHeight: '60px', objectFit: 'contain' }} />
+                          <img src={member.img} alt={`Firma ${member.name}`} style={{ maxHeight: '60px', objectFit: 'contain', transform: `rotate(${i % 2 === 0 ? '-3deg' : '4deg'})` }} />
                         )}
                       </div>
 
@@ -146,7 +150,7 @@ const TeamAgreement = () => {
                     </div>
 
                     <div style={{ 
-                      maxHeight: isOpen ? '500px' : '0', 
+                      maxHeight: isOpen ? '2500px' : '0', 
                       overflow: 'hidden', 
                       transition: 'all 0.4s ease-in-out',
                       marginTop: isOpen ? '1.5rem' : '0'
@@ -156,6 +160,11 @@ const TeamAgreement = () => {
                           <strong>Autoevaluación Pretest:</strong><br/><br/>
                           {member.testText}
                         </p>
+                        {member.testImg && (
+                          <div style={{ marginTop: '1.5rem', borderTop: '1px solid rgba(0,0,0,0.05)', paddingTop: '1.5rem' }}>
+                            <img src={member.testImg} alt={`Resultado test de ${member.name}`} style={{ width: '100%', borderRadius: '8px', boxShadow: '0 4px 15px rgba(0,0,0,0.05)' }} />
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>

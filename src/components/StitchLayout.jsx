@@ -27,7 +27,7 @@ export default function StitchLayout({ scrollYProgress }) {
         </div>
         <div className="hidden md:flex gap-8 items-center font-label text-sm uppercase tracking-wider">
           <a className="text-on-surface-variant/60 dark:text-on-surface-variant/40 hover:text-primary transition-colors duration-400" href="#team">Acuerdos</a>
-          <a className="text-primary dark:text-primary-container border-b-2 border-primary pb-1" href="#realidad">Empresa</a>
+          <a className="text-on-surface-variant/60 dark:text-on-surface-variant/40 hover:text-primary transition-colors duration-400" href="#realidad">Empresa</a>
           <a className="text-on-surface-variant/60 dark:text-on-surface-variant/40 hover:text-primary transition-colors duration-400" href="#estrategia">Estrategia Total</a>
         </div>
         <div>
