@@ -9,6 +9,7 @@ import ScrollReveal from './ScrollReveal';
 import AnimatedTitle from './AnimatedTitle';
 import ExportSimulator from './ExportSimulator';
 import PotentialDiagnosis from './PotentialDiagnosis';
+import PestelAnalysis from './PestelAnalysis';
 
 export default function StitchLayout({ scrollYProgress }) {
   const [simulatorOpen, setSimulatorOpen] = useState(false);
@@ -144,7 +145,12 @@ export default function StitchLayout({ scrollYProgress }) {
                <PotentialDiagnosis />
             </div>
 
-            {/* ITEM 2: DOFA (Tailwind Glass Style) */}
+            {/* ITEM 2: PESTEL */}
+            <div className="w-full mb-24">
+               <PestelAnalysis />
+            </div>
+
+            {/* ITEM 3: DOFA (Tailwind Glass Style) */}
             <div className="w-full">
                <DofaAnalysis />
             </div>

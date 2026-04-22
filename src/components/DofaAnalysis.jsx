@@ -49,7 +49,7 @@ const DofaAnalysis = () => {
 
   return (
     <div>
-      <h3 style={{ fontSize: '2rem', marginBottom: '1.5rem', color: 'var(--color-wheat)' }}>B4. Análisis DOFA</h3>
+      <h3 style={{ fontSize: '2rem', marginBottom: '1.5rem', color: 'var(--color-wheat)' }}>Análisis DOFA</h3>
       <div style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
