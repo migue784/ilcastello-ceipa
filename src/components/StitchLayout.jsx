@@ -81,9 +81,15 @@ export default function StitchLayout({ scrollYProgress }) {
           <AnimatedTitle text="PASTA AL HUEVO" className="font-headline text-[15vw] font-black text-on-tertiary whitespace-nowrap uppercase tracking-tighter" />
         </div>
         <ScrollReveal direction="up">
-          <div className="relative z-10 w-full max-w-5xl aspect-video bg-inverse-surface flex items-center justify-center shadow-2xl border-4 border-surface-dim/20 rounded-xl overflow-hidden">
-            <span className="font-label text-on-secondary/50 uppercase tracking-[0.2em] text-lg">[ EL VIDEO LIFESTYLE VA ACÁ ]</span>
-            <div className="absolute inset-0 bg-cover bg-center opacity-20" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1551183053-bf91a1d81141?q=80&w=2000&auto=format&fit=crop')" }}></div>
+          <div className="relative z-10 w-full max-w-[400px] aspect-[9/16] bg-black flex items-center justify-center shadow-[0_20px_50px_rgba(0,0,0,0.5)] border-4 border-white/10 rounded-2xl overflow-hidden">
+            <video 
+              src="/videos/Video.mp4" 
+              autoPlay 
+              loop 
+              muted 
+              playsInline 
+              className="w-full h-full object-cover"
+            />
           </div>
         </ScrollReveal>
       </section>
