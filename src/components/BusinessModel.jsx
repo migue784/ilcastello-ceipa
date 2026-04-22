@@ -1,6 +1,6 @@
 import React from 'react';
 import ScrollReveal from './ScrollReveal';
-import { Target, Users, Truck, Heart, DollarSign, Settings, Key, Link, CreditCard } from 'lucide-react';
+import { Target, Users, Truck, Heart, DollarSign, Settings, Key, Link, CreditCard, Globe, BarChart, Swords } from 'lucide-react';
 
 const BusinessModel = () => {
   const canvasItems = [
@@ -96,6 +96,54 @@ const BusinessModel = () => {
               </div>
             </ScrollReveal>
           ))}
+        </div>
+      </div>
+
+      {/* B3. Viabilidad Internacional */}
+      <div>
+        <h3 style={{ fontSize: '2rem', marginBottom: '1.5rem', color: 'var(--color-basil)' }}>B3. Viabilidad Internacional</h3>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          gap: '2rem'
+        }}>
+          
+          <ScrollReveal direction="up" delay={0.1}>
+            <div className="card-padding" style={{ background: 'var(--color-cream-dark)', borderRadius: '12px', borderTop: '5px solid var(--color-tomato)', height: '100%' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
+                <Globe size={28} color="var(--color-tomato)" />
+                <h4 style={{ margin: 0, fontSize: '1.2rem', color: 'var(--color-charcoal)' }}>Justificación del Producto</h4>
+              </div>
+              <p style={{ opacity: 0.85, fontSize: '0.95rem', lineHeight: '1.7', textAlign: 'justify' }}>
+                La empresa cuenta con una ventaja competitiva basada en la <strong>calidad superior de su materia prima</strong> (sémola de grano durum y huevo) y una tradición desde 1983, otorgándole una historia de marca atractiva para mercados exigentes como <strong>Estados Unidos, Panamá o Chile</strong>. Estos mercados buscan practicidad combinada con sabor auténtico italiano, permitiendo competir por diferenciación y no por precio. Su experiencia en el canal HORECA colombiano le brinda la capacidad técnica para adaptarse a las exigencias de calidad internacionales.
+              </p>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal direction="up" delay={0.2}>
+            <div className="card-padding" style={{ background: 'var(--color-cream-dark)', borderRadius: '12px', borderTop: '5px solid var(--color-wheat)', height: '100%' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
+                <BarChart size={28} color="var(--color-wheat)" />
+                <h4 style={{ margin: 0, fontSize: '1.2rem', color: 'var(--color-charcoal)' }}>Análisis del Sector Objetivo</h4>
+              </div>
+              <p style={{ opacity: 0.85, fontSize: '0.95rem', lineHeight: '1.7', textAlign: 'justify' }}>
+                En mercados como EE.UU. o Centroamérica, el sector mueve miles de millones de dólares, donde las <strong>pastas rellenas y congeladas presentan las mayores tasas de innovación</strong>. El consumidor migra de opciones masivas hacia pastas artesanales percibidas como "frescas". Aunque dominado por multinacionales, existe una brecha importante para fábricas gourmet. Il Castello puede posicionarse estratégicamente gracias a sus costos de producción competitivos en la región y su alta fidelización de marca.
+              </p>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal direction="up" delay={0.3}>
+            <div className="card-padding" style={{ background: 'var(--color-cream-dark)', borderRadius: '12px', borderTop: '5px solid var(--color-basil)', height: '100%' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
+                <Swords size={28} color="var(--color-basil)" />
+                <h4 style={{ margin: 0, fontSize: '1.2rem', color: 'var(--color-charcoal)' }}>Competidores y Entorno</h4>
+              </div>
+              <p style={{ opacity: 0.85, fontSize: '0.95rem', lineHeight: '1.7', textAlign: 'justify' }}>
+                Los principales competidores son marcas tradicionales italianas globales y productores locales. Sin embargo, los niveles de excelencia en <strong>Imagen de Marca y Calidad</strong> de Il Castello le permiten mitigar debilidades publicitarias mediante alianzas B2B. Plataformas como el Data Center OIER demuestran que la <strong>cercanía geográfica con Latinoamérica y los TLC vigentes</strong> facilitan la entrada con beneficios arancelarios, siendo una opción más atractiva que las costosas importaciones europeas.
+              </p>
+            </div>
+          </ScrollReveal>
+
         </div>
       </div>
 

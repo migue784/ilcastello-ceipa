@@ -87,10 +87,27 @@ const TeamAgreement = () => {
               
               {/* Integrante Dinámico */}
               {[
-                { name: "Miguel Angel Lopera", img: "/firmas/firma1.jpeg" },
-                { name: "Samuel Ossa", img: "/firmas/firma2.jpeg" },
-                { name: "Pablo Rodrigo", img: "/firmas/firma3.jpeg" },
-                { name: "Emmanuel Ramirez", img: null, pending: true }
+                { 
+                  name: "Miguel Angel Lopera", 
+                  img: "/firmas/firma1.jpeg",
+                  testText: "Viendo los resultados de este pretest de Aldea Global, arranco con toda. Sacar casi un 90% en general me da mucha confianza, y ver ese 100% en estrategia y plan de mercadeo me confirma que las bases de mi carrera en negocios internacionales están súper sólidas. Pero esta foto es sobre todo un recordatorio para no relajarme: tengo que meterle mucha más ficha a la hora de decidir a qué países entrar, porque en \"selección de mercados internacionales\" tuve mi nota más baja (77%). De nada sirve tener el mejor plan si no elijo bien el mercado, así que ahí es donde tengo que enfocarme para sacarle todo el provecho al curso."
+                },
+                { 
+                  name: "Samuel Ossa", 
+                  img: "/firmas/firma2.jpeg",
+                  testText: "Al ver mis resultados, siento que voy bien, pero no lo suficiente como para destacar todavía. Tengo una base sólida (79%), pero estoy por debajo del promedio de selección, lo que me deja claro que puedo dar más. Hay temas donde me va muy bien, como en plan de mercadeo y selección de mercados, pero también tengo bajones fuertes en otros, especialmente en análisis y argumentación. Eso me hace ver que mi problema no es falta de capacidad, sino falta de constancia y profundidad. Si logro ser más parejo en mi rendimiento y mejorar mi pensamiento crítico, sé que puedo subir ese nivel y acercarme a el promedio más alto."
+                },
+                { 
+                  name: "Pablo Restrepo", 
+                  img: "/firmas/firma3.jpeg",
+                  testText: "Según el test voy por un buen camino y tengo unas bases sólidas, entiendo lo que hago y cuando me enfoco cumplo bien con lo que me toca hacer, sobre todo en el plan de mercadeo, donde más me siento seguro. También analizo bien el entorno y no actúo por impulso, pero todavía puedo mejorar en la parte estratégica, especialmente al elegir mercados y definir el rumbo. No es que esté mal, pero puedo mejorar y ser más seguro en ese tema. Lo siguiente sería confiar más en mi criterio y elegir mejor."
+                },
+                { 
+                  name: "Emmanuel Ramirez", 
+                  img: null, 
+                  pending: true,
+                  testText: "Antes de empezar este núcleo, considero que tengo una base buena sobre varios temas, especialmente en lo relacionado con el análisis de mercados, la entrada a otros países, las estrategias de mercadeo y la importancia de estudiar el entorno antes de tomar decisiones. El resultado que obtuve me demuestra que sí tengo conocimientos previos importantes y que entiendo gran parte de los conceptos. Mi fortaleza es poder relacionar la teoría con situaciones prácticas.\n\nTambién me sirvió para darme cuenta de que hay cosas que debo reforzar: en algunas preguntas fallé por no analizar con suficiente detalle o por demorarme demasiado. Entiendo que todavía necesito mejorar en precisión, agilidad y en conceptos más específicos. Empiezo este proceso con la conciencia de organizar mejor mi tiempo para obtener un mejor desempeño."
+                }
               ].map((member, i) => {
                 const [isOpen, setIsOpen] = useState(false);
                 return (
@@ -134,9 +151,10 @@ const TeamAgreement = () => {
                       transition: 'all 0.4s ease-in-out',
                       marginTop: isOpen ? '1.5rem' : '0'
                     }}>
-                      <div style={{ padding: '1rem', background: 'white', borderRadius: '8px', borderLeft: '3px solid var(--color-wheat)' }}>
-                        <p style={{ fontSize: '0.95rem', opacity: 0.8, lineHeight: '1.6', margin: 0 }}>
-                          <strong>Resumen:</strong> Estamos a la espera de recolectar el texto del test para {member.name}. Este espacio está diseñado para albergar varios párrafos de texto de manera limpia y sin dañar la organización de la página web.
+                      <div style={{ padding: '1.2rem', background: 'white', borderRadius: '8px', borderLeft: '4px solid var(--color-tomato)' }}>
+                        <p style={{ fontSize: '0.95rem', opacity: 0.85, lineHeight: '1.7', margin: 0, whiteSpace: 'pre-line' }}>
+                          <strong>Autoevaluación Pretest:</strong><br/><br/>
+                          {member.testText}
                         </p>
                       </div>
                     </div>
