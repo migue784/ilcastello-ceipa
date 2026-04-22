@@ -66,7 +66,7 @@ const PotentialDiagnosis = () => {
 
       {/* Objetivo SMART */}
       <div>
-        <h3 style={{ fontSize: '2rem', marginBottom: '1.5rem', color: 'var(--color-basil)' }}>Objetivo de Internacionalización (SMART)</h3>
+        <h3 style={{ fontSize: '2rem', marginBottom: '1.5rem', color: 'var(--color-wheat)' }}>Objetivo de Internacionalización (SMART)</h3>
         <ScrollReveal direction="up">
           <div className="card-padding" style={{ background: 'var(--color-cream)', borderRadius: '12px', borderLeft: '5px solid var(--color-basil)', color: '#1a1a1a' }}>
             <p style={{ fontSize: '1.1rem', lineHeight: '1.8', opacity: 0.9, textAlign: 'justify', marginBottom: '2rem', color: '#1a1a1a' }}>

@@ -6,8 +6,8 @@ const DofaAnalysis = () => {
   const dofaData = [
     {
       type: "Fortalezas",
-      icon: <ShieldCheck size={28} color="var(--color-basil)" />,
-      color: "var(--color-basil)",
+      icon: <ShieldCheck size={28} color="#A8D08D" />,
+      color: "#A8D08D",
       items: [
         "Capital humano invaluable: Personal con alta antigüedad, lo que garantiza una estandarización empírica y perfecta de las recetas.",
         "Diversificación de proveeduría: Tienen relación con varios proveedores de sémola (mitigando riesgos), aunque sostienen una alianza fuerte con el principal por maquila.",
@@ -37,8 +37,8 @@ const DofaAnalysis = () => {
     },
     {
       type: "Amenazas",
-      icon: <Zap size={28} color="var(--color-charcoal)" />,
-      color: "var(--color-charcoal)",
+      icon: <Zap size={28} color="#FFB74D" />,
+      color: "#FFB74D",
       items: [
         "Vulnerabilidad a los altos costos del Transporte Nacional, el factor financiero que 'más golpea' a la compañía hoy en día.",
         "Variabilidad de precio en las Materias Primas críticas: La importación de Sémola pura de Italia se ha vuelto prohibitiva en costos.",
