@@ -8,6 +8,7 @@ import StrategicCrosses from './StrategicCrosses';
 import ScrollReveal from './ScrollReveal';
 import AnimatedTitle from './AnimatedTitle';
 import ExportSimulator from './ExportSimulator';
+import PotentialDiagnosis from './PotentialDiagnosis';
 
 export default function StitchLayout({ scrollYProgress }) {
   const [simulatorOpen, setSimulatorOpen] = useState(false);
@@ -138,18 +139,23 @@ export default function StitchLayout({ scrollYProgress }) {
             </h2>
             <p className="font-body text-xl text-on-primary/80 max-w-2xl mb-16 font-light">Análisis estructural y proyección sostenible hacia mercados internacionales.</p>
             
-            {/* ITEM 1: DOFA (Tailwind Glass Style) */}
+            {/* ITEM 1: DIAGNÓSTICO Y OBJETIVO SMART */}
+            <div className="w-full mb-24">
+               <PotentialDiagnosis />
+            </div>
+
+            {/* ITEM 2: DOFA (Tailwind Glass Style) */}
             <div className="w-full">
                <DofaAnalysis />
             </div>
           </div>
 
-          {/* ITEM 2: TOWS (Cruces) */}
+          {/* ITEM 3: TOWS (Cruces) */}
           <div className="w-full relative z-10 pb-16">
              <StrategicCrosses />
           </div>
 
-          {/* ITEM 3: SOSTENIBILIDAD */}
+          {/* ITEM 4: SOSTENIBILIDAD */}
           <div className="w-full relative z-10 pb-16">
             <Sustainability />
           </div>
