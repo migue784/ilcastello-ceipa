@@ -9,10 +9,10 @@ const DofaAnalysis = () => {
       icon: <ShieldCheck size={28} color="var(--color-basil)" />,
       color: "var(--color-basil)",
       items: [
-        "Alta calidad artesanal comprobada (maquilan marca premium a Grupo Nutresa).",
-        "Uso exclusivo de materias primas finas: Sémola de trigo durum y pasta al huevo.",
-        "Procesos únicos: Secado lento (14 hrs) y ultracongelación (-20°C) conservando el sabor.",
-        "Mucha capacidad instalada ociosa para expandirse si entran nuevos pedidos."
+        "Capital humano invaluable: Personal con alta antigüedad, lo que garantiza una estandarización empírica y perfecta de las recetas.",
+        "Diversificación de proveeduría: Tienen relación con varios proveedores de sémola (mitigando riesgos), aunque sostienen una alianza fuerte con el principal por maquila.",
+        "Nivel altísimo de fidelización con chefs (Canal HORECA), soportado por un servicio al cliente ultra-personalizado y directo.",
+        "Manejo de inventario estratégico (Bajo stock) que disminuye los costos de almacenamiento y garantiza total frescura."
       ]
     },
     {
@@ -20,9 +20,9 @@ const DofaAnalysis = () => {
       icon: <TrendingUp size={28} color="var(--color-wheat)" />,
       color: "var(--color-wheat)",
       items: [
-        "Mercado de las 'islas' (Punta Cana, Curazao, Cancún) enfocado 100% en turismo B2B Horeca.",
-        "Aumento en el consumo de pasta en Colombia (influencia migratoria y gentrificación en Medellín).",
-        "Alta demanda de restaurantes premium que buscan evitar hacer su propia pasta artesanal."
+        "Transición e implementación actual de Inteligencia Artificial para la toma de pedidos a través de WhatsApp Business y CRM.",
+        "Expansión agresiva del área Institucional y venta directa (ya que la maquila aporta volumen pero la venta HORECA aporta la rentabilidad real).",
+        "Mercado de las 'islas' del Caribe (B2B Hotelero) receptivo a productos ultracongelados premium listos para cocción rápida."
       ]
     },
     {
@@ -30,9 +30,9 @@ const DofaAnalysis = () => {
       icon: <AlertTriangle size={28} color="var(--color-tomato)" />,
       color: "var(--color-tomato)",
       items: [
-        "Dependencia logística riesgosa: Transporte nacional de cadena de frío (Ransa) es ineficiente y genera vetos de grandes superficies.",
-        "Ausencia de un departamento experto en Comercio Exterior para gestionar las exportaciones.",
-        "Capacidad tope (70%) en la producción de pasta seca actual sin invertir en nueva maquinaria."
+        "Curva de aprendizaje tecnológica lenta debido a la edad promedio alta del personal (resistencia inicial a la Inteligencia Artificial).",
+        "Procesos de planta altamente manuales que ralentizan la producción frente a demandas de volumen extremo.",
+        "Estructura comercial 'demasiado' dependiente del boca a boca o referenciación de chefs, sin distribuidores tercerizados escalables."
       ]
     },
     {
@@ -40,9 +40,9 @@ const DofaAnalysis = () => {
       icon: <Zap size={28} color="var(--color-charcoal)" />,
       color: "var(--color-charcoal)",
       items: [
-        "Políticas de gobierno y altas tasas de impuestos (Ej: Impoconsumo en ultraprocesados que encarece productos finales un 39%).",
-        "Competencia de multinacionales italianas (Barilla) con pasta industrial más económica a nivel global.",
-        "Aumento repentino de devaluación e inflación que afecte ingredientes importados."
+        "Vulnerabilidad a los altos costos del Transporte Nacional, el factor financiero que 'más golpea' a la compañía hoy en día.",
+        "Variabilidad de precio en las Materias Primas críticas: La importación de Sémola pura de Italia se ha vuelto prohibitiva en costos.",
+        "Riesgos inflacionarios sobre los insumos básicos diarios (huevo, pollo, carne, lácteos)."
       ]
     }
   ];

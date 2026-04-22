@@ -7,47 +7,47 @@ const BusinessModel = () => {
     {
       title: "Propuesta de Valor",
       icon: <Heart size={20} color="var(--color-tomato)" />,
-      text: "Venta de tradición italiana auténtica y salud. Producto premium artesanal hecho con sémola de grano durum y huevo libre de conservantes, receta original de 1983."
+      text: "Calidad artesanal superior justificada por el tiempo de cocción, ausencia de conservantes químicos, y empaque hermético. Servicio altamente personalizado, donde se busca 'consentir' a los chefs y clientes."
     },
     {
       title: "Segmentos de Clientes",
       icon: <Users size={20} color="var(--color-basil)" />,
-      text: "Horeca B2B (hoteles y restaurantes de alta gama) y Hogares B2C (familias y personas que buscan comida limpia y gourmet a domicilio)."
+      text: "HORECA (el más rentable y núcleo del negocio), Canal Institucional y Venta Directa B2C. Un mercado que está dispuesto a pagar un premium por el nivel de calidad del producto final."
     },
     {
-      title: "Canales",
+      title: "Canales de Comercialización",
       icon: <Truck size={20} color="var(--color-wheat)" />,
-      text: "Venta directa (e-commerce y local Sabaneta), Domicilios/envíos nacionales, y Asesores comerciales para el rubro institucional."
+      text: "Venta directa con vendedores en nómina (sin distribuidores terciarizados). Fuerza de ventas referenciada por chefs en Medellín, y 2 agentes outsourcing de corretaje en ciudades alternas. Transición actual hacia WhatsApp Business."
     },
     {
       title: "Relación con el Cliente",
       icon: <Target size={20} color="var(--color-charcoal)" />,
-      text: "Asesoría personalizada a dueños de restaurantes y fidelización digital para la comunidad B2C que valora lo artesanal."
+      text: "Contacto cálido, telefónico, y presencial. Se encuentra en etapa temprana de modernización integrando IA para toma de pedidos automatizada, respetando siempre el vínculo relacional estrecho con cada negocio."
     },
     {
       title: "Actividades Clave",
       icon: <Settings size={20} color="var(--color-tomato)" />,
-      text: "Producción diaria artesanal, estricto control de calidad sin químicos y gestión logística comercial agresiva."
+      text: "Transformación tecnológica: compra de nueva maquinaria para reducir el trabajo ultra-manual, y capacitación del personal antiguo en herramientas de Inteligencia Artificial para el área comercial."
     },
     {
       title: "Recursos Clave",
       icon: <Key size={20} color="var(--color-basil)" />,
-      text: "La marca Il Castello, receta heredada de Gianluigi G., maestros pasteros y la fábrica en Sabaneta."
+      text: "El talento humano es su principal activo: operarios con alta antigüedad aseguran la estandarización empírica de las recetas. Además de la Sémola de trigo durum, que es vital."
     },
     {
       title: "Socios Clave (Aliados)",
       icon: <Link size={20} color="var(--color-wheat)" />,
-      text: "Proveedores de harina durum y granjas, restaurantes aliados (como vitrina de calidad) y empresas de mensajería refrigerada."
+      text: "Proveedores nacionales de Sémola (alianzas apalancadas por maquila), huevos y lácteos. Los mismos clientes son considerados los principales aliados, así como los inversionistas internos dispuestos a capitalizar a largo plazo."
     },
     {
       title: "Estructura de Costos",
       icon: <CreditCard size={20} color="var(--color-charcoal)" />,
-      text: "Insumos premium, nómina del personal artesano, y altos costos operativos de mantenimiento de frío y logística."
+      text: "Altamente golpeados por los costos de transporte y materia prima. Estrategia de Inventario Bajo: operan casi just-in-time para evitar altos costos de almacenamiento y garantizar frescura máxima."
     },
     {
       title: "Fuentes de Ingreso",
       icon: <DollarSign size={20} color="var(--color-tomato)" />,
-      text: "Venta directa de productos individuales, contratos corporativos por volumen B2B y recargos logísticos."
+      text: "Ingresos escalonados por rentabilidad: 1. HORECA, 2. Venta Directa, 3. Institucional. Una fuente extra de alto volumen pero bajo margen es la producción de Maquila (Marcas Propias para terceros)."
     }
   ];
 
