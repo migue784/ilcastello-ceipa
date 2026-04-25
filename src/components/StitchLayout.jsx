@@ -10,6 +10,7 @@ import AnimatedTitle from './AnimatedTitle';
 import ExportSimulator from './ExportSimulator';
 import PotentialDiagnosis from './PotentialDiagnosis';
 import PestelAnalysis from './PestelAnalysis';
+import MacroAnalysis from './MacroAnalysis';
 
 export default function StitchLayout({ scrollYProgress }) {
   const [simulatorOpen, setSimulatorOpen] = useState(false);
@@ -31,6 +32,7 @@ export default function StitchLayout({ scrollYProgress }) {
           <a className="text-on-surface-variant/60 dark:text-on-surface-variant/40 hover:text-primary transition-colors duration-400" href="#team">Acuerdos</a>
           <a className="text-on-surface-variant/60 dark:text-on-surface-variant/40 hover:text-primary transition-colors duration-400" href="#realidad">Empresa</a>
           <a className="text-on-surface-variant/60 dark:text-on-surface-variant/40 hover:text-primary transition-colors duration-400" href="#estrategia">Estrategia Total</a>
+          <a className="text-on-surface-variant/60 dark:text-on-surface-variant/40 hover:text-primary transition-colors duration-400" href="#macro">Macroeconomía</a>
         </div>
         <div>
           <button 
@@ -172,6 +174,13 @@ export default function StitchLayout({ scrollYProgress }) {
             <Sustainability />
           </div>
 
+        </div>
+      </section>
+
+      {/* Macro Analysis */}
+      <section id="macro" className="py-32 px-8 md:px-16 bg-surface" style={{ position: 'relative', zIndex: 20 }}>
+        <div className="max-w-7xl mx-auto">
+          <MacroAnalysis />
         </div>
       </section>
 
