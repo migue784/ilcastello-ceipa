@@ -1,6 +1,6 @@
 import React from 'react';
 import ScrollReveal from './ScrollReveal';
-import { LineChart, Percent, Coins, Scale, TrendingUp, DollarSign } from 'lucide-react';
+import { LineChart, Percent, Coins, Scale, TrendingUp, DollarSign, ExternalLink } from 'lucide-react';
 
 const MacroAnalysis = () => {
   const indicators = [
@@ -52,8 +52,27 @@ const MacroAnalysis = () => {
   ];
 
   return (
-    <div className="w-full">
-      <div className="mb-20">
+    <div className="w-full relative">
+      {/* Elementos Decorativos de Fondo */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        <img 
+          src="/productos/FETTUCCINE_1_e701b431-b306-43ec-a4a6-39662090f2bc_503x.png" 
+          alt="" 
+          className="absolute -top-10 -right-40 w-[400px] opacity-[0.03] rotate-[20deg] blur-sm mix-blend-screen"
+        />
+        <img 
+          src="/productos/PAPPARDELLE_1_503x.png" 
+          alt="" 
+          className="absolute top-1/2 -left-48 w-[500px] opacity-[0.03] -rotate-[15deg] blur-md mix-blend-screen"
+        />
+        <img 
+          src="/productos/RAVIOLICARNE_1_503x.png" 
+          alt="" 
+          className="absolute bottom-10 -right-20 w-[350px] opacity-[0.04] rotate-[45deg] blur-sm mix-blend-screen"
+        />
+      </div>
+
+      <div className="mb-20 relative z-10">
         <h2 className="font-headline text-5xl md:text-7xl font-bold uppercase mb-4 text-on-surface">
           Análisis <span className="text-primary">Macroeconómico</span>
         </h2>
@@ -64,7 +83,7 @@ const MacroAnalysis = () => {
 
       {/* DASHBOARD DE POWER BI */}
       <ScrollReveal direction="up">
-        <div className="mb-24 w-full bg-surface-container-highest p-4 md:p-8 rounded-2xl shadow-xl overflow-hidden">
+        <div className="mb-24 w-full relative z-10 bg-surface-container-highest p-4 md:p-8 rounded-2xl shadow-xl overflow-hidden">
           <div className="flex items-center gap-4 mb-8">
             <LineChart className="w-8 h-8 text-primary" />
             <h3 className="font-headline text-3xl font-bold text-on-surface uppercase tracking-tight">Dashboard Interactivo</h3>
@@ -87,7 +106,7 @@ const MacroAnalysis = () => {
       </ScrollReveal>
 
       {/* TARJETAS DE INDICADORES */}
-      <div className="mb-24 space-y-12">
+      <div className="mb-24 space-y-12 relative z-10">
         <h3 className="font-headline text-4xl font-bold text-on-surface uppercase mb-12">Detalle por <span className="text-primary">Indicador</span></h3>
         
         {indicators.map((indicator, idx) => (
@@ -146,7 +165,7 @@ const MacroAnalysis = () => {
 
       {/* TABLA DE RESUMEN Y CONCLUSIÓN */}
       <ScrollReveal direction="up">
-        <div className="bg-primary text-on-primary rounded-3xl p-8 md:p-16 relative overflow-hidden shadow-2xl">
+        <div className="bg-primary text-white rounded-3xl p-8 md:p-16 relative overflow-hidden shadow-2xl z-10">
           {/* Decorative glow */}
           <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-white/10 rounded-full opacity-30 pointer-events-none transform translate-x-1/2 -translate-y-1/2 blur-3xl"></div>
           
@@ -219,9 +238,22 @@ const MacroAnalysis = () => {
           
           <div className="relative z-10 bg-black/20 p-8 rounded-xl border border-[var(--color-wheat)]/30 backdrop-blur-sm">
             <h4 className="font-headline text-2xl font-bold uppercase mb-4 text-[var(--color-wheat)]">Conclusión Final</h4>
-            <p className="font-body text-lg leading-relaxed opacity-90">
+            <p className="font-body text-lg leading-relaxed text-white opacity-90">
               <strong className="text-white">Panamá</strong> resulta ser el mercado macroeconómico más favorable <strong className="text-[var(--color-wheat)]">(23/25)</strong> para la internacionalización de Il Castello, seguido de <strong>El Salvador (20/25)</strong>. Ambos países, al ser economías dolarizadas, eliminan el riesgo cambiario y mantienen tasas de interés estables. Adicionalmente, el sostenido crecimiento económico de Panamá y su consolidado turismo HORECA de alto nivel representan el entorno más seguro y rentable para el ingreso de pasta artesanal premium. Por el contrario, México presenta las condiciones más adversas (12/25) debido a su alta volatilidad cambiaria, presión inflacionaria y elevadas tasas de interés, lo cual incrementaría significativamente el riesgo financiero de la exportación en este momento.
             </p>
+          </div>
+
+          {/* Botón Excel de Datos en Bruto */}
+          <div className="mt-8 relative z-10 flex justify-end">
+            <a 
+              href="https://ceipaeduco-my.sharepoint.com/:x:/g/personal/miguel_loperaar_virtual_ceipa_edu_co/IQCpC9kl6KlVRIiZVFrv2RqgAaR11Jg2DgJsJykCnHnT8Yc?e=6MF8EZ" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-xs font-body uppercase tracking-wider text-white/50 hover:text-[var(--color-wheat)] transition-colors border border-white/10 hover:border-[var(--color-wheat)]/50 px-4 py-2 rounded-full"
+            >
+              <ExternalLink className="w-3 h-3" />
+              Ver datos en bruto (Excel)
+            </a>
           </div>
         </div>
       </ScrollReveal>
