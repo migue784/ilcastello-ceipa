@@ -43,80 +43,51 @@ const PestelAnalysis = () => {
   ];
 
   return (
-    <div className="mb-24">
-      <div style={{ marginBottom: '2.5rem' }}>
-        <h3 style={{ fontSize: '2rem', marginBottom: '1rem', color: 'var(--color-wheat)' }}>Análisis PESTEL Comparativo</h3>
-        <p style={{ opacity: 0.85, fontSize: '1.05rem', lineHeight: '1.7', color: 'white', maxWidth: '900px' }}>
-          Evaluación estratégica del macroentorno en sus seis dimensiones críticas. Se contrasta la realidad operativa y nacional (Sabaneta, Colombia) frente a las oportunidades y retos del mercado objetivo de expansión (Costas y San José, Costa Rica).
+    <div className="w-full">
+      <div className="mb-10">
+        <h3 className="font-headline text-3xl md:text-4xl font-bold uppercase mb-4 text-[var(--color-wheat)]">2. Análisis PESTEL Comparativo</h3>
+        <p className="font-body text-base md:text-lg opacity-80 leading-relaxed max-w-3xl">
+          Evaluación estratégica del macroentorno en sus seis dimensiones críticas. Se contrasta la realidad operativa y nacional (Sabaneta, Colombia) frente a las oportunidades y retos del mercado objetivo de expansión (Costa Rica).
         </p>
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+      <div className="flex flex-col space-y-6">
         {pestelData.map((item, index) => (
           <ScrollReveal key={index} direction="up" delay={index * 0.1}>
-            <div className="card-glass-dark" style={{ 
-              display: 'flex', 
-              flexDirection: 'column',
-              overflow: 'hidden',
-              borderRadius: '12px',
-              borderLeft: '4px solid rgba(238, 222, 180, 0.4)'
-            }}>
+            <div className="card-glass-dark relative flex flex-col md:flex-row items-stretch rounded-2xl overflow-hidden border border-white/5 hover:border-[var(--color-wheat)]/30 transition-all duration-500 group bg-black/40">
               
-              {/* Contenedor Flex para Desktop */}
-              <div className="flex flex-col md:flex-row w-full">
-                
-                {/* Header (Letra y Título) */}
-                <div style={{ 
-                  background: 'rgba(255,255,255,0.03)', 
-                  padding: '1.5rem', 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  gap: '1rem',
-                }} className="md:w-1/4 border-b md:border-b-0 md:border-r border-white/10 flex-shrink-0">
-                  <div style={{ 
-                    background: 'rgba(238, 222, 180, 0.15)',
-                    width: '45px', height: '45px', 
-                    display: 'flex', alignItems: 'center', justifyContent: 'center', 
-                    borderRadius: '10px',
-                    fontFamily: 'var(--font-headline)',
-                    fontSize: '1.5rem',
-                    fontWeight: 'bold',
-                    color: 'var(--color-wheat)'
-                  }}>
-                    {item.letter}
-                  </div>
-                  <div>
-                    <h4 style={{ margin: 0, fontSize: '1.25rem', color: 'var(--color-wheat)', letterSpacing: '0.05em' }}>{item.title}</h4>
-                  </div>
+              {/* NACIONAL (Izquierda) */}
+              <div className="flex-1 p-6 md:p-8 flex flex-col justify-center relative bg-gradient-to-r from-transparent to-white/5">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="text-2xl">🇨🇴</span>
+                  <h5 className="m-0 text-sm font-headline uppercase tracking-widest text-white/50">Nacional</h5>
                 </div>
+                <p className="m-0 text-sm md:text-base leading-relaxed text-white/90 group-hover:text-white transition-colors text-balance">
+                  {item.national}
+                </p>
+              </div>
 
-                {/* Columnas de Análisis */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', flex: 1 }}>
-                  
-                  {/* Nacional */}
-                  <div style={{ padding: '1.5rem' }} className="border-b md:border-b-0 md:border-r border-white/10">
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.8rem' }}>
-                      <span style={{ fontSize: '1.2rem' }}>🇨🇴</span>
-                      <h5 style={{ margin: 0, fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '1px', opacity: 0.6, color: 'white' }}>Nacional (Colombia)</h5>
-                    </div>
-                    <p style={{ margin: 0, fontSize: '0.95rem', lineHeight: '1.6', opacity: 0.9, color: 'white' }}>
-                      {item.national}
-                    </p>
+              {/* MEDIO (Insignia Versus) */}
+              <div className="md:w-32 flex items-center justify-center py-4 md:py-0 relative z-10 border-y md:border-y-0 md:border-x border-white/10 bg-black/60 group-hover:bg-black/80 transition-colors">
+                <div className="flex flex-col items-center justify-center gap-2">
+                  <div className="w-14 h-14 rounded-full bg-[var(--color-wheat)]/10 flex items-center justify-center border border-[var(--color-wheat)]/30 group-hover:scale-110 group-hover:bg-[var(--color-wheat)] group-hover:text-black transition-all duration-500 shadow-[0_0_15px_rgba(238,222,180,0.1)] group-hover:shadow-[0_0_20px_rgba(238,222,180,0.4)]">
+                    <span className="font-headline text-2xl font-bold text-[var(--color-wheat)] group-hover:text-black transition-colors">{item.letter}</span>
                   </div>
-
-                  {/* Internacional */}
-                  <div style={{ padding: '1.5rem', background: 'rgba(238, 222, 180, 0.02)' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.8rem' }}>
-                      <span style={{ fontSize: '1.2rem' }}>🇨🇷</span>
-                      <h5 style={{ margin: 0, fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '1px', opacity: 0.6, color: 'white' }}>Internacional (Costa Rica)</h5>
-                    </div>
-                    <p style={{ margin: 0, fontSize: '0.95rem', lineHeight: '1.6', opacity: 0.95, color: 'var(--color-wheat)' }}>
-                      {item.international}
-                    </p>
-                  </div>
-
+                  <span className="font-headline uppercase text-[10px] tracking-widest text-[var(--color-wheat)]/70">{item.title}</span>
                 </div>
               </div>
+
+              {/* INTERNACIONAL (Derecha) */}
+              <div className="flex-1 p-6 md:p-8 flex flex-col justify-center relative bg-gradient-to-l from-transparent to-[var(--color-wheat)]/5 group-hover:to-[var(--color-wheat)]/10 transition-colors">
+                <div className="flex items-center gap-3 mb-4 md:flex-row-reverse md:text-right">
+                  <span className="text-2xl">🇨🇷</span>
+                  <h5 className="m-0 text-sm font-headline uppercase tracking-widest text-[var(--color-wheat)]/70">Internacional</h5>
+                </div>
+                <p className="m-0 text-sm md:text-base leading-relaxed text-[var(--color-wheat)]/90 group-hover:text-[var(--color-wheat)] transition-colors text-balance md:text-right">
+                  {item.international}
+                </p>
+              </div>
+
             </div>
           </ScrollReveal>
         ))}

@@ -48,31 +48,33 @@ const DofaAnalysis = () => {
   ];
 
   return (
-    <div>
-      <h3 style={{ fontSize: '2rem', marginBottom: '1.5rem', color: 'var(--color-wheat)' }}>Análisis DOFA</h3>
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-        gap: '2rem',
-        paddingBottom: '2rem'
-      }}>
-        {dofaData.map((item, index) => (
-          <ScrollReveal key={index} direction={index % 2 === 0 ? "left" : "right"} delay={index * 0.1}>
-            <div className="card-glass-dark" style={{
-              padding: '2rem',
-              height: '100%',
-              borderBottom: `4px solid ${item.color}`
-            }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
-                <div style={{ background: 'rgba(255,255,255,0.1)', padding: '0.8rem', borderRadius: '50%' }}>
-                  {item.icon}
+    <div className="w-full">
+      <div className="mb-10">
+        <h3 className="font-headline text-3xl md:text-4xl font-bold uppercase mb-4 text-[var(--color-wheat)]">3. Matriz DOFA</h3>
+        <p className="font-body text-base md:text-lg opacity-80 leading-relaxed max-w-3xl">
+          Diagnóstico interno y externo actual de Il Castello para afrontar la internacionalización.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative">
+        {/* Cruz central decorativa para enfatizar cuadrantes */}
+        <div className="hidden md:block absolute top-1/2 left-0 right-0 h-[1px] bg-white/10 -translate-y-1/2 z-0 pointer-events-none"></div>
+        <div className="hidden md:block absolute top-0 bottom-0 left-1/2 w-[1px] bg-white/10 -translate-x-1/2 z-0 pointer-events-none"></div>
+
+        {dofaData.map((section, index) => (
+          <ScrollReveal key={index} direction="up" delay={index * 0.1}>
+            <div className="card-glass-dark h-full p-8 flex flex-col gap-6 relative z-10 bg-black/40 border border-white/5 hover:bg-black/60 transition-colors duration-500 rounded-2xl group">
+              <div className="flex items-center gap-4 border-b border-white/10 pb-4">
+                <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-white/5 border border-white/10 group-hover:scale-110 transition-transform duration-500" style={{ borderColor: section.color + '40', backgroundColor: section.color + '10' }}>
+                  {section.icon}
                 </div>
-                <h4 style={{ margin: 0, fontSize: '1.3rem', color: 'var(--color-wheat)' }}>{item.type}</h4>
+                <h4 className="m-0 font-headline text-2xl uppercase tracking-wider" style={{ color: section.color }}>{section.type}</h4>
               </div>
-              <ul style={{ paddingLeft: '1.2rem', margin: 0, display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
-                {item.items.map((line, i) => (
-                  <li key={i} style={{ opacity: 0.8, fontSize: '0.95rem', lineHeight: '1.5' }}>
-                    {line}
+              <ul className="m-0 p-0 list-none flex flex-col gap-4">
+                {section.items.map((item, idx) => (
+                  <li key={idx} className="flex gap-3 items-start text-white/80 group-hover:text-white transition-colors text-sm md:text-base leading-relaxed">
+                    <span className="mt-1 flex-shrink-0" style={{ color: section.color }}>✦</span>
+                    <span>{item}</span>
                   </li>
                 ))}
               </ul>

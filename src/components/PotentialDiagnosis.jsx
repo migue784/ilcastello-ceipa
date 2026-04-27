@@ -7,57 +7,60 @@ const PotentialDiagnosis = () => {
     <div className="space-y-24">
       {/* Diagnóstico Excel */}
       <div>
-        <h3 style={{ fontSize: '2rem', marginBottom: '1.5rem', color: 'var(--color-wheat)' }}>Diagnóstico de Potencialidades de Internacionalización</h3>
-        <p style={{ opacity: 0.8, fontSize: '1rem', lineHeight: '1.7', marginBottom: '2rem' }}>
-          A continuación se presentan los resultados gráficos arrojados por la herramienta de diagnóstico en Excel, evaluando la capacidad técnica, comercial y financiera de Il Castello para exportar.
+        <h3 className="font-headline text-3xl md:text-4xl font-bold uppercase mb-4 text-[var(--color-wheat)]">1. Diagnóstico de Potencialidades</h3>
+        <p className="font-body text-base md:text-lg opacity-80 leading-relaxed mb-10 max-w-3xl">
+          Resultados gráficos arrojados por la herramienta de diagnóstico en Excel, evaluando la capacidad técnica, comercial y financiera de Il Castello para exportar.
         </p>
         
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: '2rem'
-        }}>
+        {/* BENTO BOX GRID */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-min">
           {[
             {
               img: '/diagnostico/img1.png',
               title: 'Proyección FOB (Exportaciones)',
-              desc: 'Análisis del valor proyectado en USD (FOB) demostrando la viabilidad y los retornos iniciales esperados durante los primeros 12 meses operativos.'
+              desc: 'Análisis del valor proyectado en USD (FOB) demostrando la viabilidad y los retornos iniciales esperados durante los primeros 12 meses operativos.',
+              className: 'md:col-span-2 md:row-span-2',
+              imgHeight: 'min-h-[300px]'
             },
             {
               img: '/diagnostico/img2.png',
               title: 'Geolocalización Estratégica',
-              desc: 'Mapeo de rutas hacia Centroamérica y Norteamérica, evaluando la eficiencia de tránsito marítimo y cercanía directa con el Puerto de Cartagena.'
+              desc: 'Mapeo de rutas hacia Centroamérica y Norteamérica, evaluando eficiencia y cercanía.',
+              className: 'md:col-span-1',
+              imgHeight: 'min-h-[150px]'
             },
             {
               img: '/diagnostico/img3.png',
               title: 'Matriz de Ponderación',
-              desc: 'Evaluación cuantitativa de variables macroeconómicas y logísticas para justificar la pre-selección técnica del país objetivo.'
+              desc: 'Evaluación cuantitativa macroeconómica para selección del país objetivo.',
+              className: 'md:col-span-1',
+              imgHeight: 'min-h-[150px]'
             },
             {
               img: '/diagnostico/img4.png',
               title: 'Participación Esperada (13%)',
-              desc: 'Meta de penetración de mercado calculada sobre el total de importaciones HORECA en el país destino, respaldada por la capacidad ociosa.'
+              desc: 'Meta de penetración de mercado calculada sobre el total de importaciones HORECA en el destino.',
+              className: 'md:col-span-2',
+              imgHeight: 'min-h-[200px]'
             },
             {
               img: '/diagnostico/img5.png',
               title: 'Análisis Arancelario',
-              desc: 'Desglose técnico de la Matriz de Selección, confirmando los beneficios del TLC aplicable y la optimización de los costos de nacionalización.'
+              desc: 'Desglose técnico de la Matriz de Selección y beneficios del TLC.',
+              className: 'md:col-span-1',
+              imgHeight: 'min-h-[200px]'
             }
           ].map((item, i) => (
             <ScrollReveal key={i} direction="up" delay={i * 0.1}>
-              <div className="card-glass-dark" style={{ padding: '1.5rem', height: '100%', display: 'flex', flexDirection: 'column', gap: '1rem', background: 'rgba(0,0,0,0.3)', borderRadius: '12px' }}>
-                <h4 style={{ margin: 0, fontSize: '1.15rem', color: 'var(--color-wheat)', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '0.8rem' }}>{item.title}</h4>
-                <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(255,255,255,0.05)', borderRadius: '8px', padding: '1rem', minHeight: '220px' }}>
-                  <img 
-                    src={item.img} 
-                    alt={item.title} 
-                    style={{ width: '100%', maxHeight: '250px', borderRadius: '4px', objectFit: 'contain' }}
-                    onError={(e) => { e.target.style.display = 'none'; }}
-                  />
+              <div className={`card-glass-dark p-6 h-full flex flex-col gap-4 bg-black/30 rounded-2xl border border-white/5 hover:border-[var(--color-wheat)]/50 transition-colors duration-500 group ${item.className || ''}`}>
+                <h4 className="m-0 text-lg font-headline uppercase text-[var(--color-wheat)] border-b border-white/10 pb-3 group-hover:border-[var(--color-wheat)]/30 transition-colors">
+                  {item.title}
+                </h4>
+                <div className={`flex-1 flex items-center justify-center bg-white/5 rounded-xl p-4 overflow-hidden relative ${item.imgHeight}`}>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity z-10"></div>
+                  <img src={item.img} alt={item.title} className="w-full h-full object-contain max-h-[400px] transition-transform duration-700 group-hover:scale-105 relative z-0" />
                 </div>
-                <p style={{ opacity: 0.85, fontSize: '0.9rem', lineHeight: '1.6', margin: 0, color: 'white' }}>
-                  {item.desc}
-                </p>
+                <p className="opacity-80 text-sm leading-relaxed m-0 text-white group-hover:text-white transition-colors">{item.desc}</p>
               </div>
             </ScrollReveal>
           ))}

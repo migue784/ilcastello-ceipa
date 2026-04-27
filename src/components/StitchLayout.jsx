@@ -136,42 +136,84 @@ export default function StitchLayout({ scrollYProgress }) {
 
       {/* Strategic Strategy (DOFA & Sustainability) */}
       <section id="estrategia" className="py-24 bg-primary text-on-primary relative overflow-hidden" style={{ zIndex: 20 }}>
-        {/* Decoración de fondo */}
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/10 to-transparent rounded-full opacity-50 pointer-events-none transform translate-x-1/3 -translate-y-1/3 blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[var(--color-wheat)]/10 to-transparent rounded-full opacity-30 pointer-events-none transform -translate-x-1/3 translate-y-1/3 blur-3xl"></div>
+        {/* Decoración de fondo dinámica */}
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[var(--color-wheat)]/10 to-transparent rounded-full opacity-50 pointer-events-none transform translate-x-1/3 -translate-y-1/3 blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-0 left-0 w-[800px] h-[800px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/5 to-transparent rounded-full opacity-30 pointer-events-none transform -translate-x-1/4 translate-y-1/4 blur-[100px]"></div>
 
-        <div className="max-w-7xl mx-auto px-8 md:px-16 space-y-32">
+        <div className="max-w-[1400px] mx-auto px-8 md:px-16 flex flex-col md:flex-row gap-16 relative z-10 pt-16">
           
-          <div className="relative z-10 pt-16">
-            <h2 className="font-headline text-5xl md:text-7xl font-bold uppercase mb-4 text-on-primary">
-              Estrategia <span className="text-[var(--color-wheat)]">Total</span>
-            </h2>
-            <p className="font-body text-xl text-on-primary/80 max-w-2xl mb-16 font-light">Análisis estructural y proyección sostenible hacia mercados internacionales.</p>
-            
+          {/* STICKY SIDEBAR (Navegación) */}
+          <div className="w-full md:w-1/4 relative">
+            <div className="md:sticky md:top-32 md:h-[calc(100vh-8rem)]">
+              <h2 className="font-headline text-5xl md:text-6xl font-bold uppercase mb-4 text-on-primary leading-none">
+                Estrategia <br className="hidden md:block" />
+                <span className="text-[var(--color-wheat)]">Total</span>
+              </h2>
+              <p className="font-body text-base text-on-primary/80 mb-12 font-light border-l-2 border-[var(--color-wheat)]/30 pl-4">
+                Análisis estructural y proyección sostenible hacia mercados internacionales.
+              </p>
+              
+              <ul className="hidden md:flex flex-col space-y-6 font-headline uppercase tracking-widest text-sm">
+                <li>
+                  <a href="#diag" className="flex items-center gap-3 text-white/50 hover:text-[var(--color-wheat)] transition-all group">
+                    <span className="w-8 h-[1px] bg-white/20 group-hover:w-12 group-hover:bg-[var(--color-wheat)] transition-all"></span>
+                    1. Diagnóstico
+                  </a>
+                </li>
+                <li>
+                  <a href="#pestel" className="flex items-center gap-3 text-white/50 hover:text-[var(--color-wheat)] transition-all group">
+                    <span className="w-8 h-[1px] bg-white/20 group-hover:w-12 group-hover:bg-[var(--color-wheat)] transition-all"></span>
+                    2. PESTEL
+                  </a>
+                </li>
+                <li>
+                  <a href="#dofa" className="flex items-center gap-3 text-white/50 hover:text-[var(--color-wheat)] transition-all group">
+                    <span className="w-8 h-[1px] bg-white/20 group-hover:w-12 group-hover:bg-[var(--color-wheat)] transition-all"></span>
+                    3. Matriz DOFA
+                  </a>
+                </li>
+                <li>
+                  <a href="#tows" className="flex items-center gap-3 text-white/50 hover:text-[var(--color-wheat)] transition-all group">
+                    <span className="w-8 h-[1px] bg-white/20 group-hover:w-12 group-hover:bg-[var(--color-wheat)] transition-all"></span>
+                    4. Cruces TOWS
+                  </a>
+                </li>
+                <li>
+                  <a href="#sost" className="flex items-center gap-3 text-white/50 hover:text-[var(--color-wheat)] transition-all group">
+                    <span className="w-8 h-[1px] bg-white/20 group-hover:w-12 group-hover:bg-[var(--color-wheat)] transition-all"></span>
+                    5. Sostenibilidad
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* CONTENIDO PRINCIPAL SCROLLABLE */}
+          <div className="w-full md:w-3/4 flex flex-col space-y-40 pb-32">
             {/* ITEM 1: DIAGNÓSTICO Y OBJETIVO SMART */}
-            <div className="w-full mb-24">
+            <div id="diag" className="scroll-mt-32 w-full">
                <PotentialDiagnosis />
             </div>
 
             {/* ITEM 2: PESTEL */}
-            <div className="w-full mb-24">
+            <div id="pestel" className="scroll-mt-32 w-full">
                <PestelAnalysis />
             </div>
 
             {/* ITEM 3: DOFA (Tailwind Glass Style) */}
-            <div className="w-full">
+            <div id="dofa" className="scroll-mt-32 w-full">
                <DofaAnalysis />
             </div>
-          </div>
 
-          {/* ITEM 3: TOWS (Cruces) */}
-          <div className="w-full relative z-10 pb-16">
-             <StrategicCrosses />
-          </div>
+            {/* ITEM 4: TOWS (Cruces) */}
+            <div id="tows" className="scroll-mt-32 w-full">
+               <StrategicCrosses />
+            </div>
 
-          {/* ITEM 4: SOSTENIBILIDAD */}
-          <div className="w-full relative z-10 pb-16">
-            <Sustainability />
+            {/* ITEM 5: SOSTENIBILIDAD */}
+            <div id="sost" className="scroll-mt-32 w-full">
+              <Sustainability />
+            </div>
           </div>
 
         </div>
