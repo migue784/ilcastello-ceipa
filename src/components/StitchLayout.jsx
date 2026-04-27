@@ -154,7 +154,7 @@ export default function StitchLayout({ scrollYProgress }) {
       </section>
 
       {/* Strategic Strategy (DOFA & Sustainability) */}
-      <section id="estrategia" className="py-24 bg-primary text-on-primary relative overflow-hidden" style={{ zIndex: 20 }}>
+      <section id="estrategia" className="py-24 bg-primary text-on-primary relative overflow-clip" style={{ zIndex: 20 }}>
         {/* Decoración de fondo dinámica */}
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[var(--color-wheat)]/10 to-transparent rounded-full opacity-50 pointer-events-none transform translate-x-1/3 -translate-y-1/3 blur-3xl animate-pulse"></div>
         <div className="absolute bottom-0 left-0 w-[800px] h-[800px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/5 to-transparent rounded-full opacity-30 pointer-events-none transform -translate-x-1/4 translate-y-1/4 blur-[100px]"></div>
@@ -163,7 +163,7 @@ export default function StitchLayout({ scrollYProgress }) {
           
           {/* STICKY SIDEBAR (Navegación) */}
           <div className="w-full md:w-1/4 relative">
-            <div className="md:sticky md:top-32 md:h-[calc(100vh-8rem)]">
+            <div className="md:sticky md:top-40 md:h-[calc(100vh-10rem)]">
               <h2 className="font-headline text-5xl md:text-6xl font-bold uppercase mb-4 text-on-primary leading-none">
                 Estrategia <br className="hidden md:block" />
                 <span className="text-[var(--color-wheat)]">Total</span>
