@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import FloatingProduct from './FloatingProduct';
 import TeamAgreement from './TeamAgreement';
 import HorizontalGallery from './HorizontalGallery';
@@ -14,6 +14,25 @@ import MacroAnalysis from './MacroAnalysis';
 
 export default function StitchLayout({ scrollYProgress }) {
   const [simulatorOpen, setSimulatorOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('diag');
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    }, { rootMargin: '-30% 0px -70% 0px' });
+
+    const sections = ['diag', 'pestel', 'dofa', 'tows', 'sost'];
+    sections.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div className="bg-surface text-on-surface font-body antialiased selection:bg-primary selection:text-on-primary">
@@ -154,42 +173,40 @@ export default function StitchLayout({ scrollYProgress }) {
               </p>
               
               <ul className="hidden md:flex flex-col space-y-6 font-headline uppercase tracking-widest text-sm">
-                <li>
-                  <a href="#diag" className="flex items-center gap-3 text-white/50 hover:text-[var(--color-wheat)] transition-all group">
-                    <span className="w-8 h-[1px] bg-white/20 group-hover:w-12 group-hover:bg-[var(--color-wheat)] transition-all"></span>
-                    1. Diagnóstico
-                  </a>
-                </li>
-                <li>
-                  <a href="#pestel" className="flex items-center gap-3 text-white/50 hover:text-[var(--color-wheat)] transition-all group">
-                    <span className="w-8 h-[1px] bg-white/20 group-hover:w-12 group-hover:bg-[var(--color-wheat)] transition-all"></span>
-                    2. PESTEL
-                  </a>
-                </li>
-                <li>
-                  <a href="#dofa" className="flex items-center gap-3 text-white/50 hover:text-[var(--color-wheat)] transition-all group">
-                    <span className="w-8 h-[1px] bg-white/20 group-hover:w-12 group-hover:bg-[var(--color-wheat)] transition-all"></span>
-                    3. Matriz DOFA
-                  </a>
-                </li>
-                <li>
-                  <a href="#tows" className="flex items-center gap-3 text-white/50 hover:text-[var(--color-wheat)] transition-all group">
-                    <span className="w-8 h-[1px] bg-white/20 group-hover:w-12 group-hover:bg-[var(--color-wheat)] transition-all"></span>
-                    4. Cruces TOWS
-                  </a>
-                </li>
-                <li>
-                  <a href="#sost" className="flex items-center gap-3 text-white/50 hover:text-[var(--color-wheat)] transition-all group">
-                    <span className="w-8 h-[1px] bg-white/20 group-hover:w-12 group-hover:bg-[var(--color-wheat)] transition-all"></span>
-                    5. Sostenibilidad
-                  </a>
-                </li>
+                {[
+                  { id: 'diag', label: '1. Diagnóstico' },
+                  { id: 'pestel', label: '2. PESTEL' },
+                  { id: 'dofa', label: '3. Matriz DOFA' },
+                  { id: 'tows', label: '4. Cruces TOWS' },
+                  { id: 'sost', label: '5. Sostenibilidad' }
+                ].map((item) => {
+                  const isActive = activeSection === item.id;
+                  return (
+                    <li key={item.id} className="transition-all duration-500 ease-in-out">
+                      <a 
+                        href={`#${item.id}`} 
+                        className={`flex items-center gap-3 transition-all duration-500 group ${
+                          isActive 
+                            ? 'text-[var(--color-wheat)] font-bold scale-105 origin-left opacity-100' 
+                            : 'text-white/30 hover:text-white/60 hover:scale-100 opacity-50'
+                        }`}
+                      >
+                        <span className={`h-[1px] transition-all duration-500 ${
+                          isActive 
+                            ? 'w-16 bg-[var(--color-wheat)] shadow-[0_0_8px_rgba(227,184,90,0.6)]' 
+                            : 'w-8 bg-white/20 group-hover:w-12 group-hover:bg-white/40'
+                        }`}></span>
+                        {item.label}
+                      </a>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           </div>
 
           {/* CONTENIDO PRINCIPAL SCROLLABLE */}
-          <div className="w-full md:w-3/4 flex flex-col space-y-40 pb-32">
+          <div className="w-full md:w-3/4 flex flex-col space-y-40 pb-32 md:pt-12">
             {/* ITEM 1: DIAGNÓSTICO Y OBJETIVO SMART */}
             <div id="diag" className="scroll-mt-32 w-full">
                <PotentialDiagnosis />
