@@ -147,12 +147,13 @@ const MacroAnalysis = () => {
               <p className="font-body text-sm text-on-surface-variant">Fuente: excel grupo 1.xlsx · Banco Mundial · FMI · Bancos Centrales</p>
             </div>
           </div>
-          <div className="w-full relative rounded-xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.2)] bg-white aspect-[16/9] min-h-[600px]">
+          <div className="w-full relative rounded-xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.2)] bg-white aspect-[16/9] min-h-[500px]">
             <iframe
-              title="Dashboard Economico"
+              title="graficas equipo 1"
               className="absolute top-0 left-0 w-full h-full"
-              src="https://app.powerbi.com/reportEmbed?reportId=7f5bbf38-648a-49f2-b7c9-83ef2bae1ab2&autoAuth=true&ctid=71d3a24e-4f62-4dea-9b25-73fe3906000e&actionBarEnabled=true"
+              src="https://ceipaeduco-my.sharepoint.com/personal/pablo_restrepoca_virtual_ceipa_edu_co/_layouts/15/embed.aspx?UniqueId=47b23501-d941-46d2-a1e5-0f7279b31c79"
               frameBorder="0"
+              scrolling="no"
               allowFullScreen={true}>
             </iframe>
           </div>
