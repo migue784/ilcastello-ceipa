@@ -16,23 +16,16 @@ export default function StitchLayout({ scrollYProgress }) {
   const [simulatorOpen, setSimulatorOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('diag');
 
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
-        }
-      });
-    }, { rootMargin: '-30% 0px -70% 0px' });
-
-    const sections = ['diag', 'pestel', 'dofa', 'tows', 'sost'];
-    sections.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
-  }, []);
+  const renderActiveContent = () => {
+    switch (activeSection) {
+      case 'diag': return <PotentialDiagnosis />;
+      case 'pestel': return <PestelAnalysis />;
+      case 'dofa': return <DofaAnalysis />;
+      case 'tows': return <StrategicCrosses />;
+      case 'sost': return <Sustainability />;
+      default: return <PotentialDiagnosis />;
+    }
+  };
 
   return (
     <div className="bg-surface text-on-surface font-body antialiased selection:bg-primary selection:text-on-primary">
@@ -183,9 +176,12 @@ export default function StitchLayout({ scrollYProgress }) {
                   const isActive = activeSection === item.id;
                   return (
                     <li key={item.id} className="transition-all duration-500 ease-in-out">
-                      <a 
-                        href={`#${item.id}`} 
-                        className={`flex items-center gap-3 transition-all duration-500 group ${
+                      <button 
+                        onClick={() => {
+                          setActiveSection(item.id);
+                          document.getElementById('estrategia')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }} 
+                        className={`flex items-center gap-3 transition-all duration-500 group focus:outline-none w-full text-left ${
                           isActive 
                             ? 'text-[var(--color-wheat)] font-bold scale-105 origin-left opacity-100' 
                             : 'text-white/30 hover:text-white/60 hover:scale-100 opacity-50'
@@ -197,7 +193,7 @@ export default function StitchLayout({ scrollYProgress }) {
                             : 'w-8 bg-white/20 group-hover:w-12 group-hover:bg-white/40'
                         }`}></span>
                         {item.label}
-                      </a>
+                      </button>
                     </li>
                   );
                 })}
@@ -205,31 +201,10 @@ export default function StitchLayout({ scrollYProgress }) {
             </div>
           </div>
 
-          {/* CONTENIDO PRINCIPAL SCROLLABLE */}
-          <div className="w-full md:w-3/4 flex flex-col space-y-40 pb-32 md:pt-12">
-            {/* ITEM 1: DIAGNÓSTICO Y OBJETIVO SMART */}
-            <div id="diag" className="scroll-mt-32 w-full">
-               <PotentialDiagnosis />
-            </div>
-
-            {/* ITEM 2: PESTEL */}
-            <div id="pestel" className="scroll-mt-32 w-full">
-               <PestelAnalysis />
-            </div>
-
-            {/* ITEM 3: DOFA (Tailwind Glass Style) */}
-            <div id="dofa" className="scroll-mt-32 w-full">
-               <DofaAnalysis />
-            </div>
-
-            {/* ITEM 4: TOWS (Cruces) */}
-            <div id="tows" className="scroll-mt-32 w-full">
-               <StrategicCrosses />
-            </div>
-
-            {/* ITEM 5: SOSTENIBILIDAD */}
-            <div id="sost" className="scroll-mt-32 w-full">
-              <Sustainability />
+          {/* CONTENIDO PRINCIPAL (SOLO TAB ACTIVO) */}
+          <div className="w-full md:w-3/4 flex flex-col md:pt-12 min-h-[80vh]">
+            <div key={activeSection} className="w-full" style={{ animation: 'fadeIn 0.5s ease-in-out' }}>
+               {renderActiveContent()}
             </div>
           </div>
 
