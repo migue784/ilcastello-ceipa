@@ -26,6 +26,11 @@ export default {
         "on-surface-variant":       "#43483f",
         "outline":                  "#73796e",
         "outline-variant":          "#c3c8bc",
+        // Tailwind Material Colors
+        "tertiary":             "#aa3322",
+        "on-tertiary":          "#ffffff",
+        "tertiary-container":   "#c84638",
+        "on-tertiary-container":"#ffcbc2",
         // Brand accents
         "tomato":  "#aa3322",
         "wheat":   "#e3b85a",

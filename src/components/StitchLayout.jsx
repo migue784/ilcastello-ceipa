@@ -36,19 +36,19 @@ export default function StitchLayout({ scrollYProgress }) {
       </div>
 
       {/* TopNavBar */}
-      <nav className="fixed top-0 w-full z-50 flex justify-between items-center px-8 py-6 bg-surface/70 dark:bg-surface-dim/70 backdrop-blur-xl shadow-none">
-        <div className="text-2xl font-black tracking-tighter text-primary dark:text-primary-container font-headline uppercase">
+      <nav className="fixed top-0 w-full z-50 flex justify-between items-center px-8 py-5 bg-surface/80 backdrop-blur-xl border-b border-outline-variant/20">
+        <div className="text-xl font-black tracking-tighter text-basil font-headline uppercase">
           IL CASTELLO
         </div>
-        <div className="hidden md:flex gap-8 items-center font-label text-sm uppercase tracking-wider">
-          <a className="text-on-surface-variant/60 dark:text-on-surface-variant/40 hover:text-primary transition-colors duration-400" href="#team">Acuerdos</a>
-          <a className="text-on-surface-variant/60 dark:text-on-surface-variant/40 hover:text-primary transition-colors duration-400" href="#realidad">Empresa</a>
-          <a className="text-on-surface-variant/60 dark:text-on-surface-variant/40 hover:text-primary transition-colors duration-400" href="#estrategia">Estrategia Total</a>
-          <a className="text-on-surface-variant/60 dark:text-on-surface-variant/40 hover:text-primary transition-colors duration-400" href="#macro">Macroeconomía</a>
+        <div className="hidden md:flex gap-8 items-center font-label text-sm uppercase tracking-wider ml-auto mr-12">
+          <a className="text-on-surface-variant/60 hover:text-primary transition-colors duration-300" href="#team">Acuerdos</a>
+          <a className="text-on-surface-variant/60 hover:text-primary transition-colors duration-300" href="#realidad">Empresa</a>
+          <a className="text-on-surface-variant/60 hover:text-primary transition-colors duration-300" href="#estrategia">Estrategia Total</a>
+          <a className="text-on-surface-variant/60 hover:text-primary transition-colors duration-300" href="#macro">Macroeconomía</a>
         </div>
         <div>
           <button 
-            className="bg-primary text-on-primary px-8 py-3 text-sm font-bold uppercase tracking-widest hover:bg-primary-container transition-colors duration-400 rounded-none transform hover:scale-105"
+            className="bg-primary text-on-primary px-8 py-3 text-sm font-bold uppercase tracking-widest hover:bg-basil transition-colors duration-300 rounded-none"
             onClick={() => setSimulatorOpen(true)}
           >
             Simular Exportación
