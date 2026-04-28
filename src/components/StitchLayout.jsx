@@ -147,51 +147,57 @@ export default function StitchLayout({ scrollYProgress }) {
       </section>
 
       {/* Strategic Strategy (DOFA & Sustainability) */}
-      <section id="estrategia" className="py-24 bg-primary text-on-primary relative overflow-clip" style={{ zIndex: 20 }}>
+      <section id="estrategia" className="bg-primary text-on-primary relative overflow-clip" style={{ zIndex: 20 }}>
         {/* Decoración de fondo dinámica */}
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[var(--color-wheat)]/10 to-transparent rounded-full opacity-50 pointer-events-none transform translate-x-1/3 -translate-y-1/3 blur-3xl animate-pulse"></div>
         <div className="absolute bottom-0 left-0 w-[800px] h-[800px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/5 to-transparent rounded-full opacity-30 pointer-events-none transform -translate-x-1/4 translate-y-1/4 blur-[100px]"></div>
 
-        <div className="max-w-[1400px] mx-auto px-8 md:px-16 flex flex-col md:flex-row gap-16 relative z-10 pt-16">
-          
-          {/* STICKY SIDEBAR (Navegación) */}
-          <div className="w-full md:w-1/4 relative">
-            <div className="md:sticky md:top-40 md:h-[calc(100vh-10rem)]">
-              <h2 className="font-headline text-5xl md:text-6xl font-bold uppercase mb-4 text-on-primary leading-none">
-                Estrategia <br className="hidden md:block" />
-                <span className="text-[var(--color-wheat)]">Total</span>
-              </h2>
-              <p className="font-body text-base text-on-primary/80 mb-12 font-light border-l-2 border-[var(--color-wheat)]/30 pl-4">
-                Análisis estructural y proyección sostenible hacia mercados internacionales.
-              </p>
-              
-              <ul className="hidden md:flex flex-col space-y-3 mt-2">
+        {/* ── CABECERA FULL-WIDTH ── */}
+        <div className="relative z-10 max-w-[1400px] mx-auto px-8 md:px-16 pt-28 pb-16 border-b border-white/10">
+          <p className="font-label text-xs uppercase tracking-[0.4em] text-[var(--color-wheat)]/60 mb-4">Análisis Estratégico</p>
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+            <h2 className="font-headline text-5xl md:text-7xl font-bold uppercase leading-none text-on-primary">
+              Estrategia <span className="text-[var(--color-wheat)]">Total</span>
+            </h2>
+            <p className="font-body text-base text-on-primary/60 max-w-sm border-l-2 border-[var(--color-wheat)]/30 pl-4 leading-relaxed">
+              Análisis estructural y proyección sostenible hacia mercados internacionales.
+            </p>
+          </div>
+        </div>
+
+        {/* ── DOS COLUMNAS: SIDEBAR + CONTENIDO ── */}
+        <div className="max-w-[1400px] mx-auto px-8 md:px-16 flex flex-col md:flex-row gap-12 relative z-10 py-12">
+
+          {/* STICKY SIDEBAR (sólo nav) */}
+          <div className="w-full md:w-56 flex-shrink-0">
+            <div className="md:sticky md:top-28">
+              <ul className="flex flex-row md:flex-col gap-2 overflow-x-auto md:overflow-visible pb-2 md:pb-0">
                 {[
-                  { id: 'diag', label: 'Diagnóstico', num: '01' },
-                  { id: 'pestel', label: 'PESTEL', num: '02' },
-                  { id: 'dofa', label: 'Matriz DOFA', num: '03' },
-                  { id: 'tows', label: 'Cruces TOWS', num: '04' },
-                  { id: 'sost', label: 'Sostenibilidad', num: '05' }
+                  { id: 'diag',   label: 'Diagnóstico',  num: '01' },
+                  { id: 'pestel', label: 'PESTEL',        num: '02' },
+                  { id: 'dofa',   label: 'Matriz DOFA',   num: '03' },
+                  { id: 'tows',   label: 'Cruces TOWS',   num: '04' },
+                  { id: 'sost',   label: 'Sostenibilidad',num: '05' }
                 ].map((item) => {
                   const isActive = activeSection === item.id;
                   return (
-                    <li key={item.id}>
+                    <li key={item.id} className="flex-shrink-0 md:flex-shrink">
                       <button
                         onClick={() => {
                           setActiveSection(item.id);
                           document.getElementById('estrategia')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
                         }}
-                        className={`group flex items-center gap-3 w-full rounded-xl px-4 py-3 text-left transition-all duration-400 focus:outline-none ${
+                        className={`group flex items-center gap-3 w-full rounded-xl px-4 py-3 text-left transition-all duration-300 focus:outline-none ${
                           isActive
-                            ? 'bg-[var(--color-wheat)]/15 border border-[var(--color-wheat)]/30 shadow-[0_0_20px_rgba(227,184,90,0.15)]'
-                            : 'bg-white/0 border border-transparent hover:bg-white/5 hover:border-white/10'
+                            ? 'bg-[var(--color-wheat)]/15 border border-[var(--color-wheat)]/40'
+                            : 'border border-transparent hover:bg-white/5 hover:border-white/10'
                         }`}
                       >
-                        <span className={`font-headline text-xs font-bold transition-colors duration-400 flex-shrink-0 ${isActive ? 'text-[var(--color-wheat)]' : 'text-white/20 group-hover:text-white/40'}`}>
+                        <span className={`font-headline text-xs font-bold flex-shrink-0 ${isActive ? 'text-[var(--color-wheat)]' : 'text-white/25 group-hover:text-white/50'}`}>
                           {item.num}
                         </span>
-                        <span className={`h-px flex-shrink-0 transition-all duration-400 ${isActive ? 'w-6 bg-[var(--color-wheat)]' : 'w-4 bg-white/20'}`} />
-                        <span className={`font-headline text-sm uppercase tracking-wider transition-all duration-400 ${isActive ? 'text-[var(--color-wheat)] font-bold' : 'text-white/40 group-hover:text-white/60'}`}>
+                        <span className={`h-px flex-shrink-0 transition-all duration-300 ${isActive ? 'w-5 bg-[var(--color-wheat)]' : 'w-3 bg-white/20'}`} />
+                        <span className={`font-headline text-sm uppercase tracking-wide whitespace-nowrap ${isActive ? 'text-[var(--color-wheat)] font-bold' : 'text-white/40 group-hover:text-white/60'}`}>
                           {item.label}
                         </span>
                         {isActive && <span className="ml-auto w-1.5 h-1.5 rounded-full bg-[var(--color-wheat)] animate-pulse flex-shrink-0" />}
@@ -203,10 +209,10 @@ export default function StitchLayout({ scrollYProgress }) {
             </div>
           </div>
 
-          {/* CONTENIDO PRINCIPAL (SOLO TAB ACTIVO) */}
-          <div className="w-full md:w-3/4 flex flex-col md:pt-12 min-h-[80vh]">
-            <div key={activeSection} className="w-full" style={{ animation: 'fadeIn 0.5s ease-in-out' }}>
-               {renderActiveContent()}
+          {/* CONTENIDO PRINCIPAL */}
+          <div className="flex-1 min-h-[70vh]">
+            <div key={activeSection} style={{ animation: 'fadeIn 0.4s ease-in-out' }}>
+              {renderActiveContent()}
             </div>
           </div>
 
