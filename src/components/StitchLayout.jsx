@@ -165,34 +165,36 @@ export default function StitchLayout({ scrollYProgress }) {
                 Análisis estructural y proyección sostenible hacia mercados internacionales.
               </p>
               
-              <ul className="hidden md:flex flex-col space-y-6 font-headline uppercase tracking-widest text-sm">
+              <ul className="hidden md:flex flex-col space-y-3 mt-2">
                 {[
-                  { id: 'diag', label: '1. Diagnóstico' },
-                  { id: 'pestel', label: '2. PESTEL' },
-                  { id: 'dofa', label: '3. Matriz DOFA' },
-                  { id: 'tows', label: '4. Cruces TOWS' },
-                  { id: 'sost', label: '5. Sostenibilidad' }
+                  { id: 'diag', label: 'Diagnóstico', num: '01' },
+                  { id: 'pestel', label: 'PESTEL', num: '02' },
+                  { id: 'dofa', label: 'Matriz DOFA', num: '03' },
+                  { id: 'tows', label: 'Cruces TOWS', num: '04' },
+                  { id: 'sost', label: 'Sostenibilidad', num: '05' }
                 ].map((item) => {
                   const isActive = activeSection === item.id;
                   return (
-                    <li key={item.id} className="transition-all duration-500 ease-in-out">
-                      <button 
+                    <li key={item.id}>
+                      <button
                         onClick={() => {
                           setActiveSection(item.id);
                           document.getElementById('estrategia')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        }} 
-                        className={`flex items-center gap-3 transition-all duration-500 group focus:outline-none w-full text-left ${
-                          isActive 
-                            ? 'text-[var(--color-wheat)] font-bold scale-105 origin-left opacity-100' 
-                            : 'text-white/30 hover:text-white/60 hover:scale-100 opacity-50'
+                        }}
+                        className={`group flex items-center gap-3 w-full rounded-xl px-4 py-3 text-left transition-all duration-400 focus:outline-none ${
+                          isActive
+                            ? 'bg-[var(--color-wheat)]/15 border border-[var(--color-wheat)]/30 shadow-[0_0_20px_rgba(227,184,90,0.15)]'
+                            : 'bg-white/0 border border-transparent hover:bg-white/5 hover:border-white/10'
                         }`}
                       >
-                        <span className={`h-[1px] transition-all duration-500 ${
-                          isActive 
-                            ? 'w-16 bg-[var(--color-wheat)] shadow-[0_0_8px_rgba(227,184,90,0.6)]' 
-                            : 'w-8 bg-white/20 group-hover:w-12 group-hover:bg-white/40'
-                        }`}></span>
-                        {item.label}
+                        <span className={`font-headline text-xs font-bold transition-colors duration-400 flex-shrink-0 ${isActive ? 'text-[var(--color-wheat)]' : 'text-white/20 group-hover:text-white/40'}`}>
+                          {item.num}
+                        </span>
+                        <span className={`h-px flex-shrink-0 transition-all duration-400 ${isActive ? 'w-6 bg-[var(--color-wheat)]' : 'w-4 bg-white/20'}`} />
+                        <span className={`font-headline text-sm uppercase tracking-wider transition-all duration-400 ${isActive ? 'text-[var(--color-wheat)] font-bold' : 'text-white/40 group-hover:text-white/60'}`}>
+                          {item.label}
+                        </span>
+                        {isActive && <span className="ml-auto w-1.5 h-1.5 rounded-full bg-[var(--color-wheat)] animate-pulse flex-shrink-0" />}
                       </button>
                     </li>
                   );
