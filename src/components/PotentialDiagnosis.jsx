@@ -8,7 +8,7 @@ const smartData = [
     label: 'Específico',
     icon: <Target size={20} />,
     color: '#E3B85A',
-    content: 'Iniciar la exportación de pastas rellenas ultracongeladas (Raviolis premium) hacia el canal HORECA en San José y zonas costeras de Costa Rica.',
+    content: 'Iniciar la exportación de pastas rellenas ultracongeladas (Raviolis premium) hacia el canal HORECA en Ciudad de México y zonas costeras de la Riviera Maya.',
   },
   {
     letter: 'M',
@@ -36,7 +36,7 @@ const smartData = [
     label: 'Temporal',
     icon: <Clock size={20} />,
     color: '#B39DDB',
-    content: 'Cumplir con este objetivo en un plazo estricto de 12 meses (Diciembre de 2026), logrando la consolidación del primer contenedor comercial en Costa Rica.',
+    content: 'Cumplir con este objetivo en un plazo estricto de 12 meses (Diciembre de 2026), logrando la consolidación del primer contenedor comercial en México.',
   },
 ];
 

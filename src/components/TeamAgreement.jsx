@@ -129,11 +129,28 @@ const TeamAgreement = () => {
                         <p style={{ margin: 0, fontSize: '0.9rem', opacity: 0.6 }}>Análisis Metodológico</p>
                       </div>
                       
-                      <div style={{ flex: '1 1 200px', display: 'flex', justifyContent: 'center' }}>
+                      <div style={{ flex: '1 1 200px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                         {member.pending ? (
                           <span style={{ fontSize: '0.8rem', opacity: 0.4, fontStyle: 'italic' }}>Firma pendiente...</span>
                         ) : (
-                          <img src={member.img} alt={`Firma ${member.name}`} style={{ maxHeight: '60px', objectFit: 'contain', transform: `rotate(${i % 2 === 0 ? '-3deg' : '4deg'})` }} />
+                          <div style={{ 
+                            width: '180px',
+                            height: '80px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center'
+                          }}>
+                            <img 
+                              src={member.img} 
+                              alt={`Firma ${member.name}`} 
+                              style={{ 
+                                maxHeight: '100%', 
+                                maxWidth: '100%',
+                                objectFit: 'contain',
+                                transform: member.name !== "Miguel Angel Lopera" ? 'rotate(-90deg)' : 'none'
+                              }} 
+                            />
+                          </div>
                         )}
                       </div>
 

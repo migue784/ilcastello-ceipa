@@ -7,6 +7,7 @@ import Sustainability from './Sustainability';
 import StrategicCrosses from './StrategicCrosses';
 import ScrollReveal from './ScrollReveal';
 import AnimatedTitle from './AnimatedTitle';
+import EnvironmentAnalysis from './EnvironmentAnalysis';
 import ExportSimulator from './ExportSimulator';
 import PotentialDiagnosis from './PotentialDiagnosis';
 import PestelAnalysis from './PestelAnalysis';
@@ -22,6 +23,7 @@ export default function StitchLayout({ scrollYProgress }) {
       case 'pestel': return <PestelAnalysis />;
       case 'dofa': return <DofaAnalysis />;
       case 'tows': return <StrategicCrosses />;
+      case 'macro': return <MacroAnalysis />;
       case 'sost': return <Sustainability />;
       default: return <PotentialDiagnosis />;
     }
@@ -45,6 +47,7 @@ export default function StitchLayout({ scrollYProgress }) {
           <a className="text-on-surface-variant/60 hover:text-primary transition-colors duration-300" href="#realidad">Empresa</a>
           <a className="text-on-surface-variant/60 hover:text-primary transition-colors duration-300" href="#estrategia">Estrategia Total</a>
           <a className="text-on-surface-variant/60 hover:text-primary transition-colors duration-300" href="#macro">Macroeconomía</a>
+          <a className="text-on-surface-variant/60 hover:text-primary transition-colors duration-300" href="#analisis-entornos">Internacionalización</a>
         </div>
         <div>
           <button 
@@ -173,11 +176,12 @@ export default function StitchLayout({ scrollYProgress }) {
             <div className="md:sticky md:top-28">
               <ul className="flex flex-row md:flex-col gap-2 overflow-x-auto md:overflow-visible pb-2 md:pb-0">
                 {[
-                  { id: 'diag',   label: 'Diagnóstico',  num: '01' },
-                  { id: 'pestel', label: 'PESTEL',        num: '02' },
-                  { id: 'dofa',   label: 'Matriz DOFA',   num: '03' },
-                  { id: 'tows',   label: 'Cruces TOWS',   num: '04' },
-                  { id: 'sost',   label: 'Sostenibilidad',num: '05' }
+                  { id: 'diag',     label: 'Diagnóstico',     num: '01' },
+                  { id: 'pestel',   label: 'PESTEL',          num: '02' },
+                  { id: 'dofa',     label: 'Matriz DOFA',     num: '03' },
+                  { id: 'tows',     label: 'Cruces TOWS',     num: '04' },
+                  { id: 'macro',    label: 'Macroeconomía',   num: '05' },
+                  { id: 'sost',     label: 'Sostenibilidad',  num: '06' }
                 ].map((item) => {
                   const isActive = activeSection === item.id;
                   return (
@@ -223,6 +227,13 @@ export default function StitchLayout({ scrollYProgress }) {
       <section id="macro" className="py-32 px-8 md:px-16 bg-surface" style={{ position: 'relative', zIndex: 20 }}>
         <div className="max-w-7xl mx-auto">
           <MacroAnalysis />
+        </div>
+      </section>
+
+      {/* New Section: Environment Analysis (Internacionalización) */}
+      <section id="analisis-entornos" className="py-32 px-8 md:px-16 bg-surface-container-low" style={{ position: 'relative', zIndex: 20 }}>
+        <div className="max-w-7xl mx-auto">
+          <EnvironmentAnalysis />
         </div>
       </section>
 

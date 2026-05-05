@@ -6,6 +6,7 @@ export default function ExportSimulator({ isOpen, onClose }) {
   const [fase, setFase] = useState('offline'); // offline | booting | dashboard | tracking
   const [volumen, setVolumen] = useState(2000);
   const [incoterm, setIncoterm] = useState('CIF');
+  const [paisDestino, setPaisDestino] = useState('PA'); // PA | MX | SV | RD
   const [trackingPhaseStatus, setTrackingPhaseStatus] = useState('INACTIVO');
   const [diasTranscurridos, setDiasTranscurridos] = useState(0);
 
@@ -80,10 +81,18 @@ export default function ExportSimulator({ isOpen, onClose }) {
       // == COORDENADAS RUTA ==
       const medellin = [6.2442, -75.5812];
       const cartagena = [10.3997, -75.5144];
-      const ptoLimon = [9.9918, -83.0336]; // Costa Rica
-      const sanJose = [9.9281, -84.0907];
-      const guanacaste = [10.6346, -85.4407];
-      const limonSur = [9.7, -82.8];
+      
+      const destinos = {
+        PA: { name: 'Panamá', port: [8.9555, -79.5202], capital: [8.9833, -79.5167], other: [9.35, -79.9] }, // Puerto Balboa / Ciudad / Colón
+        MX: { name: 'México', port: [19.1738, -96.1342], capital: [19.4326, -99.1332], other: [21.1619, -86.8515] }, // Pto Veracruz / CDMX / Cancún
+        SV: { name: 'El Salvador', port: [13.5215, -89.8333], capital: [13.6929, -89.2182], other: [13.97, -89.56] }, // Acajutla / San Salvador / Santa Ana
+        RD: { name: 'Rep. Dominicana', port: [18.4239, -69.6481], capital: [18.4861, -69.9312], other: [19.75, -70.7] }, // Caucedo / Santo Domingo / Puerto Plata
+      };
+
+      const selected = destinos[paisDestino];
+      const ptoDestino = selected.port;
+      const capitalDestino = selected.capital;
+      const extraDestino = selected.other;
 
       // FASE 1 INIT: Ajustar encuadre para que se vean Medellín y Cartagena simultáneamente.
       map.fitBounds([medellin, cartagena], { padding: [100, 100] });
@@ -100,34 +109,34 @@ export default function ExportSimulator({ isOpen, onClose }) {
         truck.remove();
         L.marker(cartagena, { icon: iconPunto }).addTo(map);
 
-        // Ajusta vista para ver Cartagena y Costa Rica
-        map.flyToBounds([cartagena, ptoLimon], { duration: 2.5, padding: [60, 60] });
+        // Ajusta vista para ver Cartagena y Destino
+        map.flyToBounds([cartagena, ptoDestino], { duration: 2.5, padding: [60, 60] });
 
         const ship = L.marker(cartagena, { icon: iconBarco }).addTo(map);
-        L.polyline([cartagena, ptoLimon], { color: MAR_COLOR, weight: 3, dashArray: '6,6', opacity: 0.7 }).addTo(map);
+        L.polyline([cartagena, ptoDestino], { color: MAR_COLOR, weight: 3, dashArray: '6,6', opacity: 0.7 }).addTo(map);
 
         setTimeout(() => {
           // Animar barco super lento cruzando el mar (9 segundos)
-          animMarker(ship, cartagena, ptoLimon, 9000, () => {
+          animMarker(ship, cartagena, ptoDestino, 9000, () => {
 
             // FASE 3: DISTRIBUCIÓN NACIONAL
-            setTrackingPhaseStatus('FASE 3: DISTRIBUCIÓN FINAL HORECA');
-            map.flyToBounds([ptoLimon, guanacaste], { animate: true, duration: 2, padding: [40, 40] });
+            setTrackingPhaseStatus(`FASE 3: DISTRIBUCIÓN FINAL HORECA - ${selected.name}`);
+            map.flyToBounds([ptoDestino, extraDestino], { animate: true, duration: 2, padding: [40, 40] });
 
             setTimeout(() => {
               ship.remove();
-              L.marker(ptoLimon, { icon: iconPunto }).addTo(map);
+              L.marker(ptoDestino, { icon: iconPunto }).addTo(map);
 
-              const truck1 = L.marker(ptoLimon, { icon: iconCamion }).addTo(map);
-              const truck2 = L.marker(ptoLimon, { icon: iconCamion }).addTo(map);
-              const truck3 = L.marker(ptoLimon, { icon: iconCamion }).addTo(map);
+              const truck1 = L.marker(ptoDestino, { icon: iconCamion }).addTo(map);
+              const truck2 = L.marker(ptoDestino, { icon: iconCamion }).addTo(map);
+              const truck3 = L.marker(ptoDestino, { icon: iconCamion }).addTo(map);
 
-              L.polyline([ptoLimon, sanJose], { color: TIERRA_COLOR, weight: 2, dashArray: '2,4', opacity: 0.3 }).addTo(map);
-              L.polyline([ptoLimon, guanacaste], { color: TIERRA_COLOR, weight: 2, dashArray: '2,4', opacity: 0.3 }).addTo(map);
+              L.polyline([ptoDestino, capitalDestino], { color: TIERRA_COLOR, weight: 2, dashArray: '2,4', opacity: 0.3 }).addTo(map);
+              L.polyline([ptoDestino, extraDestino], { color: TIERRA_COLOR, weight: 2, dashArray: '2,4', opacity: 0.3 }).addTo(map);
 
-              animMarker(truck1, ptoLimon, sanJose, 3500);
-              animMarker(truck2, ptoLimon, guanacaste, 4000);
-              animMarker(truck3, ptoLimon, limonSur, 2500, () => {
+              animMarker(truck1, ptoDestino, capitalDestino, 3500);
+              animMarker(truck2, ptoDestino, extraDestino, 4000);
+              animMarker(truck3, ptoDestino, [ptoDestino[0] + 0.3, ptoDestino[1] - 0.2], 2500, () => {
                 setTimeout(() => {
                   setTrackingPhaseStatus('COMPLETADO');
                   clearInterval(daysInterval);
@@ -146,14 +155,22 @@ export default function ExportSimulator({ isOpen, onClose }) {
 
   const handleClose = () => { setFase('offline'); onClose(); };
 
-  // Físicas Financieras Reales basadas en DOFA Il Castello
-  const ingresosTotales = volumen * 35000;
+  // Físicas Financieras Dinámicas por País
+  const configPaises = {
+    PA: { name: 'Panamá', tariff: 0.05, freight: 8000000, insurance: 0.015, extraSanitary: 1200000 },
+    MX: { name: 'México', tariff: 0.00, freight: 14000000, insurance: 0.02, extraSanitary: 1100000 },
+    SV: { name: 'El Salvador', tariff: 0.00, freight: 15000000, insurance: 0.025, extraSanitary: 1500000 },
+    RD: { name: 'Rep. Dominicana', tariff: 0.14, freight: 11000000, insurance: 0.03, extraSanitary: 900000 },
+  };
+
+  const currentConf = configPaises[paisDestino];
+  const ingresosTotales = volumen * 38000; // Precio premium internacional
   const costoProduccionLocal = volumen * 11000;
-  const costoAduaneroCO = 4500000;
-  const costoFleteRefrigerado = incoterm === 'CIF' ? 12000000 + (volumen * 5500) : (volumen * 2000); // Refrigeracion Ransa y Marina
-  const seguroIncoterm = incoterm === 'CIF' ? ingresosTotales * 0.02 : 0;
-  const arancelCostaRica = incoterm === 'CIF' ? ingresosTotales * 0.14 : 0;
-  const egresosTotales = costoProduccionLocal + costoAduaneroCO + costoFleteRefrigerado + arancelCostaRica + seguroIncoterm;
+  const costoAduaneroCO = 4500000 + currentConf.extraSanitary;
+  const costoFleteRefrigerado = incoterm === 'CIF' ? currentConf.freight + (volumen * 4500) : (volumen * 2000);
+  const seguroIncoterm = incoterm === 'CIF' ? ingresosTotales * currentConf.insurance : 0;
+  const arancelDestino = incoterm === 'CIF' ? ingresosTotales * currentConf.tariff : 0;
+  const egresosTotales = costoProduccionLocal + costoAduaneroCO + costoFleteRefrigerado + arancelDestino + seguroIncoterm;
   const EBITDA = ingresosTotales - egresosTotales;
   const margenNeto = (EBITDA / ingresosTotales) * 100;
   const isRentable = EBITDA > 0;
@@ -192,11 +209,12 @@ export default function ExportSimulator({ isOpen, onClose }) {
     doc.setFontSize(10);
     const today = new Date();
     doc.text(`Fecha de Simulación: ${today.toLocaleDateString()}`, 14, 40);
-    doc.text(`ID de Auditoría: EXP-${Math.floor(Math.random() * 90000) + 10000}-CRC`, 14, 46);
+    doc.text(`País Destino: ${currentConf.name}`, 14, 46);
+    doc.text(`ID de Auditoría: EXP-${Math.floor(Math.random() * 90000) + 10000}-${paisDestino}`, 14, 52);
 
     doc.setFont("helvetica", "bold");
     doc.setFontSize(14);
-    doc.text("1. PARÁMETROS DE EXPORTACIÓN TÉRMICA", 14, 60);
+    doc.text("1. PARÁMETROS DE EXPORTACIÓN TÉRMICA", 14, 65);
 
     // Draw Line
     doc.setDrawColor(...primaryColor);
@@ -206,14 +224,14 @@ export default function ExportSimulator({ isOpen, onClose }) {
     doc.setFont("helvetica", "normal");
     doc.setFontSize(10);
     const params = [
-      `Mercado Destino: Puertos CRC y Zonas de Hotelería Interior (San José, Tamarindo).`,
+      `Mercado Destino: ${currentConf.name} (HORECA Segment).`,
       `Volumen Bruto Despachado: ${volumen.toLocaleString()} KG.`,
       `Incoterm pactado: ${incoterm} (Asignación de responsabilidad B2B).`,
-      `Tiempo de Tránsito Marítimo Estimado: 13 Días.`,
+      `Tiempo de Tránsito Marítimo Estimado: 12-15 Días.`,
       `Cadena de Ultracongelación Mantenida: -20°C mediante contenedores Reefer.`,
       `Porcentaje de Mermas Termodinámicas: 0.0% (Viabilidad Táctica de Calidad).`
     ];
-    params.forEach((line, i) => doc.text(`• ${line}`, 14, 70 + (i * 6)));
+    params.forEach((line, i) => doc.text(`• ${line}`, 14, 75 + (i * 6)));
 
     // --- SECCIÓN FINANCIERA (TABLAS) ---
     doc.setFont("helvetica", "bold");
@@ -243,8 +261,8 @@ export default function ExportSimulator({ isOpen, onClose }) {
       `-$ ${(seguroIncoterm / 1000000).toFixed(1)} M`,
         ""],
 
-      [`Aranceles de Nacionalización CRC (${incoterm})`,
-      `-$ ${(arancelCostaRica / 1000000).toFixed(1)} M`,
+      [`Aranceles de Nacionalización ${paisDestino} (${incoterm})`,
+      `-$ ${(arancelDestino / 1000000).toFixed(1)} M`,
         ""]
     ];
 
@@ -335,10 +353,35 @@ export default function ExportSimulator({ isOpen, onClose }) {
         </div>
 
         {fase === 'dashboard' && (
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="flex-1 p-6 md:p-12 w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
+          <motion.div 
+            key={paisDestino}
+            initial={{ opacity: 0, x: 20 }} 
+            animate={{ opacity: 1, x: 0 }} 
+            className="flex-1 p-6 md:p-12 w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12"
+          >
             <div className="space-y-10 border-r border-outline/20 pr-0 md:pr-12">
               <div>
-                <h1 className="text-4xl md:text-5xl font-headline font-bold uppercase tracking-tight text-on-surface mb-2">Exportación a<br /><span className="text-primary text-6xl">Costa Rica</span></h1>
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {[
+                    { id: 'PA', label: 'Panamá' },
+                    { id: 'MX', label: 'México' },
+                    { id: 'SV', label: 'El Salvador' },
+                    { id: 'RD', label: 'Rep. Dominicana' },
+                  ].map(p => (
+                    <button
+                      key={p.id}
+                      onClick={() => setPaisDestino(p.id)}
+                      className={`px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all border ${
+                        paisDestino === p.id 
+                        ? 'bg-primary text-white border-primary' 
+                        : 'bg-surface text-on-surface-variant border-outline/30 hover:border-primary'
+                      }`}
+                    >
+                      {p.label}
+                    </button>
+                  ))}
+                </div>
+                <h1 className="text-4xl md:text-5xl font-headline font-bold uppercase tracking-tight text-on-surface mb-2">Exportación a<br /><span className="text-primary text-6xl">{currentConf.name}</span></h1>
                 <p className="font-body text-base text-on-surface-variant leading-relaxed mb-4">
                   Dimensionamiento táctico HORECA. Mueve el control de arrastre para simular el impacto en los fijos logísticos de la ultracongelación.
                 </p>
@@ -375,7 +418,7 @@ export default function ExportSimulator({ isOpen, onClose }) {
                   </button>
                 </div>
                 <div className="mt-6 p-4 bg-white/50 border border-outline/10 text-xs text-on-surface-variant leading-relaxed">
-                  {incoterm === 'FOB' ? 'FOB (Free On Board): Minimiza la carga de gastos porque Il Castello solo asume la logística desde Medellín hasta que el contenedor sube al barco en Cartagena. Reduce costo de flete.' : 'CIF (Cost, Insurance & Freight): La jugada maestra B2B. Proveemos el contenedor refrigerado hasta el puerto de Moín en Limón, Costa Rica, absorbiendo altos costos fijos pero controlando la cadena física de temperatura a -20°C.'}
+                  {incoterm === 'FOB' ? 'FOB (Free On Board): Minimiza la carga de gastos porque Il Castello solo asume la logística desde Medellín hasta que el contenedor sube al barco en Cartagena. Reduce costo de flete.' : 'CIF (Cost, Insurance & Freight): La jugada maestra B2B. Proveemos el contenedor refrigerado hasta el puerto de Veracruz, México, absorbiendo altos costos fijos pero controlando la cadena física de temperatura a -20°C.'}
                 </div>
               </div>
             </div>
@@ -401,8 +444,10 @@ export default function ExportSimulator({ isOpen, onClose }) {
 
                   {incoterm === 'CIF' && (
                     <li className="flex justify-between items-end border-b border-outline/10 pb-2">
-                      <span className="font-body text-sm text-tomato font-bold">Aranceles Aduana Costa Rica</span>
-                      <span className="font-headline text-lg text-tomato font-bold">-${(arancelCostaRica / 1000000).toFixed(1)} M</span>
+                      <span className="font-body text-sm text-tomato font-bold">
+                        Aranceles {currentConf.name} {currentConf.tariff === 0 ? '(TLC 0%)' : `(${Math.round(currentConf.tariff * 100)}%)`}
+                      </span>
+                      <span className="font-headline text-lg text-tomato font-bold">-${(arancelDestino / 1000000).toFixed(1)} M</span>
                     </li>
                   )}
                 </ul>
@@ -452,7 +497,7 @@ export default function ExportSimulator({ isOpen, onClose }) {
                       <CheckCircle2 size={40} className="text-primary flex-shrink-0" />
                       <div>
                         <h2 className="text-4xl font-headline font-bold uppercase tracking-tight text-charcoal mb-0">Ruta Internacional Exitosa</h2>
-                        <p className="text-xs text-on-surface-variant font-label uppercase tracking-widest font-bold">Llegada Confirmada: Centrales Hoteleras B2B Costa Rica</p>
+                        <p className="text-xs text-on-surface-variant font-label uppercase tracking-widest font-bold">Llegada Confirmada: Centrales Hoteleras B2B {currentConf.name}</p>
                       </div>
                     </div>
 

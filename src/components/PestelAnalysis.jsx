@@ -8,7 +8,7 @@ const pestelData = [
     icon: <Landmark size={18} />,
     color: '#7EC8E3',
     national: 'Estabilidad regulatoria local pero incertidumbre tributaria continua y cargas impositivas para las PYMES.',
-    international: 'Tratado de Libre Comercio (TLC) vigente entre Colombia y Costa Rica que facilita la entrada comercial sin barreras severas.',
+    international: 'Tratado de Libre Comercio (TLC) G2 vigente entre Colombia y México que facilita la entrada comercial sin barreras severas.',
     impactLevel: { national: 55, international: 80 },
   },
   {
@@ -48,7 +48,7 @@ const pestelData = [
     icon: <Scale size={18} />,
     color: '#FF8A65',
     national: 'Normatividad estricta de salubridad y manipulación de alimentos (INVIMA) junto con leyes laborales locales muy pesadas.',
-    international: 'Requisitos aduaneros de nacionalización y registros sanitarios ineludibles del Ministerio de Salud costarricense para alimentos de origen animal.',
+    international: 'Requisitos aduaneros de nacionalización y registros sanitarios ineludibles de la COFEPRIS mexicana para alimentos de origen animal.',
     impactLevel: { national: 35, international: 65 },
   },
 ];
@@ -88,7 +88,7 @@ const PestelAnalysis = () => {
         </h3>
         <div className="flex items-center gap-4">
           <div className="h-px flex-1 bg-gradient-to-r from-[var(--color-wheat)]/40 to-transparent" />
-          <p className="font-body text-sm text-white/50 text-right max-w-xs">Macroentorno comparado: Colombia 🇨🇴 vs Costa Rica 🇨🇷</p>
+          <p className="font-body text-sm text-white/50 text-right max-w-xs">Macroentorno comparado: Colombia 🇨🇴 vs México 🇲🇽</p>
         </div>
       </motion.div>
 
@@ -99,7 +99,7 @@ const PestelAnalysis = () => {
           <span className="text-white/60 font-body text-xs uppercase tracking-wider">Entorno Nacional</span>
         </div>
         <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--color-wheat)]/10 border border-[var(--color-wheat)]/20 text-sm">
-          <span className="text-xl">🇨🇷</span>
+          <span className="text-xl">🇲🇽</span>
           <span className="text-[var(--color-wheat)]/80 font-body text-xs uppercase tracking-wider">Mercado Objetivo</span>
         </div>
       </motion.div>
@@ -165,8 +165,8 @@ const PestelAnalysis = () => {
                       {/* Internacional */}
                       <div className="p-6 flex flex-col gap-4" style={{ background: item.color + '08' }}>
                         <div className="flex items-center gap-3">
-                          <span className="text-2xl">🇨🇷</span>
-                          <span className="text-xs uppercase tracking-widest font-semibold" style={{ color: item.color + 'aa' }}>Costa Rica — Internacional</span>
+                          <span className="text-2xl">🇲🇽</span>
+                          <span className="text-xs uppercase tracking-widest font-semibold" style={{ color: item.color + 'aa' }}>México — Internacional</span>
                         </div>
                         <p className="text-sm leading-relaxed" style={{ color: item.color + 'dd' }}>{item.international}</p>
                         <div>
