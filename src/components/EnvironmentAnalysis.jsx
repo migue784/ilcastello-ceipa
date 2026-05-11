@@ -338,38 +338,50 @@ const EnvironmentAnalysis = () => {
 
   const Glossary = () => {
     const items = [
-      { name: "Indulgencia (Hofstede)", desc: "Mide el grado en que las personas intentan controlar sus impulsos y deseos. Una puntuación alta indica una sociedad que permite la gratificación libre de impulsos naturales relacionados con disfrutar de la vida y divertirse." },
-      { name: "Tasa de urbanización", desc: "Porcentaje de la población total que vive en áreas urbanas. Indica el nivel de concentración de consumidores y el desarrollo de infraestructura en ciudades." },
-      { name: "Distancia al poder", desc: "Mide el grado en que los miembros menos poderosos de una sociedad aceptan y esperan que el poder se distribuya de forma desigual." },
-      { name: "Regulaciones específicas", desc: "Refleja la complejidad y el rigor de las normativas sanitarias y legales para el sector de alimentos (como INVIMA o COFEPRIS)." },
-      { name: "Percepción de Corrupción", desc: "Índice que califica a los países según la percepción de corrupción en el sector público. (0 = muy corrupto, 100 = muy limpio)." },
-      { name: "Estabilidad Política", desc: "Mide la percepción de la probabilidad de que el gobierno sea desestabilizado o derrocado por medios inconstitucionales o violentos." },
-      { name: "Logística (LPI)", desc: "El Índice de Desempeño Logístico mide la eficiencia de las cadenas de suministro internacionales y la calidad de la infraestructura de transporte." },
-      { name: "Penetración de internet", desc: "Porcentaje de la población con acceso a internet. Es crucial para el marketing digital y el comercio electrónico." },
-      { name: "Índice de innovación global", desc: "Clasifica las capacidades y los resultados de innovación de las economías del mundo." },
-      { name: "Acuerdos comerciales", desc: "Número de tratados de libre comercio vigentes que facilitan el intercambio con aranceles preferenciales." },
-      { name: "Balanza comercial", desc: "Diferencia entre el valor de las exportaciones y las importaciones de un país. (Superávit vs Déficit)." },
-      { name: "Rutas y puertos", desc: "Cantidad de infraestructura portuaria y rutas marítimas disponibles para el comercio internacional." },
-      { name: "Flujo de IED", desc: "Inversión Extranjera Directa recibida; indica el atractivo del país para inversores internacionales." },
-      { name: "Incentivos a la inversión", desc: "Calificación de las políticas gubernamentales para atraer capital extranjero (exenciones, zonas francas)." },
-      { name: "PIB turístico y gastro", desc: "Contribución porcentual de los sectores de turismo y restaurantes al Producto Interno Bruto nacional." }
+      { cat: "Cultural", name: "Indulgencia (Hofstede)", desc: "Mide el grado en que las personas intentan controlar sus impulsos y deseos. Indica si la sociedad valora el disfrute y el placer." },
+      { cat: "Cultural", name: "Tasa de urbanización", desc: "Porcentaje de población en áreas urbanas. Vital para la logística de frío y concentración de consumidores HORECA." },
+      { cat: "Cultural", name: "Distancia al poder", desc: "Mide la aceptación de jerarquías. Define si la venta debe ser vertical (directivos) o consultiva (chefs)." },
+      { cat: "Político/Legal", name: "Regulaciones específicas", desc: "Complejidad de normativas sanitarias (INVIMA, COFEPRIS). Es la principal barrera técnica de entrada." },
+      { cat: "Político/Legal", name: "Percepción de Corrupción", desc: "Riesgo de demoras administrativas o discrecionalidad en aduanas que afecten la cadena de frío." },
+      { cat: "Político/Legal", name: "Estabilidad Política", desc: "Garantía de continuidad en los contratos B2B y seguridad en las rutas logísticas terrestres." },
+      { cat: "Tecnológico/Geo", name: "Logística (LPI)", desc: "Eficiencia de la cadena de suministro internacional y calidad de puertos/centros de acopio refrigerados." },
+      { cat: "Tecnológico/Geo", name: "Penetración de internet", desc: "Facilita la gestión de pedidos online, seguimiento de carga y marketing digital B2B." },
+      { cat: "Tecnológico/Geo", name: "Índice de innovación global", desc: "Adopción de tecnologías como IoT para monitorear temperaturas y empaques inteligentes." },
+      { cat: "Comercio Int.", name: "Acuerdos comerciales", desc: "Tratados de Libre Comercio (TLC) que otorgan ventajas arancelarias frente a competidores europeos." },
+      { cat: "Comercio Int.", name: "Balanza comercial", desc: "Relación de intercambio con Colombia. Un flujo aceitado reduce riesgos cambiarios y de documentación." },
+      { cat: "Comercio Int.", name: "Rutas y puertos", desc: "Frecuencia naviera y tiempos de tránsito. Crítico para manejar stocks bajos y alta rotación." },
+      { cat: "Inversión/HORECA", name: "Flujo de IED", desc: "Inversión Extranjera Directa. Indica la apertura de nuevos hoteles y complejos turísticos (clientes potenciales)." },
+      { cat: "Inversión/HORECA", name: "Incentivos a la inversión", desc: "Beneficios fiscales (Zonas Francas, Leyes de Turismo) que abaratan la operación del distribuidor local." },
+      { cat: "Inversión/HORECA", name: "PIB turístico y gastro", desc: "Aporte del sector al país. Determina el volumen de demanda real para pastas artesanales premium." }
     ];
 
     return (
-      <div className="mt-24 bg-surface-container-highest/30 rounded-[3rem] p-12 border border-outline-variant/10">
-        <div className="flex items-center gap-4 mb-10">
-          <div className="bg-primary p-3 rounded-2xl">
-            <ShieldCheck className="w-8 h-8 text-white" />
+      <div className="mt-24 bg-surface-container-highest/30 rounded-[3rem] p-8 md:p-12 border border-outline-variant/10">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
+          <div className="flex items-center gap-4">
+            <div className="bg-primary p-3 rounded-2xl shadow-lg shadow-primary/20">
+              <ShieldCheck className="w-8 h-8 text-white" />
+            </div>
+            <div>
+              <h3 className="font-headline text-3xl font-bold uppercase text-on-surface">Diccionario de Indicadores</h3>
+              <p className="font-label text-sm text-on-surface-variant uppercase tracking-widest">Metodología de los 5 Entornos</p>
+            </div>
           </div>
-          <div>
-            <h3 className="font-headline text-3xl font-bold uppercase text-on-surface">Diccionario de Indicadores</h3>
-            <p className="font-label text-sm text-on-surface-variant uppercase tracking-widest">Entendiendo los factores de análisis</p>
+          <div className="flex flex-wrap gap-2">
+            {["Cultural", "Político/Legal", "Tecnológico/Geo", "Comercio Int.", "Inversión/HORECA"].map(c => (
+              <span key={c} className="px-3 py-1 bg-surface border border-outline-variant/20 rounded-full text-[10px] font-bold uppercase tracking-tighter text-on-surface-variant">
+                {c}
+              </span>
+            ))}
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {items.map((item, i) => (
-            <div key={i} className="bg-surface p-6 rounded-2xl border border-outline-variant/10 hover:border-primary/30 transition-all group">
-              <h4 className="font-headline text-sm font-bold text-primary mb-2 uppercase tracking-wide group-hover:text-basil">{item.name}</h4>
+            <div key={i} className="bg-surface p-6 rounded-2xl border border-outline-variant/10 hover:border-primary/30 transition-all group relative overflow-hidden">
+              <div className="absolute top-0 right-0 px-3 py-1 bg-basil/10 rounded-bl-xl text-[10px] font-black uppercase text-basil">
+                {item.cat}
+              </div>
+              <h4 className="font-headline text-sm font-bold text-primary mb-2 uppercase tracking-wide pr-12">{item.name}</h4>
               <p className="font-body text-sm text-on-surface-variant leading-relaxed">{item.desc}</p>
             </div>
           ))}
@@ -379,54 +391,50 @@ const EnvironmentAnalysis = () => {
   };
 
   const PowerBISection = () => {
-    // ESPACIO PARA EL ENLACE: Reemplaza 'URL_AQUÍ' cuando lo tengas
     const powerBiUrl = 'https://ceipaeduco-my.sharepoint.com/:u:/g/personal/pablo_restrepoca_virtual_ceipa_edu_co/IQD874fKI8EIRrUSavpR7jvJAS2vH8QqI8Ac46wCvp72frA?e=Y7sQRd&action=embedview'; 
 
     return (
       <div className="mt-20 relative">
-        <div className="bg-basil text-white p-12 rounded-[3.5rem] overflow-hidden relative shadow-2xl">
-          {/* Decoración de fondo */}
+        <div className="bg-basil text-white p-8 md:p-12 rounded-[3.5rem] overflow-hidden relative shadow-2xl border border-white/10">
           <div className="absolute top-0 right-0 w-80 h-80 bg-white/5 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2" />
-          
           <div className="relative z-10">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 mb-12">
               <div>
-                <p className="font-label text-xs uppercase tracking-[0.5em] text-[var(--color-wheat)] mb-3">Reporte Interactivo</p>
+                <p className="font-label text-xs uppercase tracking-[0.5em] text-[var(--color-wheat)] mb-3">Dashboard Analítico</p>
                 <h3 className="font-headline text-4xl md:text-5xl font-black uppercase leading-tight">
-                  Dashboard de <br /><span className="text-[var(--color-wheat)]">Internacionalización</span>
+                  Visualización de <br /><span className="text-[var(--color-wheat)]">Datos Reales</span>
                 </h3>
               </div>
-              <TrendingUp className="w-20 h-20 text-[var(--color-wheat)]/20 hidden lg:block" />
+              <a 
+                href={powerBiUrl.replace('&action=embedview', '')} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="bg-white/10 hover:bg-white/20 p-4 rounded-2xl flex items-center gap-3 transition-all border border-white/10 group"
+              >
+                <ExternalLink className="w-5 h-5 text-[var(--color-wheat)] group-hover:scale-110 transition-transform" />
+                <span className="font-label text-xs uppercase tracking-widest font-bold">Abrir en Pantalla Completa</span>
+              </a>
             </div>
 
-            <div className="w-full aspect-video bg-white/5 rounded-3xl border-2 border-dashed border-white/20 flex flex-col items-center justify-center text-center p-8 backdrop-blur-sm group hover:bg-white/10 transition-all cursor-pointer">
-              {powerBiUrl ? (
-                <iframe 
-                  title="Power BI Report" 
-                  className="w-full h-full rounded-2xl"
-                  src={powerBiUrl}
-                  frameBorder="0" 
-                  allowFullScreen={true}
-                />
-              ) : (
-                <div className="space-y-6">
-                  <div className="bg-white/10 p-6 rounded-full w-24 h-24 flex items-center justify-center mx-auto animate-pulse">
-                    <ExternalLink className="w-10 h-10 text-[var(--color-wheat)]" />
-                  </div>
-                  <div>
-                    <h4 className="font-headline text-2xl font-bold mb-2 uppercase tracking-tighter text-white">Espacio Reservado para Power BI</h4>
-                    <p className="font-body text-white/60 max-w-md mx-auto">
-                      Aquí se insertará el dashboard interactivo de los 5 entornos. <br />
-                      <span className="italic text-[var(--color-wheat)]/80 text-sm mt-4 block">Esperando enlace de integración...</span>
-                    </p>
-                  </div>
-                </div>
-              )}
+            <div className="w-full aspect-video bg-white/5 rounded-3xl border-2 border-dashed border-white/20 relative overflow-hidden shadow-inner">
+              <iframe 
+                title="Power BI Report" 
+                className="w-full h-full"
+                src={powerBiUrl}
+                frameBorder="0" 
+                allowFullScreen={true}
+              />
+              <div className="absolute inset-0 bg-basil/20 pointer-events-none flex items-end p-8 opacity-0 hover:opacity-100 transition-opacity">
+                <p className="bg-black/60 backdrop-blur-md p-4 rounded-xl text-xs font-body text-white/90 border border-white/10">
+                  <strong className="text-[var(--color-wheat)]">Importante:</strong> Si ves una pantalla de inicio de sesión, es porque el enlace de SharePoint es privado. Para acceso público, usa "Publicar en la Web" en Power BI.
+                </p>
+              </div>
             </div>
-            
-            <div className="mt-8 flex items-center gap-3 text-xs font-label uppercase tracking-widest text-white/40">
-              <span className="w-2 h-2 bg-emerald-500 rounded-full animate-ping" />
-              Sincronizado con Base de Datos de 5 Países
+            <div className="mt-8 flex flex-wrap items-center justify-between gap-4">
+              <div className="flex items-center gap-3 text-xs font-label uppercase tracking-widest text-white/40">
+                <span className="w-2 h-2 bg-emerald-500 rounded-full animate-ping" />
+                Sincronización en Tiempo Real activada
+              </div>
             </div>
           </div>
         </div>
