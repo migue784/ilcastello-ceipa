@@ -416,11 +416,11 @@ const EnvironmentAnalysis = () => {
               </a>
             </div>
 
-            <div className="w-full aspect-video bg-white/5 rounded-3xl border-2 border-white/20 relative overflow-hidden shadow-2xl">
+            <div className="w-full h-[600px] md:h-[800px] bg-white rounded-2xl overflow-hidden shadow-2xl border border-white/10">
               <iframe 
                 title="Power BI Report" 
-                className="w-full h-full bg-white"
-                src={powerBiUrl}
+                className="w-full h-full"
+                src={powerBiUrl + "&navContentPaneEnabled=false"}
                 frameBorder="0" 
                 allowFullScreen={true}
               />
