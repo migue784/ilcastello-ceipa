@@ -336,6 +336,104 @@ const EnvironmentAnalysis = () => {
       .sort((a, b) => b.score - a.score);
   };
 
+  const Glossary = () => {
+    const items = [
+      { name: "Indulgencia (Hofstede)", desc: "Mide el grado en que las personas intentan controlar sus impulsos y deseos. Una puntuación alta indica una sociedad que permite la gratificación libre de impulsos naturales relacionados con disfrutar de la vida y divertirse." },
+      { name: "Tasa de urbanización", desc: "Porcentaje de la población total que vive en áreas urbanas. Indica el nivel de concentración de consumidores y el desarrollo de infraestructura en ciudades." },
+      { name: "Distancia al poder", desc: "Mide el grado en que los miembros menos poderosos de una sociedad aceptan y esperan que el poder se distribuya de forma desigual." },
+      { name: "Regulaciones específicas", desc: "Refleja la complejidad y el rigor de las normativas sanitarias y legales para el sector de alimentos (como INVIMA o COFEPRIS)." },
+      { name: "Percepción de Corrupción", desc: "Índice que califica a los países según la percepción de corrupción en el sector público. (0 = muy corrupto, 100 = muy limpio)." },
+      { name: "Estabilidad Política", desc: "Mide la percepción de la probabilidad de que el gobierno sea desestabilizado o derrocado por medios inconstitucionales o violentos." },
+      { name: "Logística (LPI)", desc: "El Índice de Desempeño Logístico mide la eficiencia de las cadenas de suministro internacionales y la calidad de la infraestructura de transporte." },
+      { name: "Penetración de internet", desc: "Porcentaje de la población con acceso a internet. Es crucial para el marketing digital y el comercio electrónico." },
+      { name: "Índice de innovación global", desc: "Clasifica las capacidades y los resultados de innovación de las economías del mundo." },
+      { name: "Acuerdos comerciales", desc: "Número de tratados de libre comercio vigentes que facilitan el intercambio con aranceles preferenciales." },
+      { name: "Balanza comercial", desc: "Diferencia entre el valor de las exportaciones y las importaciones de un país. (Superávit vs Déficit)." },
+      { name: "Rutas y puertos", desc: "Cantidad de infraestructura portuaria y rutas marítimas disponibles para el comercio internacional." },
+      { name: "Flujo de IED", desc: "Inversión Extranjera Directa recibida; indica el atractivo del país para inversores internacionales." },
+      { name: "Incentivos a la inversión", desc: "Calificación de las políticas gubernamentales para atraer capital extranjero (exenciones, zonas francas)." },
+      { name: "PIB turístico y gastro", desc: "Contribución porcentual de los sectores de turismo y restaurantes al Producto Interno Bruto nacional." }
+    ];
+
+    return (
+      <div className="mt-24 bg-surface-container-highest/30 rounded-[3rem] p-12 border border-outline-variant/10">
+        <div className="flex items-center gap-4 mb-10">
+          <div className="bg-primary p-3 rounded-2xl">
+            <ShieldCheck className="w-8 h-8 text-white" />
+          </div>
+          <div>
+            <h3 className="font-headline text-3xl font-bold uppercase text-on-surface">Diccionario de Indicadores</h3>
+            <p className="font-label text-sm text-on-surface-variant uppercase tracking-widest">Entendiendo los factores de análisis</p>
+          </div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {items.map((item, i) => (
+            <div key={i} className="bg-surface p-6 rounded-2xl border border-outline-variant/10 hover:border-primary/30 transition-all group">
+              <h4 className="font-headline text-sm font-bold text-primary mb-2 uppercase tracking-wide group-hover:text-basil">{item.name}</h4>
+              <p className="font-body text-sm text-on-surface-variant leading-relaxed">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
+  const PowerBISection = () => {
+    // ESPACIO PARA EL ENLACE: Reemplaza 'URL_AQUÍ' cuando lo tengas
+    const powerBiUrl = 'https://ceipaeduco-my.sharepoint.com/:u:/g/personal/pablo_restrepoca_virtual_ceipa_edu_co/IQD874fKI8EIRrUSavpR7jvJAS2vH8QqI8Ac46wCvp72frA?e=Y7sQRd&action=embedview'; 
+
+    return (
+      <div className="mt-20 relative">
+        <div className="bg-basil text-white p-12 rounded-[3.5rem] overflow-hidden relative shadow-2xl">
+          {/* Decoración de fondo */}
+          <div className="absolute top-0 right-0 w-80 h-80 bg-white/5 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2" />
+          
+          <div className="relative z-10">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 mb-12">
+              <div>
+                <p className="font-label text-xs uppercase tracking-[0.5em] text-[var(--color-wheat)] mb-3">Reporte Interactivo</p>
+                <h3 className="font-headline text-4xl md:text-5xl font-black uppercase leading-tight">
+                  Dashboard de <br /><span className="text-[var(--color-wheat)]">Internacionalización</span>
+                </h3>
+              </div>
+              <TrendingUp className="w-20 h-20 text-[var(--color-wheat)]/20 hidden lg:block" />
+            </div>
+
+            <div className="w-full aspect-video bg-white/5 rounded-3xl border-2 border-dashed border-white/20 flex flex-col items-center justify-center text-center p-8 backdrop-blur-sm group hover:bg-white/10 transition-all cursor-pointer">
+              {powerBiUrl ? (
+                <iframe 
+                  title="Power BI Report" 
+                  className="w-full h-full rounded-2xl"
+                  src={powerBiUrl}
+                  frameBorder="0" 
+                  allowFullScreen={true}
+                />
+              ) : (
+                <div className="space-y-6">
+                  <div className="bg-white/10 p-6 rounded-full w-24 h-24 flex items-center justify-center mx-auto animate-pulse">
+                    <ExternalLink className="w-10 h-10 text-[var(--color-wheat)]" />
+                  </div>
+                  <div>
+                    <h4 className="font-headline text-2xl font-bold mb-2 uppercase tracking-tighter text-white">Espacio Reservado para Power BI</h4>
+                    <p className="font-body text-white/60 max-w-md mx-auto">
+                      Aquí se insertará el dashboard interactivo de los 5 entornos. <br />
+                      <span className="italic text-[var(--color-wheat)]/80 text-sm mt-4 block">Esperando enlace de integración...</span>
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
+            
+            <div className="mt-8 flex items-center gap-3 text-xs font-label uppercase tracking-widest text-white/40">
+              <span className="w-2 h-2 bg-emerald-500 rounded-full animate-ping" />
+              Sincronizado con Base de Datos de 5 Países
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="w-full relative min-h-screen">
       {/* Encabezado */}
@@ -534,6 +632,10 @@ const EnvironmentAnalysis = () => {
           </div>
         )}
       </AnimatePresence>
+
+      {/* Glosario y Power BI (Ultima Sección) */}
+      <Glossary />
+      <PowerBISection />
     </div>
   );
 };
