@@ -391,7 +391,7 @@ const EnvironmentAnalysis = () => {
   };
 
   const PowerBISection = () => {
-    const powerBiUrl = 'https://ceipaeduco-my.sharepoint.com/:u:/g/personal/pablo_restrepoca_virtual_ceipa_edu_co/IQD874fKI8EIRrUSavpR7jvJAS2vH8QqI8Ac46wCvp72frA?e=Y7sQRd&action=embedview'; 
+    const powerBiUrl = 'https://app.powerbi.com/view?r=eyJrIjoiY2RjZTlmZDYtODAwMy00ODdjLWI0ODEtNzI4MGQzN2I0NzAxIiwidCI6IjcxZDNhMjRlLTRmNjItNGRlYS05YjI1LTczZmUzOTA2MDAwZSIsImMiOjR9'; 
 
     return (
       <div className="mt-20 relative">
@@ -406,30 +406,26 @@ const EnvironmentAnalysis = () => {
                 </h3>
               </div>
               <a 
-                href={powerBiUrl.replace('&action=embedview', '')} 
+                href={powerBiUrl} 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="bg-white/10 hover:bg-white/20 p-4 rounded-2xl flex items-center gap-3 transition-all border border-white/10 group"
               >
                 <ExternalLink className="w-5 h-5 text-[var(--color-wheat)] group-hover:scale-110 transition-transform" />
-                <span className="font-label text-xs uppercase tracking-widest font-bold">Abrir en Pantalla Completa</span>
+                <span className="font-label text-xs uppercase tracking-widest font-bold">Ver en Pantalla Completa</span>
               </a>
             </div>
 
-            <div className="w-full aspect-video bg-white/5 rounded-3xl border-2 border-dashed border-white/20 relative overflow-hidden shadow-inner">
+            <div className="w-full aspect-video bg-white/5 rounded-3xl border-2 border-white/20 relative overflow-hidden shadow-2xl">
               <iframe 
                 title="Power BI Report" 
-                className="w-full h-full"
+                className="w-full h-full bg-white"
                 src={powerBiUrl}
                 frameBorder="0" 
                 allowFullScreen={true}
               />
-              <div className="absolute inset-0 bg-basil/20 pointer-events-none flex items-end p-8 opacity-0 hover:opacity-100 transition-opacity">
-                <p className="bg-black/60 backdrop-blur-md p-4 rounded-xl text-xs font-body text-white/90 border border-white/10">
-                  <strong className="text-[var(--color-wheat)]">Importante:</strong> Si ves una pantalla de inicio de sesión, es porque el enlace de SharePoint es privado. Para acceso público, usa "Publicar en la Web" en Power BI.
-                </p>
-              </div>
             </div>
+            
             <div className="mt-8 flex flex-wrap items-center justify-between gap-4">
               <div className="flex items-center gap-3 text-xs font-label uppercase tracking-widest text-white/40">
                 <span className="w-2 h-2 bg-emerald-500 rounded-full animate-ping" />
