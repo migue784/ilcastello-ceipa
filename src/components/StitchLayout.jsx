@@ -13,6 +13,7 @@ import PotentialDiagnosis from './PotentialDiagnosis';
 import PestelAnalysis from './PestelAnalysis';
 import MacroAnalysis from './MacroAnalysis';
 import InternationalizationPlan from './InternationalizationPlan';
+import { DollarSign, BarChart3, TrendingUp } from 'lucide-react';
 
 export default function StitchLayout({ scrollYProgress }) {
   const [simulatorOpen, setSimulatorOpen] = useState(false);
@@ -50,10 +51,15 @@ export default function StitchLayout({ scrollYProgress }) {
 
           {/* Centered Desktop Menu Links */}
           <div className="hidden lg:flex gap-5 xl:gap-8 items-center font-label text-xs uppercase tracking-widest text-on-surface-variant/80 ml-auto mr-8">
-            <a className="hover:text-primary border-b border-transparent hover:border-primary/30 pb-1 transition-all duration-300" href="#team">Acuerdos</a>
             <a className="hover:text-primary border-b border-transparent hover:border-primary/30 pb-1 transition-all duration-300" href="#realidad">Empresa</a>
             <a className="hover:text-primary border-b border-transparent hover:border-primary/30 pb-1 transition-all duration-300" href="#estrategia">Estrategia</a>
-            <a className="hover:text-primary border-b border-transparent hover:border-primary/30 pb-1 transition-all duration-300" href="#macro">Macroeconomía</a>
+            <a 
+              href="#economico" 
+              className="bg-primary/10 hover:bg-primary/20 text-primary border border-primary/20 hover:border-primary/40 px-4 py-2 font-bold uppercase tracking-widest transition-all duration-300 rounded-full flex items-center gap-1.5 shadow-sm"
+            >
+              <DollarSign className="w-3.5 h-3.5" />
+              Económico
+            </a>
             <a className="hover:text-primary border-b border-transparent hover:border-primary/30 pb-1 transition-all duration-300" href="#analisis-entornos">Internacionalización</a>
             <a className="hover:text-primary border-b border-transparent hover:border-primary/30 pb-1 transition-all duration-300" href="#plan-a7">Plan Marketing</a>
           </div>
@@ -107,13 +113,6 @@ export default function StitchLayout({ scrollYProgress }) {
           <div className="flex flex-col gap-6 font-headline text-3xl uppercase tracking-wider text-on-surface pl-2">
             <a 
               className="hover:text-primary transition-colors w-fit" 
-              href="#team"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Acuerdos
-            </a>
-            <a 
-              className="hover:text-primary transition-colors w-fit" 
               href="#realidad"
               onClick={() => setMobileMenuOpen(false)}
             >
@@ -127,11 +126,12 @@ export default function StitchLayout({ scrollYProgress }) {
               Estrategia
             </a>
             <a 
-              className="hover:text-primary transition-colors w-fit" 
-              href="#macro"
+              className="flex items-center gap-2 hover:text-primary transition-colors w-fit border border-primary/20 bg-primary/5 px-5 py-2.5 rounded-full text-2xl font-bold uppercase tracking-wider shadow-sm" 
+              href="#economico"
               onClick={() => setMobileMenuOpen(false)}
             >
-              Macroeconomía
+              <DollarSign className="w-5 h-5 text-primary" />
+              Económico
             </a>
             <a 
               className="hover:text-primary transition-colors w-fit" 
@@ -334,10 +334,127 @@ export default function StitchLayout({ scrollYProgress }) {
         </div>
       </section>
 
-      {/* Macro Analysis */}
-      <section id="macro" className="py-32 px-8 md:px-16 bg-surface" style={{ position: 'relative', zIndex: 20 }}>
+      {/* Viabilidad Económica y Financiera */}
+      <section id="economico" className="py-32 px-8 md:px-16 bg-surface" style={{ position: 'relative', zIndex: 20 }}>
         <div className="max-w-7xl mx-auto">
-          <MacroAnalysis />
+          
+          <div className="mb-16 max-w-3xl">
+            <p className="font-label text-xs uppercase tracking-[0.3em] text-primary font-bold mb-3">Viabilidad Financiera</p>
+            <h2 className="font-headline text-4xl md:text-6xl font-bold tracking-tight text-on-surface uppercase mb-6">
+              Análisis Económico <br />
+              <span className="text-primary">y Estructura de Margen</span>
+            </h2>
+            <p className="font-body text-base md:text-lg text-on-surface-variant leading-relaxed">
+              La viabilidad de exportación de Il Castello se fundamenta en un modelo de **alto valor percibido (Premium Pricing)**. A continuación se desglosan las variables de costos de producción, gastos logísticos internacionales y retornos proyectados bajo el Incoterm CIF.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+            
+            {/* Tarjeta 1: Unit Economics */}
+            <div className="bg-surface-container-low p-8 rounded-[2rem] border border-outline-variant/20 shadow-sm flex flex-col justify-between hover:border-primary/30 transition-all duration-300">
+              <div className="space-y-4">
+                <div className="w-12 h-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center">
+                  <DollarSign className="w-6 h-6" />
+                </div>
+                <h3 className="font-headline text-2xl font-bold text-basil">Estructura Unitaria (Unit Economics)</h3>
+                <p className="font-body text-xs text-on-surface-variant leading-relaxed">
+                  Evaluación del costo puro en planta frente al precio de venta internacional CIF en el puerto destino de Caucedo.
+                </p>
+                <div className="space-y-3 pt-2">
+                  <div className="flex justify-between items-center text-xs pb-2 border-b border-outline-variant/10">
+                    <span className="text-on-surface-variant/80">Costo Planta Colombia:</span>
+                    <strong className="text-charcoal font-headline font-bold">$11.000 COP / kg</strong>
+                  </div>
+                  <div className="flex justify-between items-center text-xs pb-2 border-b border-outline-variant/10">
+                    <span className="text-on-surface-variant/80">Precio Venta CIF Exportación:</span>
+                    <strong className="text-primary font-headline font-bold">$38.000 COP / kg (~$9.5 USD)</strong>
+                  </div>
+                  <div className="flex justify-between items-center text-xs">
+                    <span className="text-primary font-bold">Margen Bruto de Contribución:</span>
+                    <strong className="text-emerald-800 font-bold bg-emerald-50 px-2 py-0.5 rounded">71.05%</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Tarjeta 2: EBITDA y Punto de Equilibrio */}
+            <div className="bg-surface-container-low p-8 rounded-[2rem] border border-outline-variant/20 shadow-sm flex flex-col justify-between hover:border-primary/30 transition-all duration-300">
+              <div className="space-y-4">
+                <div className="w-12 h-12 rounded-2xl bg-yellow-600/10 text-yellow-600 flex items-center justify-center">
+                  <BarChart3 className="w-6 h-6" />
+                </div>
+                <h3 className="font-headline text-2xl font-bold text-basil">EBITDA y Rentabilidad Operativa</h3>
+                <p className="font-body text-xs text-on-surface-variant leading-relaxed">
+                  Proyección financiera mensual basada en un volumen objetivo inicial de exportación B2B de **2.000 kg/mes**.
+                </p>
+                <div className="space-y-3 pt-2">
+                  <div className="flex justify-between items-center text-xs pb-2 border-b border-outline-variant/10">
+                    <span className="text-on-surface-variant/80">Ingresos Proyectados (2.000 kg):</span>
+                    <strong className="text-charcoal font-headline font-bold">$76.000.000 COP</strong>
+                  </div>
+                  <div className="flex justify-between items-center text-xs pb-2 border-b border-outline-variant/10">
+                    <span className="text-on-surface-variant/80">Egresos Totales (Planta + Flete + Arancel):</span>
+                    <strong className="text-tomato font-headline font-bold">$31.020.000 COP</strong>
+                  </div>
+                  <div className="flex justify-between items-center text-xs">
+                    <span className="text-primary font-bold">EBITDA Mensual Estimado (RD):</span>
+                    <strong className="text-emerald-800 font-bold bg-emerald-50 px-2 py-0.5 rounded">~$44.980.000 COP</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Tarjeta 3: Mitigación de Pérdidas y ROI */}
+            <div className="bg-surface-container-low p-8 rounded-[2rem] border border-outline-variant/20 shadow-sm flex flex-col justify-between hover:border-primary/30 transition-all duration-300">
+              <div className="space-y-4">
+                <div className="w-12 h-12 rounded-2xl bg-orange-600/10 text-orange-600 flex items-center justify-center">
+                  <TrendingUp className="w-6 h-6" />
+                </div>
+                <h3 className="font-headline text-2xl font-bold text-basil">Retorno sobre la Inversión (ROI)</h3>
+                <p className="font-body text-xs text-on-surface-variant leading-relaxed">
+                  Variables de protección de valor y tasa de retorno estimada para la pyme en el primer año de operación.
+                </p>
+                <div className="space-y-3 pt-2">
+                  <div className="flex justify-between items-center text-xs pb-2 border-b border-outline-variant/10">
+                    <span className="text-on-surface-variant/80">Margen Neto Operativo (RD):</span>
+                    <strong className="text-emerald-800 font-bold font-headline">59.18%</strong>
+                  </div>
+                  <div className="flex justify-between items-center text-xs pb-2 border-b border-outline-variant/10">
+                    <span className="text-on-surface-variant/80">Punto de Equilibrio de Volumen:</span>
+                    <strong className="text-charcoal font-headline font-bold">816 kg / Mes B2B</strong>
+                  </div>
+                  <div className="flex justify-between items-center text-xs">
+                    <span className="text-on-surface-variant/80">Amortización de Inversión Inicial:</span>
+                    <strong className="text-primary font-bold bg-primary/10 px-2 py-0.5 rounded">Menor a 6 Meses</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Caja Llamada al Simulador */}
+          <div className="p-8 md:p-12 rounded-[2.5rem] bg-gradient-to-br from-basil to-charcoal text-white shadow-xl overflow-hidden border border-white/5 relative flex flex-col md:flex-row justify-between items-center gap-8">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,rgba(227,184,90,0.1),transparent_50%)] pointer-events-none"></div>
+            <div className="relative z-10 space-y-4 max-w-2xl">
+              <h4 className="font-headline text-2xl md:text-3xl font-bold text-white uppercase leading-tight">
+                Simulador Financiero de Exportación Interactivo
+              </h4>
+              <p className="text-white/70 text-xs md:text-sm leading-relaxed text-justify">
+                Como negociante, entendemos que las tasas arancelarias, los seguros de transporte y los costos de fletes varían constantemente. Use nuestra herramienta interactiva para calcular escenarios dinámicos para **Panamá, México, El Salvador y República Dominicana**, y descargue el informe ejecutivo en PDF.
+              </p>
+            </div>
+            <div className="relative z-10 flex-shrink-0">
+              <button
+                onClick={() => setSimulatorOpen(true)}
+                className="bg-primary hover:bg-basil text-on-primary px-8 py-4 text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:shadow-lg hover:scale-105 active:scale-95 border-2 border-white/20"
+              >
+                Abrir Simulador Económico
+              </button>
+            </div>
+          </div>
+
         </div>
       </section>
 
