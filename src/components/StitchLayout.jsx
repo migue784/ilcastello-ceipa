@@ -40,8 +40,8 @@ export default function StitchLayout({ scrollYProgress }) {
 
       {/* TopNavBar */}
       <nav className="fixed top-0 w-full z-50 flex justify-between items-center px-8 py-3 bg-surface/80 backdrop-blur-xl border-b border-outline-variant/20">
-        <div className="flex items-center bg-charcoal px-4 py-1.5 rounded-full border border-outline-variant/10 shadow-sm hover:scale-[1.02] transition-transform duration-300 cursor-pointer">
-          <img src="/logo.png" alt="Il Castello Logo" className="h-7 md:h-8 w-auto object-contain" />
+        <div className="flex items-center hover:scale-[1.02] transition-transform duration-300 cursor-pointer">
+          <img src="/logo.png" alt="Il Castello Logo" className="h-8 md:h-9 w-auto object-contain" />
         </div>
         <div className="hidden md:flex gap-6 items-center font-label text-sm uppercase tracking-wider ml-auto mr-12">
           <a className="text-on-surface-variant/60 hover:text-primary transition-colors duration-300" href="#team">Acuerdos</a>
@@ -65,8 +65,8 @@ export default function StitchLayout({ scrollYProgress }) {
       <header className="min-h-screen flex flex-col justify-center items-start px-8 md:px-16 pt-32 pb-16 relative overflow-hidden bg-surface">
         <div className="z-10 w-full max-w-7xl mx-auto flex flex-col md:flex-row gap-12 items-center">
           <div className="flex-1 space-y-6">
-            <div className="flex items-center bg-charcoal px-4 py-1.5 rounded-full border border-outline-variant/10 shadow-sm w-fit mb-2">
-              <img src="/logo.png" alt="Il Castello Logo" className="h-6 w-auto object-contain" />
+            <div className="flex items-center w-fit mb-2">
+              <img src="/logo.png" alt="Il Castello Logo" className="h-8 md:h-9 w-auto object-contain" />
             </div>
             <p className="font-label text-primary uppercase tracking-[0.3em] text-sm font-bold">Aldea Global 2 • Fase 1</p>
             <h1 className="font-headline text-6xl md:text-[7rem] leading-[0.85] font-black tracking-tighter text-on-surface uppercase relative z-20">
@@ -263,8 +263,8 @@ export default function StitchLayout({ scrollYProgress }) {
 
       {/* Footer */}
       <footer className="w-full flex flex-col items-center justify-center py-20 px-12 text-center bg-surface-dim dark:bg-black font-mono text-[10px] uppercase tracking-[0.2em] leading-relaxed relative z-20">
-        <div className="flex items-center justify-center mb-8 bg-charcoal px-5 py-2 rounded-full border border-outline-variant/10 shadow-md">
-          <img src="/logo.png" alt="Il Castello Logo" className="h-8 md:h-9 w-auto object-contain" />
+        <div className="flex items-center justify-center mb-8">
+          <img src="/logo.png" alt="Il Castello Logo" className="h-9 md:h-10 w-auto object-contain" />
         </div>
         <div className="text-on-surface/60 opacity-60">
           © 2026 PROYECTO UNIVERSITARIO ESTUDIANTES CEIPA.
