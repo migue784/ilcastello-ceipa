@@ -55,7 +55,7 @@ export default function StitchLayout({ scrollYProgress }) {
             <a className="hover:text-primary border-b border-transparent hover:border-primary/30 pb-1 transition-all duration-300" href="#estrategia">Estrategia</a>
             <a 
               href="#economico" 
-              className="bg-primary/10 hover:bg-primary/20 text-primary border border-primary/20 hover:border-primary/40 px-4 py-2 font-bold uppercase tracking-widest transition-all duration-300 rounded-full flex items-center gap-1.5 shadow-sm"
+              className="bg-primary text-on-primary px-5 py-2.5 font-bold uppercase tracking-widest transition-all duration-300 hover:bg-basil hover:shadow-md active:scale-95 rounded-none flex items-center gap-1.5"
             >
               <DollarSign className="w-3.5 h-3.5" />
               Económico
@@ -126,11 +126,11 @@ export default function StitchLayout({ scrollYProgress }) {
               Estrategia
             </a>
             <a 
-              className="flex items-center gap-2 hover:text-primary transition-colors w-fit border border-primary/20 bg-primary/5 px-5 py-2.5 rounded-full text-2xl font-bold uppercase tracking-wider shadow-sm" 
+              className="flex items-center gap-2 bg-primary text-on-primary px-6 py-3.5 w-fit text-2xl font-bold uppercase tracking-wider hover:bg-basil transition-all duration-300 rounded-none shadow-md" 
               href="#economico"
               onClick={() => setMobileMenuOpen(false)}
             >
-              <DollarSign className="w-5 h-5 text-primary" />
+              <DollarSign className="w-5 h-5 text-on-primary" />
               Económico
             </a>
             <a 
