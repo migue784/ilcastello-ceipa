@@ -12,6 +12,7 @@ import ExportSimulator from './ExportSimulator';
 import PotentialDiagnosis from './PotentialDiagnosis';
 import PestelAnalysis from './PestelAnalysis';
 import MacroAnalysis from './MacroAnalysis';
+import InternationalizationPlan from './InternationalizationPlan';
 
 export default function StitchLayout({ scrollYProgress }) {
   const [simulatorOpen, setSimulatorOpen] = useState(false);
@@ -42,12 +43,13 @@ export default function StitchLayout({ scrollYProgress }) {
         <div className="text-xl font-black tracking-tighter text-basil font-headline uppercase">
           IL CASTELLO
         </div>
-        <div className="hidden md:flex gap-8 items-center font-label text-sm uppercase tracking-wider ml-auto mr-12">
+        <div className="hidden md:flex gap-6 items-center font-label text-sm uppercase tracking-wider ml-auto mr-12">
           <a className="text-on-surface-variant/60 hover:text-primary transition-colors duration-300" href="#team">Acuerdos</a>
           <a className="text-on-surface-variant/60 hover:text-primary transition-colors duration-300" href="#realidad">Empresa</a>
           <a className="text-on-surface-variant/60 hover:text-primary transition-colors duration-300" href="#estrategia">Estrategia Total</a>
           <a className="text-on-surface-variant/60 hover:text-primary transition-colors duration-300" href="#macro">Macroeconomía</a>
           <a className="text-on-surface-variant/60 hover:text-primary transition-colors duration-300" href="#analisis-entornos">Internacionalización</a>
+          <a className="text-on-surface-variant/60 hover:text-primary transition-colors duration-300" href="#plan-a7">A7: Plan Marketing</a>
         </div>
         <div>
           <button 
@@ -234,6 +236,13 @@ export default function StitchLayout({ scrollYProgress }) {
       <section id="analisis-entornos" className="py-32 px-8 md:px-16 bg-surface-container-low" style={{ position: 'relative', zIndex: 20 }}>
         <div className="max-w-7xl mx-auto">
           <EnvironmentAnalysis />
+        </div>
+      </section>
+
+      {/* Actividad 7: Plan de Internacionalización y Marketing Gourmet */}
+      <section id="plan-a7" className="py-32 px-8 md:px-16 bg-surface" style={{ position: 'relative', zIndex: 20 }}>
+        <div className="max-w-7xl mx-auto">
+          <InternationalizationPlan />
         </div>
       </section>
 
