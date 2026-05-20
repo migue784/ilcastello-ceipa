@@ -17,6 +17,7 @@ import InternationalizationPlan from './InternationalizationPlan';
 export default function StitchLayout({ scrollYProgress }) {
   const [simulatorOpen, setSimulatorOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('diag');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const renderActiveContent = () => {
     switch (activeSection) {
@@ -39,27 +40,132 @@ export default function StitchLayout({ scrollYProgress }) {
       </div>
 
       {/* TopNavBar */}
-      <nav className="fixed top-0 w-full z-50 flex justify-between items-center px-8 py-3 bg-surface/80 backdrop-blur-xl border-b border-outline-variant/20">
-        <div className="flex items-center hover:scale-[1.02] transition-transform duration-300 cursor-pointer">
-          <img src="/logo.png" alt="Il Castello Logo" className="h-8 md:h-9 w-auto object-contain" />
+      <nav className="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-outline-variant/10">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 h-20 flex justify-between items-center">
+          
+          {/* Logo */}
+          <div className="flex items-center hover:scale-[1.02] transition-transform duration-300 cursor-pointer">
+            <img src="/logo.png" alt="Il Castello Logo" className="h-8 md:h-9 w-auto object-contain" />
+          </div>
+
+          {/* Centered Desktop Menu Links */}
+          <div className="hidden lg:flex gap-5 xl:gap-8 items-center font-label text-xs uppercase tracking-widest text-on-surface-variant/80 ml-auto mr-8">
+            <a className="hover:text-primary border-b border-transparent hover:border-primary/30 pb-1 transition-all duration-300" href="#team">Acuerdos</a>
+            <a className="hover:text-primary border-b border-transparent hover:border-primary/30 pb-1 transition-all duration-300" href="#realidad">Empresa</a>
+            <a className="hover:text-primary border-b border-transparent hover:border-primary/30 pb-1 transition-all duration-300" href="#estrategia">Estrategia</a>
+            <a className="hover:text-primary border-b border-transparent hover:border-primary/30 pb-1 transition-all duration-300" href="#macro">Macroeconomía</a>
+            <a className="hover:text-primary border-b border-transparent hover:border-primary/30 pb-1 transition-all duration-300" href="#analisis-entornos">Internacionalización</a>
+            <a className="hover:text-primary border-b border-transparent hover:border-primary/30 pb-1 transition-all duration-300" href="#plan-a7">Plan Marketing</a>
+          </div>
+
+          {/* Action Button & Hamburger Toggle */}
+          <div className="flex items-center gap-4">
+            <button 
+              className="hidden sm:block bg-primary text-on-primary px-6 py-2.5 text-xs font-bold uppercase tracking-widest hover:bg-basil transition-all duration-300 hover:shadow-md active:scale-95 rounded-none"
+              onClick={() => setSimulatorOpen(true)}
+            >
+              Simular Exportación
+            </button>
+
+            {/* Hamburger Button */}
+            <button
+              className="lg:hidden text-on-surface hover:text-primary p-2 focus:outline-none transition-colors"
+              onClick={() => setMobileMenuOpen(true)}
+              aria-label="Open Menu"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+          </div>
+
         </div>
-        <div className="hidden md:flex gap-6 items-center font-label text-sm uppercase tracking-wider ml-auto mr-12">
-          <a className="text-on-surface-variant/60 hover:text-primary transition-colors duration-300" href="#team">Acuerdos</a>
-          <a className="text-on-surface-variant/60 hover:text-primary transition-colors duration-300" href="#realidad">Empresa</a>
-          <a className="text-on-surface-variant/60 hover:text-primary transition-colors duration-300" href="#estrategia">Estrategia Total</a>
-          <a className="text-on-surface-variant/60 hover:text-primary transition-colors duration-300" href="#macro">Macroeconomía</a>
-          <a className="text-on-surface-variant/60 hover:text-primary transition-colors duration-300" href="#analisis-entornos">Internacionalización</a>
-          <a className="text-on-surface-variant/60 hover:text-primary transition-colors duration-300" href="#plan-a7">A7: Plan Marketing</a>
-        </div>
+      </nav>
+
+      {/* Mobile Menu Drawer (Slide-down overlay with high-end style) */}
+      <div 
+        className={`fixed inset-0 z-[100] bg-surface flex flex-col justify-between p-8 transition-all duration-500 ease-in-out ${
+          mobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full pointer-events-none'
+        }`}
+      >
         <div>
+          {/* Drawer Header */}
+          <div className="flex justify-between items-center mb-12">
+            <img src="/logo.png" alt="Il Castello Logo" className="h-8 w-auto object-contain" />
+            <button
+              className="text-on-surface hover:text-primary p-2 focus:outline-none transition-colors"
+              onClick={() => setMobileMenuOpen(false)}
+              aria-label="Close Menu"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+
+          {/* Drawer Links */}
+          <div className="flex flex-col gap-6 font-headline text-3xl uppercase tracking-wider text-on-surface pl-2">
+            <a 
+              className="hover:text-primary transition-colors w-fit" 
+              href="#team"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Acuerdos
+            </a>
+            <a 
+              className="hover:text-primary transition-colors w-fit" 
+              href="#realidad"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Empresa
+            </a>
+            <a 
+              className="hover:text-primary transition-colors w-fit" 
+              href="#estrategia"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Estrategia
+            </a>
+            <a 
+              className="hover:text-primary transition-colors w-fit" 
+              href="#macro"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Macroeconomía
+            </a>
+            <a 
+              className="hover:text-primary transition-colors w-fit" 
+              href="#analisis-entornos"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Internacionalización
+            </a>
+            <a 
+              className="hover:text-primary transition-colors w-fit" 
+              href="#plan-a7"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Plan Marketing
+            </a>
+          </div>
+        </div>
+
+        {/* Drawer Footer Call To Action */}
+        <div className="space-y-6">
           <button 
-            className="bg-primary text-on-primary px-8 py-3 text-sm font-bold uppercase tracking-widest hover:bg-basil transition-colors duration-300 rounded-none"
-            onClick={() => setSimulatorOpen(true)}
+            className="w-full bg-primary text-on-primary py-4 text-sm font-bold uppercase tracking-widest hover:bg-basil transition-colors duration-300 rounded-none shadow-md"
+            onClick={() => {
+              setMobileMenuOpen(false);
+              setSimulatorOpen(true);
+            }}
           >
             Simular Exportación
           </button>
+          <div className="text-center font-mono text-[9px] uppercase tracking-widest text-on-surface-variant/40">
+            © 2026 PROYECTO UNIVERSITARIO ESTUDIANTES CEIPA.
+          </div>
         </div>
-      </nav>
+      </div>
 
       {/* Hero (Portata) */}
       <header className="min-h-screen flex flex-col justify-center items-start px-8 md:px-16 pt-32 pb-16 relative overflow-hidden bg-surface">
